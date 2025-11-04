@@ -1,0 +1,1818 @@
+
+#----------------------------- Global Properties ----------------------------#
+
+/outputDir:bin/$(Platform)
+/intermediateDir:obj/$(Platform)
+/platform:DesktopGL
+/config:
+/profile:Reach
+/compress:False
+
+#-------------------------------- References --------------------------------#
+
+
+#---------------------------------- Content ---------------------------------#
+
+#begin Grubby Escape/Audio/Music/Atmos/mines_crystal_shimmer_loop.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Grubby Escape/Audio/Music/Atmos/mines_crystal_shimmer_loop.wav;Grubby Escape/Audio/Music/Atmos/mines_crystal_shimmer_loop
+
+#begin Grubby Escape/Audio/Music/Atmos/mines_machinery_atmos.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Grubby Escape/Audio/Music/Atmos/mines_machinery_atmos.wav;Grubby Escape/Audio/Music/Atmos/mines_machinery_atmos
+
+#begin Grubby Escape/Audio/Music/Songs/S26 Crystal ACTION.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Grubby Escape/Audio/Music/Songs/S26 Crystal ACTION.wav;Grubby Escape/Audio/Music/Songs/S26 Crystal ACTION
+
+#begin Grubby Escape/Audio/Music/Songs/S26 Crystal BASS.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Grubby Escape/Audio/Music/Songs/S26 Crystal BASS.wav;Grubby Escape/Audio/Music/Songs/S26 Crystal BASS
+
+#begin Grubby Escape/Audio/Music/Songs/S26 Crystal MAIN.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Grubby Escape/Audio/Music/Songs/S26 Crystal MAIN.wav;Grubby Escape/Audio/Music/Songs/S26 Crystal MAIN
+
+#begin Grubby Escape/Audio/Sound Effects/Grubs/Alert/grub_alert_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Grubby Escape/Audio/Sound Effects/Grubs/Alert/grub_alert_1.wav;Grubby Escape/Audio/Sound Effects/Grubs/Alert/grub_alert_1
+
+#begin Grubby Escape/Audio/Sound Effects/Grubs/Alert/grub_alert_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Grubby Escape/Audio/Sound Effects/Grubs/Alert/grub_alert_2.wav;Grubby Escape/Audio/Sound Effects/Grubs/Alert/grub_alert_2
+
+#begin Grubby Escape/Audio/Sound Effects/Grubs/Alert/grub_alert_3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Grubby Escape/Audio/Sound Effects/Grubs/Alert/grub_alert_3.wav;Grubby Escape/Audio/Sound Effects/Grubs/Alert/grub_alert_3
+
+#begin Grubby Escape/Audio/Sound Effects/Grubs/Burrow/grub_burrow.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Grubby Escape/Audio/Sound Effects/Grubs/Burrow/grub_burrow.wav;Grubby Escape/Audio/Sound Effects/Grubs/Burrow/grub_burrow
+
+#begin Grubby Escape/Audio/Sound Effects/Grubs/Freed/grub_free_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Grubby Escape/Audio/Sound Effects/Grubs/Freed/grub_free_1.wav;Grubby Escape/Audio/Sound Effects/Grubs/Freed/grub_free_1
+
+#begin Grubby Escape/Audio/Sound Effects/Grubs/Freed/grub_free_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Grubby Escape/Audio/Sound Effects/Grubs/Freed/grub_free_2.wav;Grubby Escape/Audio/Sound Effects/Grubs/Freed/grub_free_2
+
+#begin Grubby Escape/Audio/Sound Effects/Grubs/Sad/grub_sad_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Grubby Escape/Audio/Sound Effects/Grubs/Sad/grub_sad_1.wav;Grubby Escape/Audio/Sound Effects/Grubs/Sad/grub_sad_1
+
+#begin Grubby Escape/Audio/Sound Effects/Grubs/Sad/grub_sad_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Grubby Escape/Audio/Sound Effects/Grubs/Sad/grub_sad_2.wav;Grubby Escape/Audio/Sound Effects/Grubs/Sad/grub_sad_2
+
+#begin Grubby Escape/Audio/Sound Effects/Grubs/Sad/grub_sad_3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Grubby Escape/Audio/Sound Effects/Grubs/Sad/grub_sad_3.wav;Grubby Escape/Audio/Sound Effects/Grubs/Sad/grub_sad_3
+
+#begin Grubby Escape/Audio/Sound Effects/Rails/lift_activate.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Grubby Escape/Audio/Sound Effects/Rails/lift_activate.wav;Grubby Escape/Audio/Sound Effects/Rails/lift_activate
+
+#begin Grubby Escape/Audio/Sound Effects/Rails/lift_arrive.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Grubby Escape/Audio/Sound Effects/Rails/lift_arrive.wav;Grubby Escape/Audio/Sound Effects/Rails/lift_arrive
+
+#begin Grubby Escape/Audio/Sound Effects/Rails/mines_conveyor_loop.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Grubby Escape/Audio/Sound Effects/Rails/mines_conveyor_loop.wav;Grubby Escape/Audio/Sound Effects/Rails/mines_conveyor_loop
+
+#begin Grubby Escape/Audio/Sound Effects/Start/spa_heal.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Grubby Escape/Audio/Sound Effects/Start/spa_heal.wav;Grubby Escape/Audio/Sound Effects/Start/spa_heal
+
+#begin Grubby Escape/Font/VT323-Regular.ttf
+/copy:Grubby Escape/Font/VT323-Regular.ttf;Grubby Escape/Font/VT323-Regular
+
+#begin Grubby Escape/Images/Background/Extremely Far/BG_bone_01.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Background/Extremely Far/BG_bone_01.png;Grubby Escape/Images/Background/Extremely Far/BG_bone_01
+
+#begin Grubby Escape/Images/Background/Extremely Far/BG_bone_02.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Background/Extremely Far/BG_bone_02.png;Grubby Escape/Images/Background/Extremely Far/BG_bone_02
+
+#begin Grubby Escape/Images/Background/Extremely Far/BG_bone_03.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Background/Extremely Far/BG_bone_03.png;Grubby Escape/Images/Background/Extremely Far/BG_bone_03
+
+#begin Grubby Escape/Images/Background/Extremely Far/BG_egg_05.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Background/Extremely Far/BG_egg_05.png;Grubby Escape/Images/Background/Extremely Far/BG_egg_05
+
+#begin Grubby Escape/Images/Background/Extremely Far/BG_twist.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Background/Extremely Far/BG_twist.png;Grubby Escape/Images/Background/Extremely Far/BG_twist
+
+#begin Grubby Escape/Images/Background/Extremely Far/mines_BG_blur_02.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Background/Extremely Far/mines_BG_blur_02.png;Grubby Escape/Images/Background/Extremely Far/mines_BG_blur_02
+
+#begin Grubby Escape/Images/Background/Extremely Far/mines_BG_rocks.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Background/Extremely Far/mines_BG_rocks.png;Grubby Escape/Images/Background/Extremely Far/mines_BG_rocks
+
+#begin Grubby Escape/Images/Background/Far/far_bg_mines_plats_0000_5.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Background/Far/far_bg_mines_plats_0000_5.png;Grubby Escape/Images/Background/Far/far_bg_mines_plats_0000_5
+
+#begin Grubby Escape/Images/Background/Far/far_bg_mines_plats_0001_4.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Background/Far/far_bg_mines_plats_0001_4.png;Grubby Escape/Images/Background/Far/far_bg_mines_plats_0001_4
+
+#begin Grubby Escape/Images/Background/Far/far_bg_mines_plats_0002_3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Background/Far/far_bg_mines_plats_0002_3.png;Grubby Escape/Images/Background/Far/far_bg_mines_plats_0002_3
+
+#begin Grubby Escape/Images/Background/Far/far_bg_mines_plats_0003_2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Background/Far/far_bg_mines_plats_0003_2.png;Grubby Escape/Images/Background/Far/far_bg_mines_plats_0003_2
+
+#begin Grubby Escape/Images/Background/Far/far_bg_mines_plats_0004_1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Background/Far/far_bg_mines_plats_0004_1.png;Grubby Escape/Images/Background/Far/far_bg_mines_plats_0004_1
+
+#begin Grubby Escape/Images/Background/Far/mine_strut_07_BG.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Background/Far/mine_strut_07_BG.png;Grubby Escape/Images/Background/Far/mine_strut_07_BG
+
+#begin Grubby Escape/Images/Button/grubby_button.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Button/grubby_button.png;Grubby Escape/Images/Button/grubby_button
+
+#begin Grubby Escape/Images/Crystals/mine_crystal_01.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Crystals/mine_crystal_01.png;Grubby Escape/Images/Crystals/mine_crystal_01
+
+#begin Grubby Escape/Images/Crystals/mine_crystal_04.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Crystals/mine_crystal_04.png;Grubby Escape/Images/Crystals/mine_crystal_04
+
+#begin Grubby Escape/Images/Crystals/mine_crystal_06.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Crystals/mine_crystal_06.png;Grubby Escape/Images/Crystals/mine_crystal_06
+
+#begin Grubby Escape/Images/Crystals/mine_crystal_08.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Crystals/mine_crystal_08.png;Grubby Escape/Images/Crystals/mine_crystal_08
+
+#begin Grubby Escape/Images/Floor/mine_floor_01.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Floor/mine_floor_01.png;Grubby Escape/Images/Floor/mine_floor_01
+
+#begin Grubby Escape/Images/Grubs/Alert 12/Cry_000.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Alert 12/Cry_000.png;Grubby Escape/Images/Grubs/Alert 12/Cry_000
+
+#begin Grubby Escape/Images/Grubs/Alert 12/Cry_001.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Alert 12/Cry_001.png;Grubby Escape/Images/Grubs/Alert 12/Cry_001
+
+#begin Grubby Escape/Images/Grubs/Alert 12/Cry_002.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Alert 12/Cry_002.png;Grubby Escape/Images/Grubs/Alert 12/Cry_002
+
+#begin Grubby Escape/Images/Grubs/Alert 12/Cry_003.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Alert 12/Cry_003.png;Grubby Escape/Images/Grubs/Alert 12/Cry_003
+
+#begin Grubby Escape/Images/Grubs/Alert 12/Cry_004.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Alert 12/Cry_004.png;Grubby Escape/Images/Grubs/Alert 12/Cry_004
+
+#begin Grubby Escape/Images/Grubs/Alert 12/Cry_005.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Alert 12/Cry_005.png;Grubby Escape/Images/Grubs/Alert 12/Cry_005
+
+#begin Grubby Escape/Images/Grubs/Alert 12/Cry_006.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Alert 12/Cry_006.png;Grubby Escape/Images/Grubs/Alert 12/Cry_006
+
+#begin Grubby Escape/Images/Grubs/Freed 10/Freed_000.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Freed 10/Freed_000.png;Grubby Escape/Images/Grubs/Freed 10/Freed_000
+
+#begin Grubby Escape/Images/Grubs/Freed 10/Freed_001.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Freed 10/Freed_001.png;Grubby Escape/Images/Grubs/Freed 10/Freed_001
+
+#begin Grubby Escape/Images/Grubs/Freed 10/Freed_002.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Freed 10/Freed_002.png;Grubby Escape/Images/Grubs/Freed 10/Freed_002
+
+#begin Grubby Escape/Images/Grubs/Freed 10/Freed_003.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Freed 10/Freed_003.png;Grubby Escape/Images/Grubs/Freed 10/Freed_003
+
+#begin Grubby Escape/Images/Grubs/Freed 10/Freed_004.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Freed 10/Freed_004.png;Grubby Escape/Images/Grubs/Freed 10/Freed_004
+
+#begin Grubby Escape/Images/Grubs/Freed 10/Freed_005.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Freed 10/Freed_005.png;Grubby Escape/Images/Grubs/Freed 10/Freed_005
+
+#begin Grubby Escape/Images/Grubs/Freed 10/Freed_006.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Freed 10/Freed_006.png;Grubby Escape/Images/Grubs/Freed 10/Freed_006
+
+#begin Grubby Escape/Images/Grubs/Freed 10/Freed_007.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Freed 10/Freed_007.png;Grubby Escape/Images/Grubs/Freed 10/Freed_007
+
+#begin Grubby Escape/Images/Grubs/Freed 10/Freed_008.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Freed 10/Freed_008.png;Grubby Escape/Images/Grubs/Freed 10/Freed_008
+
+#begin Grubby Escape/Images/Grubs/Freed 10/Freed_009.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Freed 10/Freed_009.png;Grubby Escape/Images/Grubs/Freed 10/Freed_009
+
+#begin Grubby Escape/Images/Grubs/Freed 10/Freed_010.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Freed 10/Freed_010.png;Grubby Escape/Images/Grubs/Freed 10/Freed_010
+
+#begin Grubby Escape/Images/Grubs/Freed 10/Freed_011.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Freed 10/Freed_011.png;Grubby Escape/Images/Grubs/Freed 10/Freed_011
+
+#begin Grubby Escape/Images/Grubs/Freed 10/Freed_012.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Freed 10/Freed_012.png;Grubby Escape/Images/Grubs/Freed 10/Freed_012
+
+#begin Grubby Escape/Images/Grubs/Freed 10/Freed_013.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Freed 10/Freed_013.png;Grubby Escape/Images/Grubs/Freed 10/Freed_013
+
+#begin Grubby Escape/Images/Grubs/Freed 10/Freed_014.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Freed 10/Freed_014.png;Grubby Escape/Images/Grubs/Freed 10/Freed_014
+
+#begin Grubby Escape/Images/Grubs/Freed 10/Freed_015.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Freed 10/Freed_015.png;Grubby Escape/Images/Grubs/Freed 10/Freed_015
+
+#begin Grubby Escape/Images/Grubs/Freed 10/Freed_016.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Freed 10/Freed_016.png;Grubby Escape/Images/Grubs/Freed 10/Freed_016
+
+#begin Grubby Escape/Images/Grubs/Freed 10/Freed_017.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Freed 10/Freed_017.png;Grubby Escape/Images/Grubs/Freed 10/Freed_017
+
+#begin Grubby Escape/Images/Grubs/Freed 10/Freed_018.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Freed 10/Freed_018.png;Grubby Escape/Images/Grubs/Freed 10/Freed_018
+
+#begin Grubby Escape/Images/Grubs/Freed 10/Freed_019.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Freed 10/Freed_019.png;Grubby Escape/Images/Grubs/Freed 10/Freed_019
+
+#begin Grubby Escape/Images/Grubs/Grub Pin/grubby_location.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Grub Pin/grubby_location.png;Grubby Escape/Images/Grubs/Grub Pin/grubby_location
+
+#begin Grubby Escape/Images/Grubs/Home Idle 12/Home Bounce_000.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Idle 12/Home Bounce_000.png;Grubby Escape/Images/Grubs/Home Idle 12/Home Bounce_000
+
+#begin Grubby Escape/Images/Grubs/Home Idle 12/Home Bounce_001.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Idle 12/Home Bounce_001.png;Grubby Escape/Images/Grubs/Home Idle 12/Home Bounce_001
+
+#begin Grubby Escape/Images/Grubs/Home Idle 12/Home Bounce_002.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Idle 12/Home Bounce_002.png;Grubby Escape/Images/Grubs/Home Idle 12/Home Bounce_002
+
+#begin Grubby Escape/Images/Grubs/Home Idle 12/Home Bounce_003.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Idle 12/Home Bounce_003.png;Grubby Escape/Images/Grubs/Home Idle 12/Home Bounce_003
+
+#begin Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_000.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_000.png;Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_000
+
+#begin Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_001.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_001.png;Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_001
+
+#begin Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_002.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_002.png;Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_002
+
+#begin Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_003.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_003.png;Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_003
+
+#begin Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_004.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_004.png;Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_004
+
+#begin Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_005.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_005.png;Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_005
+
+#begin Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_006.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_006.png;Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_006
+
+#begin Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_007.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_007.png;Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_007
+
+#begin Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_008.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_008.png;Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_008
+
+#begin Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_009.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_009.png;Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_009
+
+#begin Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_010.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_010.png;Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_010
+
+#begin Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_011.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_011.png;Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_011
+
+#begin Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_012.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_012.png;Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_012
+
+#begin Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_013.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_013.png;Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_013
+
+#begin Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_014.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_014.png;Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_014
+
+#begin Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_015.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_015.png;Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_015
+
+#begin Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_016.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_016.png;Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_016
+
+#begin Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_017.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_017.png;Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_017
+
+#begin Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_018.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_018.png;Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_018
+
+#begin Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_019.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_019.png;Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_019
+
+#begin Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_020.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_020.png;Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_020
+
+#begin Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_021.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_021.png;Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_021
+
+#begin Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_022.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_022.png;Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_022
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_000.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_000.png;Grubby Escape/Images/Grubs/Idle 12/Idle_000
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_001.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_001.png;Grubby Escape/Images/Grubs/Idle 12/Idle_001
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_002.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_002.png;Grubby Escape/Images/Grubs/Idle 12/Idle_002
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_003.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_003.png;Grubby Escape/Images/Grubs/Idle 12/Idle_003
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_004.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_004.png;Grubby Escape/Images/Grubs/Idle 12/Idle_004
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_005.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_005.png;Grubby Escape/Images/Grubs/Idle 12/Idle_005
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_006.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_006.png;Grubby Escape/Images/Grubs/Idle 12/Idle_006
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_007.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_007.png;Grubby Escape/Images/Grubs/Idle 12/Idle_007
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_008.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_008.png;Grubby Escape/Images/Grubs/Idle 12/Idle_008
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_009.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_009.png;Grubby Escape/Images/Grubs/Idle 12/Idle_009
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_010.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_010.png;Grubby Escape/Images/Grubs/Idle 12/Idle_010
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_011.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_011.png;Grubby Escape/Images/Grubs/Idle 12/Idle_011
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_012.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_012.png;Grubby Escape/Images/Grubs/Idle 12/Idle_012
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_013.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_013.png;Grubby Escape/Images/Grubs/Idle 12/Idle_013
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_014.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_014.png;Grubby Escape/Images/Grubs/Idle 12/Idle_014
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_015.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_015.png;Grubby Escape/Images/Grubs/Idle 12/Idle_015
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_016.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_016.png;Grubby Escape/Images/Grubs/Idle 12/Idle_016
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_017.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_017.png;Grubby Escape/Images/Grubs/Idle 12/Idle_017
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_018.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_018.png;Grubby Escape/Images/Grubs/Idle 12/Idle_018
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_019.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_019.png;Grubby Escape/Images/Grubs/Idle 12/Idle_019
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_020.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_020.png;Grubby Escape/Images/Grubs/Idle 12/Idle_020
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_021.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_021.png;Grubby Escape/Images/Grubs/Idle 12/Idle_021
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_022.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_022.png;Grubby Escape/Images/Grubs/Idle 12/Idle_022
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_023.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_023.png;Grubby Escape/Images/Grubs/Idle 12/Idle_023
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_024.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_024.png;Grubby Escape/Images/Grubs/Idle 12/Idle_024
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_025.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_025.png;Grubby Escape/Images/Grubs/Idle 12/Idle_025
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_026.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_026.png;Grubby Escape/Images/Grubs/Idle 12/Idle_026
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_027.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_027.png;Grubby Escape/Images/Grubs/Idle 12/Idle_027
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_028.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_028.png;Grubby Escape/Images/Grubs/Idle 12/Idle_028
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_029.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_029.png;Grubby Escape/Images/Grubs/Idle 12/Idle_029
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_030.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_030.png;Grubby Escape/Images/Grubs/Idle 12/Idle_030
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_031.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_031.png;Grubby Escape/Images/Grubs/Idle 12/Idle_031
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_032.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_032.png;Grubby Escape/Images/Grubs/Idle 12/Idle_032
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_033.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_033.png;Grubby Escape/Images/Grubs/Idle 12/Idle_033
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_034.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_034.png;Grubby Escape/Images/Grubs/Idle 12/Idle_034
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_035.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_035.png;Grubby Escape/Images/Grubs/Idle 12/Idle_035
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_036.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_036.png;Grubby Escape/Images/Grubs/Idle 12/Idle_036
+
+#begin Grubby Escape/Images/Grubs/Idle 12/Idle_037.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Idle 12/Idle_037.png;Grubby Escape/Images/Grubs/Idle 12/Idle_037
+
+#begin Grubby Escape/Images/Grubs/Jump 10/Freed_000.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Jump 10/Freed_000.png;Grubby Escape/Images/Grubs/Jump 10/Freed_000
+
+#begin Grubby Escape/Images/Grubs/Jump 10/Freed_001.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Jump 10/Freed_001.png;Grubby Escape/Images/Grubs/Jump 10/Freed_001
+
+#begin Grubby Escape/Images/Grubs/Jump 10/Freed_002.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Jump 10/Freed_002.png;Grubby Escape/Images/Grubs/Jump 10/Freed_002
+
+#begin Grubby Escape/Images/Grubs/Jump 10/Freed_003.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Jump 10/Freed_003.png;Grubby Escape/Images/Grubs/Jump 10/Freed_003
+
+#begin Grubby Escape/Images/Grubs/Jump 10/Freed_004.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Jump 10/Freed_004.png;Grubby Escape/Images/Grubs/Jump 10/Freed_004
+
+#begin Grubby Escape/Images/Grubs/Jump 10/Freed_005.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Jump 10/Freed_005.png;Grubby Escape/Images/Grubs/Jump 10/Freed_005
+
+#begin Grubby Escape/Images/Grubs/Jump 10/Freed_006.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Jump 10/Freed_006.png;Grubby Escape/Images/Grubs/Jump 10/Freed_006
+
+#begin Grubby Escape/Images/Grubs/Jump 10/Freed_007.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Jump 10/Freed_007.png;Grubby Escape/Images/Grubs/Jump 10/Freed_007
+
+#begin Grubby Escape/Images/Grubs/Jump 10/Freed_008.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Jump 10/Freed_008.png;Grubby Escape/Images/Grubs/Jump 10/Freed_008
+
+#begin Grubby Escape/Images/Grubs/Jump 10/Freed_009.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Jump 10/Freed_009.png;Grubby Escape/Images/Grubs/Jump 10/Freed_009
+
+#begin Grubby Escape/Images/Grubs/Jump 10/Freed_010.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Jump 10/Freed_010.png;Grubby Escape/Images/Grubs/Jump 10/Freed_010
+
+#begin Grubby Escape/Images/Grubs/Jump 10/Freed_011.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Jump 10/Freed_011.png;Grubby Escape/Images/Grubs/Jump 10/Freed_011
+
+#begin Grubby Escape/Images/Grubs/Jump 10/Freed_012.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Jump 10/Freed_012.png;Grubby Escape/Images/Grubs/Jump 10/Freed_012
+
+#begin Grubby Escape/Images/Grubs/Jump 10/Freed_013.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Jump 10/Freed_013.png;Grubby Escape/Images/Grubs/Jump 10/Freed_013
+
+#begin Grubby Escape/Images/Grubs/Jump 10/Freed_014.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Jump 10/Freed_014.png;Grubby Escape/Images/Grubs/Jump 10/Freed_014
+
+#begin Grubby Escape/Images/Grubs/Jump 10/Freed_015.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Jump 10/Freed_015.png;Grubby Escape/Images/Grubs/Jump 10/Freed_015
+
+#begin Grubby Escape/Images/Grubs/Jump 10/Freed_016.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Jump 10/Freed_016.png;Grubby Escape/Images/Grubs/Jump 10/Freed_016
+
+#begin Grubby Escape/Images/Grubs/Jump 10/Freed_017.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Jump 10/Freed_017.png;Grubby Escape/Images/Grubs/Jump 10/Freed_017
+
+#begin Grubby Escape/Images/Grubs/Jump 10/Freed_018.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Jump 10/Freed_018.png;Grubby Escape/Images/Grubs/Jump 10/Freed_018
+
+#begin Grubby Escape/Images/Grubs/Jump 10/Freed_019.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Grubs/Jump 10/Freed_019.png;Grubby Escape/Images/Grubs/Jump 10/Freed_019
+
+#begin Grubby Escape/Images/Lights/ruin_beam_glow.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Lights/ruin_beam_glow.png;Grubby Escape/Images/Lights/ruin_beam_glow
+
+#begin Grubby Escape/Images/Lights/white_light.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Lights/white_light.png;Grubby Escape/Images/Lights/white_light
+
+#begin Grubby Escape/Images/Rails/mine_rail_01.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Rails/mine_rail_01.png;Grubby Escape/Images/Rails/mine_rail_01
+
+#begin Grubby Escape/Images/Rails/mine_rail_02.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Rails/mine_rail_02.png;Grubby Escape/Images/Rails/mine_rail_02
+
+#begin Grubby Escape/Images/Rails/mine_rail_03.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Rails/mine_rail_03.png;Grubby Escape/Images/Rails/mine_rail_03
+
+#begin Grubby Escape/Images/Rails/mine_rail_joint.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Rails/mine_rail_joint.png;Grubby Escape/Images/Rails/mine_rail_joint
+
+#begin Grubby Escape/Images/Rails/mines_flip_platform_BG.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Rails/mines_flip_platform_BG.png;Grubby Escape/Images/Rails/mines_flip_platform_BG
+
+#begin Grubby Escape/Images/Rails/Mines_Layered_0008_a.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Rails/Mines_Layered_0008_a.png;Grubby Escape/Images/Rails/Mines_Layered_0008_a
+
+#begin Grubby Escape/Images/Start Screen/grubby_home.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Start Screen/grubby_home.png;Grubby Escape/Images/Start Screen/grubby_home
+
