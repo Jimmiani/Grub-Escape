@@ -79,6 +79,30 @@
 /processorParam:Quality=Best
 /build:Grubby Escape/Audio/Sound Effects/Grubs/Freed/grub_free_2.wav;Grubby Escape/Audio/Sound Effects/Grubs/Freed/grub_free_2
 
+#begin Grubby Escape/Audio/Sound Effects/Grubs/Sad Idle/Grub_sad_idle_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Grubby Escape/Audio/Sound Effects/Grubs/Sad Idle/Grub_sad_idle_01.wav;Grubby Escape/Audio/Sound Effects/Grubs/Sad Idle/Grub_sad_idle_01
+
+#begin Grubby Escape/Audio/Sound Effects/Grubs/Sad Idle/Grub_sad_idle_02.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Grubby Escape/Audio/Sound Effects/Grubs/Sad Idle/Grub_sad_idle_02.wav;Grubby Escape/Audio/Sound Effects/Grubs/Sad Idle/Grub_sad_idle_02
+
+#begin Grubby Escape/Audio/Sound Effects/Grubs/Sad Idle/Grub_sad_idle_03.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Grubby Escape/Audio/Sound Effects/Grubs/Sad Idle/Grub_sad_idle_03.wav;Grubby Escape/Audio/Sound Effects/Grubs/Sad Idle/Grub_sad_idle_03
+
+#begin Grubby Escape/Audio/Sound Effects/Grubs/Sad Idle/Grub_sad_idle_04.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Grubby Escape/Audio/Sound Effects/Grubs/Sad Idle/Grub_sad_idle_04.wav;Grubby Escape/Audio/Sound Effects/Grubs/Sad Idle/Grub_sad_idle_04
+
 #begin Grubby Escape/Audio/Sound Effects/Grubs/Sad/grub_sad_1.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

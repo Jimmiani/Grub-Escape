@@ -28,8 +28,8 @@ namespace Grubby_Escape
 
         private List<SoundEffect> _alertEffect;
         private List<SoundEffect> _jumpEffect;
+        private List<SoundEffect> _sadEffect;
         private List<SoundEffect> _idleEffect;
-        private List<SoundEffect> _Effect;
 
         private List<Texture2D> _idleAnim;
         private List<Texture2D> _jumpAnim;
@@ -43,12 +43,15 @@ namespace Grubby_Escape
         private int _currentFrame;
         private float _animTimer;
         private float _bounceTimer;
+        private float _idleTimer;
+        private int _idleIndex;
 
-        public Grub(List<Texture2D> idleAnim, List<SoundEffect> idleEffect, List<Texture2D> alertAnim, List<SoundEffect> alertEffect, List<Texture2D> jumpAnim, List<SoundEffect> jumpEffect)
+        public Grub(List<Texture2D> idleAnim, List<SoundEffect> idleEffect, List<SoundEffect> sadEffect, List<Texture2D> alertAnim, List<SoundEffect> alertEffect, List<Texture2D> jumpAnim, List<SoundEffect> jumpEffect)
         {
             _idleEffect = idleEffect;
             _alertEffect = alertEffect;
             _jumpEffect = jumpEffect;
+            _sadEffect = sadEffect;
 
             _idleAnim = idleAnim;
             _alertAnim = alertAnim;
@@ -59,6 +62,8 @@ namespace Grubby_Escape
             _currentAnim = _idleAnim;
             _currentFrame = 0;
             _animTimer = 0;
+            _idleTimer = 0;
+            _idleIndex = 0;
             _grubRect = new Rectangle(100, 100, 157, 171);
         }
 
@@ -78,6 +83,8 @@ namespace Grubby_Escape
 
             if (grubState == GrubState.Idle)
             {
+                _idleTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
                 _currentAnim = _idleAnim;
 
                 if (_animTimer >= 1.0 / 12.0)
@@ -87,6 +94,17 @@ namespace Grubby_Escape
                     if (_currentFrame >= _idleAnim.Count)
                     {
                         _currentFrame = 1;
+                    }
+                }
+
+                if (_idleTimer > 3)
+                {
+                    _idleEffect[_idleIndex].Play();
+                    _idleTimer = 0;
+                    _idleIndex += 1;
+                    if (_idleIndex >= _idleEffect.Count)
+                    {
+                        _idleIndex = 0;
                     }
                 }
             }
@@ -200,6 +218,14 @@ namespace Grubby_Escape
             grubState = GrubState.Jump;
         }
 
+        public void Sad()
+        {
+            _sadEffect[_generator.Next(0, _sadEffect.Count)].Play();
+
+            _currentFrame = 0;
+            grubState = GrubState.Idle;
+        }
+
         public GrubState CurrentState
         {
             get { return grubState; }
@@ -210,6 +236,11 @@ namespace Grubby_Escape
         {
             get { return _position; }
             set { _position = value; }
+        }
+
+        public Rectangle Hitbox
+        {
+            get { return _grubRect; }
         }
     }
 }
