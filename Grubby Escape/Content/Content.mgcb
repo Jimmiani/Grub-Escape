@@ -376,6 +376,18 @@
 /processorParam:TextureFormat=Color
 /build:Grubby Escape/Images/Floor/mine_floor_01.png;Grubby Escape/Images/Floor/mine_floor_01
 
+#begin Grubby Escape/Images/Floor/white_square.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Floor/white_square.png
+
 #begin Grubby Escape/Images/Grubs/Alert 12/Cry_000.png
 /importer:TextureImporter
 /processor:TextureProcessor

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -22,11 +23,16 @@ namespace Grubby_Escape
         KeyboardState keyboardState, prevKeyboardState;
         GameState gameState;
         Camera2D camera;
+        Random generator;
 
         // Backgrounds
 
         Texture2D BG1, BG2, BG3, BG4, BG5;
-        Texture2D lightTex;
+        Texture2D lightTex, blackTex;
+
+        // Foreground
+
+        Texture2D crystalFG1, crystalFG2;
 
         // Music
 
@@ -62,7 +68,7 @@ namespace Grubby_Escape
 
         // Floors
 
-        Texture2D woodFloor, railFloor, railBrokenL, railBrokenR;
+        Texture2D woodFloor, railFloor, railBrokenL, railBrokenR, crystalFloor1, crystalFloor2;
 
         public Game1()
         {
@@ -81,6 +87,7 @@ namespace Grubby_Escape
 
             gameState = GameState.Start;
             camera = new Camera2D(GraphicsDevice.Viewport);
+            generator = new Random();
 
             grubIdle = new List<Texture2D>();
             grubAlert = new List<Texture2D>();
@@ -111,7 +118,7 @@ namespace Grubby_Escape
             mainMusic.IsLooped = true;
             mainMusic.Play();
 
-            bassMusic.Volume = 0;
+            bassMusic.Volume = 0.8f;
             bassMusic.IsLooped = true;
             bassMusic.Play();
 
@@ -130,6 +137,14 @@ namespace Grubby_Escape
 
             // --------------------------- Images -------------------------------
 
+            // Crystals
+
+            crystalFG1 = Content.Load<Texture2D>("Grubby Escape/Images/Crystals/mine_crystal_04");
+            crystalFG2 = Content.Load<Texture2D>("Grubby Escape/Images/Crystals/mine_crystal_06");
+            crystalFloor1 = Content.Load<Texture2D>("Grubby Escape/Images/Crystals/mine_crystal_01");
+            crystalFloor2 = Content.Load<Texture2D>("Grubby Escape/Images/Crystals/mine_crystal_08");
+
+
             // Backgrounds
 
             BG1 = Content.Load<Texture2D>("Grubby Escape/Images/Background/Extremely Far/BG_bone_01");
@@ -147,6 +162,7 @@ namespace Grubby_Escape
             railFloor = Content.Load<Texture2D>("Grubby Escape/Images/Rails/mine_rail_01");
             railBrokenL = Content.Load<Texture2D>("Grubby Escape/Images/Rails/mine_rail_02");
             railBrokenR = Content.Load<Texture2D>("Grubby Escape/Images/Rails/mine_rail_03");
+            blackTex = Content.Load<Texture2D>("Grubby Escape/Images/Floor/white_square");
 
             // Grubby
 
@@ -249,7 +265,7 @@ namespace Grubby_Escape
                 if (cartStartTimer > 1 && !hasStarted)
                 {
                     camera.Shake(3, 2, true);
-                    cart.Start(8);
+                    cart.Start(20);
                     hasStarted = true;
                 }
 
@@ -273,22 +289,37 @@ namespace Grubby_Escape
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
-            _spriteBatch.Begin(transformMatrix: camera.GetParallaxTransform(0.2f));
+            _spriteBatch.Begin(transformMatrix: camera.GetParallaxTransform(0.1f));
 
-            _spriteBatch.Draw(BG1, new Rectangle(0, 0, 1500, 1800), Color.White);
+            _spriteBatch.Draw(BG4, new Rectangle(200, -300, 1400, 1600), null, Color.White, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
+            _spriteBatch.Draw(BG1, new Rectangle(-300, -500, 1000, 1500), Color.White);
             _spriteBatch.Draw(BG2, new Rectangle(1500, 600, 1000, 1100), Color.White);
-            _spriteBatch.Draw(BG3, new Rectangle(700, 100, 1900, 2000), Color.White);
-            _spriteBatch.Draw(BG4, new Rectangle(2000, 900, 1700, 1900), Color.White);
-            _spriteBatch.Draw(BG5, new Rectangle(-1000, -500, 1900, 2100), Color.White);
-            _spriteBatch.Draw(lightTex, new Rectangle(-10000, -10000, 30000, 30000), Color.Pink * 0.2f);
+            _spriteBatch.Draw(BG3, new Rectangle(-500, 400, 1500, 1800), Color.White);
+            _spriteBatch.Draw(BG5, new Rectangle(1400, -300, 1000, 1200), Color.White);
+            _spriteBatch.Draw(lightTex, new Rectangle(-14000, -14000, 30000, 30000), Color.Pink * 0.5f);
 
             _spriteBatch.End();
 
 
             _spriteBatch.Begin(transformMatrix: camera.Transform);
 
+            // Ceiling
+
+            for (int i = 0; i < 10; i++)
+            {
+                _spriteBatch.Draw(crystalFG1, new Vector2(-500 + (1000 * i), -240), Color.White);
+            }
+
+
+            // Left side
+            for (int i = 0; i < 4; i++)
+            {
+                _spriteBatch.Draw(woodFloor, new Vector2(-359, 0 + (290 * i)), null, Color.White, MathHelper.ToRadians(90), new Vector2(woodFloor.Width / 2, woodFloor.Height / 2), 1, SpriteEffects.None, 0);
+            }
+            _spriteBatch.Draw(blackTex, new Rectangle(-1000, 790, 6756, 1000), Color.Black);
+            
             for (int i = 0; i < 25; i++)
             {
                 _spriteBatch.Draw(woodFloor, new Vector2(-1500 + (290 * i), 780), Color.White);
@@ -297,9 +328,42 @@ namespace Grubby_Escape
             {
                 _spriteBatch.Draw(railFloor, new Vector2(150 + (270 * i), 770), Color.White);
             }
+            for (int i = 0; i < 4; i++)
+            {
+                _spriteBatch.Draw(woodFloor, new Vector2(5750, 940 + (290 * i)), null, Color.White, MathHelper.ToRadians(90), new Vector2(woodFloor.Width / 2, woodFloor.Height / 2), 1, SpriteEffects.None, 0);
+            }
             _spriteBatch.Draw(railBrokenL, new Vector2(5560, 760), Color.White);
+
+            _spriteBatch.Draw(crystalFG1, new Vector2(-440, 580), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.FlipVertically, 0);
+
+            // Middle
+
+
+
+            // Right side
+
+            _spriteBatch.Draw(blackTex, new Rectangle(6750, 790, 10000, 1000), Color.Black);
+            for (int i = 0; i < 25; i++)
+            {
+                _spriteBatch.Draw(woodFloor, new Vector2(6750 + (290 * i), 780), Color.White);
+            }
+            for (int i = 0; i < 15; i++)
+            {
+                _spriteBatch.Draw(railFloor, new Vector2(6750 + (270 * i), 770), Color.White);
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                _spriteBatch.Draw(woodFloor, new Vector2(6750, 940 + (290 * i)), null, Color.White, MathHelper.ToRadians(270), new Vector2(woodFloor.Width / 2, woodFloor.Height / 2), 1, SpriteEffects.None, 0);
+            }
+            _spriteBatch.Draw(railBrokenR, new Vector2(6500, 770), Color.White);
             cart.Draw(_spriteBatch);
             grubby.Draw(_spriteBatch, true);
+
+            _spriteBatch.End();
+
+            // Foregorund
+
+            _spriteBatch.Begin(transformMatrix: camera.GetParallaxTransform(1.2f));
 
             _spriteBatch.End();
 
