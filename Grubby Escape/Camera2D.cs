@@ -26,6 +26,7 @@ namespace Grubby_Escape
         private bool _shakeFade = false;
         private Random _generator = new Random();
         private Vector2 _shakeOffset = Vector2.Zero;
+        private Vector2 _finalPosition = Vector2.Zero;
 
         public Camera2D(Viewport viewport)
         {
@@ -66,11 +67,11 @@ namespace Grubby_Escape
             }
 
             // Combine shake offset with camera position
-            Vector2 finalPosition = Position + _shakeOffset;
+            _finalPosition = Position + _shakeOffset;
 
             // Build transformation matrix
             _transform =
-                Matrix.CreateTranslation(new Vector3(-finalPosition, 0f)) *
+                Matrix.CreateTranslation(new Vector3(-_finalPosition, 0f)) *
                 Matrix.CreateRotationZ(Rotation) *
                 Matrix.CreateScale(Zoom, Zoom, 1f);
         }
@@ -84,7 +85,7 @@ namespace Grubby_Escape
 
         public Matrix GetParallaxTransform(float factor)
         {
-            return Matrix.CreateTranslation(-Position.X * factor, -Position.Y * factor, 0f) *
+            return Matrix.CreateTranslation(-_finalPosition.X * factor, -_finalPosition.Y * factor, 0f) *
                    Matrix.CreateRotationZ(Rotation) *
                    Matrix.CreateScale(Zoom, Zoom, 1f);
         }

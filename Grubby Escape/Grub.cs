@@ -224,6 +224,7 @@ namespace Grubby_Escape
 
             _currentFrame = 0;
             grubState = GrubState.Idle;
+            _idleTimer = 0;
         }
 
         public GrubState CurrentState

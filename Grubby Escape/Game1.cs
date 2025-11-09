@@ -32,7 +32,8 @@ namespace Grubby_Escape
 
         // Foreground
 
-        Texture2D crystalFG1, crystalFG2;
+        Texture2D crystalFG1, crystalFG2, blackFader;
+        List<Texture2D> rocksFG;
 
         // Music
 
@@ -89,6 +90,8 @@ namespace Grubby_Escape
             camera = new Camera2D(GraphicsDevice.Viewport);
             generator = new Random();
 
+            rocksFG = new List<Texture2D>();
+
             grubIdle = new List<Texture2D>();
             grubAlert = new List<Texture2D>();
             grubJump = new List<Texture2D>();
@@ -114,11 +117,11 @@ namespace Grubby_Escape
 
             grubby.Position = new Vector2(0, 630);
 
-            mainMusic.Volume = 0.8f;
+            mainMusic.Volume = 0.6f;
             mainMusic.IsLooped = true;
             mainMusic.Play();
 
-            bassMusic.Volume = 0.8f;
+            bassMusic.Volume = 0.6f;
             bassMusic.IsLooped = true;
             bassMusic.Play();
 
@@ -126,7 +129,7 @@ namespace Grubby_Escape
             actionMusic.IsLooped = true;
             actionMusic.Play();
 
-            machineryAtmos.Volume = 0.7f;
+            machineryAtmos.Volume = 0.6f;
             machineryAtmos.IsLooped = true;
             machineryAtmos.Play();
         }
@@ -144,6 +147,11 @@ namespace Grubby_Escape
             crystalFloor1 = Content.Load<Texture2D>("Grubby Escape/Images/Crystals/mine_crystal_01");
             crystalFloor2 = Content.Load<Texture2D>("Grubby Escape/Images/Crystals/mine_crystal_08");
 
+            // Foreground
+
+            for (int i = 1; i <= 19; i++)
+                rocksFG.Add(Content.Load<Texture2D>($"Grubby Escape/Images/Foreground/Rock_FG ({i})"));
+            blackFader = Content.Load<Texture2D>("Grubby Escape/Images/Lights/black_fader_GG");
 
             // Backgrounds
 
@@ -265,7 +273,7 @@ namespace Grubby_Escape
                 if (cartStartTimer > 1 && !hasStarted)
                 {
                     camera.Shake(3, 2, true);
-                    cart.Start(20);
+                    cart.Start(8);
                     hasStarted = true;
                 }
 
@@ -298,19 +306,21 @@ namespace Grubby_Escape
             _spriteBatch.Draw(BG2, new Rectangle(1500, 600, 1000, 1100), Color.White);
             _spriteBatch.Draw(BG3, new Rectangle(-500, 400, 1500, 1800), Color.White);
             _spriteBatch.Draw(BG5, new Rectangle(1400, -300, 1000, 1200), Color.White);
+            _spriteBatch.Draw(BG3, new Rectangle(2000, -100, 1500, 1800), Color.White);
+            _spriteBatch.Draw(BG5, new Rectangle(2400, 500, 1000, 1200), Color.White);
             _spriteBatch.Draw(lightTex, new Rectangle(-14000, -14000, 30000, 30000), Color.Pink * 0.5f);
+            _spriteBatch.Draw(blackTex, new Rectangle(-1000, -400, 10000, 450), Color.Black);
+            _spriteBatch.Draw(blackFader, new Rectangle(-10000, -200, 30000, 420), Color.White);
 
             _spriteBatch.End();
 
 
             _spriteBatch.Begin(transformMatrix: camera.Transform);
 
-            // Ceiling
+            _spriteBatch.Draw(lightTex, new Rectangle(grubby.Hitbox.Center.X - 400, grubby.Hitbox.Center.Y - 400, 800, 800), Color.White * 0.2f);
 
-            for (int i = 0; i < 10; i++)
-            {
-                _spriteBatch.Draw(crystalFG1, new Vector2(-500 + (1000 * i), -240), Color.White);
-            }
+
+            // Ceiling
 
 
             // Left side
@@ -364,6 +374,27 @@ namespace Grubby_Escape
             // Foregorund
 
             _spriteBatch.Begin(transformMatrix: camera.GetParallaxTransform(1.2f));
+
+
+            for (int j = 0; j < 15; j++)
+            {
+                for (int i = 0; i < rocksFG.Count; i++)
+                {
+                    _spriteBatch.Draw(rocksFG[i], new Vector2(-600 + (1200 * j) + (80 * i), -220), Color.White);
+                }
+            }
+
+            _spriteBatch.End();
+
+            _spriteBatch.Begin(transformMatrix: camera.GetParallaxTransform(1.4f));
+
+            for (int j = 0; j < 15; j++)
+            {
+                for (int i = 0; i < rocksFG.Count; i++)
+                {
+                    _spriteBatch.Draw(rocksFG[i], new Vector2(-800 + (1200 * j) + (100 * i), -250), Color.White);
+                }
+            }
 
             _spriteBatch.End();
 
