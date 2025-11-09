@@ -56,7 +56,7 @@ namespace Grubby_Escape
             {
                 _startTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-                if (_velocity.X < _moveSpeed)
+                if (Math.Abs(_velocity.X) < Math.Abs(_moveSpeed))
                 {
                     _velocity.X = (_startTimer * _startTimer) * (_moveSpeed / 2);
                 }
@@ -80,11 +80,11 @@ namespace Grubby_Escape
             {
                 _startTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-                if (_velocity.X > 0)
+                if (Math.Abs(_velocity.X) > 0)
                 {
                     _velocity.X = _moveSpeed - ((_startTimer * _startTimer) * (_moveSpeed / 2));
                 }
-                else
+                if (Math.Sign(_velocity.X) != Math.Sign(_moveSpeed))
                 {
                     _startTimer = 0;
                     _cartState = CartState.Stopped;

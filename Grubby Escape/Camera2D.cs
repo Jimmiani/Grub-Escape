@@ -81,5 +81,12 @@ namespace Grubby_Escape
             _totalShakeDuration = duration;
             _shakeFade = fade;
         }
+
+        public Matrix GetParallaxTransform(float factor)
+        {
+            return Matrix.CreateTranslation(-Position.X * factor, -Position.Y * factor, 0f) *
+                   Matrix.CreateRotationZ(Rotation) *
+                   Matrix.CreateScale(Zoom, Zoom, 1f);
+        }
     }
 }
