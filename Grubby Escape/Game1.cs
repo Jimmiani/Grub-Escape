@@ -25,6 +25,11 @@ namespace Grubby_Escape
         Camera2D camera;
         Random generator;
 
+        // Particles
+
+        ParticleSystem smokeSystem;
+        List<Texture2D> smokeTextures;
+
         // Backgrounds
 
         Texture2D BG1, BG2, BG3, BG4, BG5;
@@ -90,6 +95,8 @@ namespace Grubby_Escape
             camera = new Camera2D(GraphicsDevice.Viewport);
             generator = new Random();
 
+            smokeTextures = new List<Texture2D>();
+
             rocksFG = new List<Texture2D>();
 
             grubIdle = new List<Texture2D>();
@@ -132,6 +139,31 @@ namespace Grubby_Escape
             machineryAtmos.Volume = 0.6f;
             machineryAtmos.IsLooped = true;
             machineryAtmos.Play();
+
+            // Particles
+
+            smokeSystem = new ParticleSystem(smokeTextures, new Rectangle(5750, 1300, 1000, 300), EmitterShape.Rectangle);
+
+            smokeSystem.SetDefaults(
+                Color.White,
+                false,
+                true,
+                0.1f,
+                1,
+                0,
+                0,
+                -0.5f,
+                -1,
+                false,
+                -0.05f,
+                0.05f,
+                4,
+                5,
+                2,
+                3,
+                1,
+                true);
+            smokeSystem.RestoreDefaults();
         }
 
         protected override void LoadContent()
@@ -139,6 +171,11 @@ namespace Grubby_Escape
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // --------------------------- Images -------------------------------
+
+            // Particles
+
+            for (int i = 1; i <= 5; i++)
+                smokeTextures.Add(Content.Load<Texture2D>($"Grubby Escape/Images/Particles/Smoke/abyss_smoke_0{i}"));
 
             // Crystals
 
@@ -232,6 +269,7 @@ namespace Grubby_Escape
             grubby.Update(mouseState, prevMouseState, gameTime);
             cart.Update(gameTime);
             camera.Update(gameTime);
+            smokeSystem.Update(gameTime);
 
             Debug.WriteLine(mouseWorldPos);
 
@@ -287,6 +325,7 @@ namespace Grubby_Escape
                     {
                         grubby.Sad();
                         gameState = GameState.Reverse;
+                        hasStarted = false;
                     }
                 }
             }
@@ -346,10 +385,6 @@ namespace Grubby_Escape
 
             _spriteBatch.Draw(crystalFG1, new Vector2(-440, 580), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.FlipVertically, 0);
 
-            // Middle
-
-
-
             // Right side
 
             _spriteBatch.Draw(blackTex, new Rectangle(6750, 790, 10000, 1000), Color.Black);
@@ -368,6 +403,11 @@ namespace Grubby_Escape
             _spriteBatch.Draw(railBrokenR, new Vector2(6500, 770), Color.White);
             cart.Draw(_spriteBatch);
             grubby.Draw(_spriteBatch, true);
+
+            // Middle
+
+            _spriteBatch.Draw(blackFader, new Rectangle(3500, 900, 6000, 900), Color.White);
+            smokeSystem.Draw(_spriteBatch);
 
             _spriteBatch.End();
 
@@ -392,7 +432,7 @@ namespace Grubby_Escape
             {
                 for (int i = 0; i < rocksFG.Count; i++)
                 {
-                    _spriteBatch.Draw(rocksFG[i], new Vector2(-800 + (1200 * j) + (100 * i), -250), Color.White);
+                    _spriteBatch.Draw(rocksFG[i], new Vector2(-900 + (1200 * j) + (100 * i), -250), Color.White);
                 }
             }
 

@@ -2008,6 +2008,66 @@
 /processorParam:TextureFormat=Color
 /build:Grubby Escape/Images/Lights/white_light.png;Grubby Escape/Images/Lights/white_light
 
+#begin Grubby Escape/Images/Particles/Smoke/abyss_smoke_01.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Particles/Smoke/abyss_smoke_01.png;Grubby Escape/Images/Particles/Smoke/abyss_smoke_01
+
+#begin Grubby Escape/Images/Particles/Smoke/abyss_smoke_02.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Particles/Smoke/abyss_smoke_02.png;Grubby Escape/Images/Particles/Smoke/abyss_smoke_02
+
+#begin Grubby Escape/Images/Particles/Smoke/abyss_smoke_03.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Particles/Smoke/abyss_smoke_03.png;Grubby Escape/Images/Particles/Smoke/abyss_smoke_03
+
+#begin Grubby Escape/Images/Particles/Smoke/abyss_smoke_04.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Particles/Smoke/abyss_smoke_04.png;Grubby Escape/Images/Particles/Smoke/abyss_smoke_04
+
+#begin Grubby Escape/Images/Particles/Smoke/abyss_smoke_05.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Particles/Smoke/abyss_smoke_05.png;Grubby Escape/Images/Particles/Smoke/abyss_smoke_05
+
 #begin Grubby Escape/Images/Rails/mine_rail_01.png
 /importer:TextureImporter
 /processor:TextureProcessor
