@@ -386,7 +386,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Floor/white_square.png
+/build:Grubby Escape/Images/Floor/white_square.png;Grubby Escape/Images/Floor/white_square
 
 #begin Grubby Escape/Images/Foreground/Rock_FG (1).png
 /importer:TextureImporter
@@ -398,7 +398,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Foreground/Rock_FG (1).png
+/build:Grubby Escape/Images/Foreground/Rock_FG (1).png;Grubby Escape/Images/Foreground/Rock_FG (1)
 
 #begin Grubby Escape/Images/Foreground/Rock_FG (10).png
 /importer:TextureImporter
@@ -410,7 +410,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Foreground/Rock_FG (10).png
+/build:Grubby Escape/Images/Foreground/Rock_FG (10).png;Grubby Escape/Images/Foreground/Rock_FG (10)
 
 #begin Grubby Escape/Images/Foreground/Rock_FG (11).png
 /importer:TextureImporter
@@ -422,7 +422,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Foreground/Rock_FG (11).png
+/build:Grubby Escape/Images/Foreground/Rock_FG (11).png;Grubby Escape/Images/Foreground/Rock_FG (11)
 
 #begin Grubby Escape/Images/Foreground/Rock_FG (12).png
 /importer:TextureImporter
@@ -434,7 +434,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Foreground/Rock_FG (12).png
+/build:Grubby Escape/Images/Foreground/Rock_FG (12).png;Grubby Escape/Images/Foreground/Rock_FG (12)
 
 #begin Grubby Escape/Images/Foreground/Rock_FG (13).png
 /importer:TextureImporter
@@ -446,7 +446,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Foreground/Rock_FG (13).png
+/build:Grubby Escape/Images/Foreground/Rock_FG (13).png;Grubby Escape/Images/Foreground/Rock_FG (13)
 
 #begin Grubby Escape/Images/Foreground/Rock_FG (14).png
 /importer:TextureImporter
@@ -458,7 +458,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Foreground/Rock_FG (14).png
+/build:Grubby Escape/Images/Foreground/Rock_FG (14).png;Grubby Escape/Images/Foreground/Rock_FG (14)
 
 #begin Grubby Escape/Images/Foreground/Rock_FG (15).png
 /importer:TextureImporter
@@ -470,7 +470,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Foreground/Rock_FG (15).png
+/build:Grubby Escape/Images/Foreground/Rock_FG (15).png;Grubby Escape/Images/Foreground/Rock_FG (15)
 
 #begin Grubby Escape/Images/Foreground/Rock_FG (16).png
 /importer:TextureImporter
@@ -482,7 +482,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Foreground/Rock_FG (16).png
+/build:Grubby Escape/Images/Foreground/Rock_FG (16).png;Grubby Escape/Images/Foreground/Rock_FG (16)
 
 #begin Grubby Escape/Images/Foreground/Rock_FG (17).png
 /importer:TextureImporter
@@ -494,7 +494,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Foreground/Rock_FG (17).png
+/build:Grubby Escape/Images/Foreground/Rock_FG (17).png;Grubby Escape/Images/Foreground/Rock_FG (17)
 
 #begin Grubby Escape/Images/Foreground/Rock_FG (18).png
 /importer:TextureImporter
@@ -506,7 +506,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Foreground/Rock_FG (18).png
+/build:Grubby Escape/Images/Foreground/Rock_FG (18).png;Grubby Escape/Images/Foreground/Rock_FG (18)
 
 #begin Grubby Escape/Images/Foreground/Rock_FG (19).png
 /importer:TextureImporter
@@ -518,7 +518,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Foreground/Rock_FG (19).png
+/build:Grubby Escape/Images/Foreground/Rock_FG (19).png;Grubby Escape/Images/Foreground/Rock_FG (19)
 
 #begin Grubby Escape/Images/Foreground/Rock_FG (2).png
 /importer:TextureImporter
@@ -530,7 +530,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Foreground/Rock_FG (2).png
+/build:Grubby Escape/Images/Foreground/Rock_FG (2).png;Grubby Escape/Images/Foreground/Rock_FG (2)
 
 #begin Grubby Escape/Images/Foreground/Rock_FG (3).png
 /importer:TextureImporter
@@ -542,7 +542,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Foreground/Rock_FG (3).png
+/build:Grubby Escape/Images/Foreground/Rock_FG (3).png;Grubby Escape/Images/Foreground/Rock_FG (3)
 
 #begin Grubby Escape/Images/Foreground/Rock_FG (4).png
 /importer:TextureImporter
@@ -554,7 +554,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Foreground/Rock_FG (4).png
+/build:Grubby Escape/Images/Foreground/Rock_FG (4).png;Grubby Escape/Images/Foreground/Rock_FG (4)
 
 #begin Grubby Escape/Images/Foreground/Rock_FG (5).png
 /importer:TextureImporter
@@ -566,7 +566,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Foreground/Rock_FG (5).png
+/build:Grubby Escape/Images/Foreground/Rock_FG (5).png;Grubby Escape/Images/Foreground/Rock_FG (5)
 
 #begin Grubby Escape/Images/Foreground/Rock_FG (6).png
 /importer:TextureImporter
@@ -578,7 +578,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Foreground/Rock_FG (6).png
+/build:Grubby Escape/Images/Foreground/Rock_FG (6).png;Grubby Escape/Images/Foreground/Rock_FG (6)
 
 #begin Grubby Escape/Images/Foreground/Rock_FG (7).png
 /importer:TextureImporter
@@ -590,7 +590,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Foreground/Rock_FG (7).png
+/build:Grubby Escape/Images/Foreground/Rock_FG (7).png;Grubby Escape/Images/Foreground/Rock_FG (7)
 
 #begin Grubby Escape/Images/Foreground/Rock_FG (8).png
 /importer:TextureImporter
@@ -602,7 +602,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Foreground/Rock_FG (8).png
+/build:Grubby Escape/Images/Foreground/Rock_FG (8).png;Grubby Escape/Images/Foreground/Rock_FG (8)
 
 #begin Grubby Escape/Images/Foreground/Rock_FG (9).png
 /importer:TextureImporter
@@ -614,7 +614,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Foreground/Rock_FG (9).png
+/build:Grubby Escape/Images/Foreground/Rock_FG (9).png;Grubby Escape/Images/Foreground/Rock_FG (9)
 
 #begin Grubby Escape/Images/Grubs/Alert 12/Cry_000.png
 /importer:TextureImporter
@@ -1982,7 +1982,19 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Lights/black_fader_GG.png
+/build:Grubby Escape/Images/Lights/black_fader_GG.png;Grubby Escape/Images/Lights/black_fader_GG
+
+#begin Grubby Escape/Images/Lights/credits vignette.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Lights/credits vignette.png;Grubby Escape/Images/Lights/credits vignette
 
 #begin Grubby Escape/Images/Lights/ruin_beam_glow.png
 /importer:TextureImporter
@@ -2067,6 +2079,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Grubby Escape/Images/Particles/Smoke/abyss_smoke_05.png;Grubby Escape/Images/Particles/Smoke/abyss_smoke_05
+
+#begin Grubby Escape/Images/Particles/Smoke/wispy_smoke_particle_abyss.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Particles/Smoke/wispy_smoke_particle_abyss.png;Grubby Escape/Images/Particles/Smoke/wispy_smoke_particle_abyss
 
 #begin Grubby Escape/Images/Rails/mine_rail_01.png
 /importer:TextureImporter

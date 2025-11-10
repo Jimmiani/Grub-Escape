@@ -190,8 +190,8 @@ namespace Grubby_Escape
         }
         public void SetAngularVelocity(float min, float max)
         {
-            MaxAngularVelocity = max / 60;
-            MinAngularVelocity = min / 60;
+            MaxAngularVelocity = MathHelper.ToRadians(max / 60);
+            MinAngularVelocity = MathHelper.ToRadians(min / 60);
         }
         public void SetSpawnInfo(float rate, int amount)
         {
@@ -211,8 +211,8 @@ namespace Grubby_Escape
             _defaultMaxXVelocity = maxXVel;
             _defaultHighVelocityMode = highVelocityMode;
 
-            _defaultMinAngularVelocity = minAngVel / 60;
-            _defaultMaxAngularVelocity = maxAngVel / 60;
+            _defaultMinAngularVelocity = MathHelper.ToRadians(minAngVel / 60);
+            _defaultMaxAngularVelocity = MathHelper.ToRadians(maxAngVel / 60);
 
             _defaultMinTTL = minTTL * 60;
             _defaultMaxTTL = maxTTL * 60;

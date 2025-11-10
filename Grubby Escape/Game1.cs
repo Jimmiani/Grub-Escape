@@ -33,7 +33,8 @@ namespace Grubby_Escape
         // Backgrounds
 
         Texture2D BG1, BG2, BG3, BG4, BG5;
-        Texture2D lightTex, blackTex;
+        Texture2D lightTex, blackTex, vignette;
+        Rectangle vignetteRect;
 
         // Foreground
 
@@ -155,15 +156,17 @@ namespace Grubby_Escape
                 -0.5f,
                 -1,
                 false,
-                -0.05f,
-                0.05f,
-                4,
-                5,
-                2,
+                -15,
+                15,
+                6,
+                6,
                 3,
-                1,
+                4,
+                0.9f,
                 true);
             smokeSystem.RestoreDefaults();
+
+            vignetteRect = new Rectangle(vignette.Width * -6, vignette.Height * -6, vignette.Width * 12, vignette.Height * 12);
         }
 
         protected override void LoadContent()
@@ -176,6 +179,7 @@ namespace Grubby_Escape
 
             for (int i = 1; i <= 5; i++)
                 smokeTextures.Add(Content.Load<Texture2D>($"Grubby Escape/Images/Particles/Smoke/abyss_smoke_0{i}"));
+            vignette = Content.Load<Texture2D>("Grubby Escape/Images/Lights/credits vignette");
 
             // Crystals
 
@@ -272,6 +276,9 @@ namespace Grubby_Escape
             smokeSystem.Update(gameTime);
 
             Debug.WriteLine(mouseWorldPos);
+
+            if (mouseState.RightButton == ButtonState.Pressed)
+                camera.Zoom = 0.1f;
 
             if (isOnCart)
                 grubby.Position = new Vector2(cart.Position.X + 30, cart.Position.Y - 65);
@@ -435,6 +442,14 @@ namespace Grubby_Escape
                     _spriteBatch.Draw(rocksFG[i], new Vector2(-900 + (1200 * j) + (100 * i), -250), Color.White);
                 }
             }
+
+            _spriteBatch.End();
+
+            // Vignette
+
+            _spriteBatch.Begin(transformMatrix: camera.Transform);
+
+            _spriteBatch.Draw(vignette, new Rectangle(vignetteRect.X + grubby.Hitbox.Center.X, vignetteRect.Y + grubby.Hitbox.Center.Y, vignetteRect.Width, vignetteRect.Height), Color.White * 1);
 
             _spriteBatch.End();
 
