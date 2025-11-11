@@ -125,11 +125,11 @@ namespace Grubby_Escape
 
             grubby.Position = new Vector2(0, 630);
 
-            mainMusic.Volume = 0.6f;
+            mainMusic.Volume = 0.5f;
             mainMusic.IsLooped = true;
             mainMusic.Play();
 
-            bassMusic.Volume = 0.6f;
+            bassMusic.Volume = 0;
             bassMusic.IsLooped = true;
             bassMusic.Play();
 
@@ -137,7 +137,7 @@ namespace Grubby_Escape
             actionMusic.IsLooped = true;
             actionMusic.Play();
 
-            machineryAtmos.Volume = 0.6f;
+            machineryAtmos.Volume = 0.5f;
             machineryAtmos.IsLooped = true;
             machineryAtmos.Play();
 
