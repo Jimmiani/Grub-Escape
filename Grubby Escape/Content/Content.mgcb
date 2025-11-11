@@ -1994,7 +1994,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Lights/credits vignette.png;Grubby Escape/Images/Lights/credits vignette
+/build:Grubby Escape/Images/Lights/credits vignette.png
 
 #begin Grubby Escape/Images/Lights/ruin_beam_glow.png
 /importer:TextureImporter

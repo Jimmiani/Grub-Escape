@@ -165,7 +165,7 @@ namespace Grubby_Escape
                 true);
             smokeSystem.RestoreDefaults();
 
-            vignetteRect = new Rectangle(vignette.Width * -6, vignette.Height * -6, vignette.Width * 12, vignette.Height * 12);
+            vignetteRect = new Rectangle(vignette.Width * -16, vignette.Height * -16, vignette.Width * 32, vignette.Height * 32);
 
 
             // Rock positions
@@ -381,7 +381,6 @@ namespace Grubby_Escape
             _spriteBatch.Draw(BG5, new Rectangle(1400, -300, 1000, 1200), Color.White);
             _spriteBatch.Draw(BG3, new Rectangle(2000, -100, 1500, 1800), Color.White);
             _spriteBatch.Draw(BG5, new Rectangle(2400, 500, 1000, 1200), Color.White);
-            _spriteBatch.Draw(pixel, new Rectangle(-1000, -1000, 6000, 6000), Color.White);
             _spriteBatch.Draw(pixel, new Rectangle(-1000, -400, 10000, 450), Color.Black);
             _spriteBatch.Draw(blackFader, new Rectangle(-10000, -200, 30000, 420), Color.White);
 
