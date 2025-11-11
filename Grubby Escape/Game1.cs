@@ -33,7 +33,7 @@ namespace Grubby_Escape
         // Backgrounds
 
         Texture2D BG1, BG2, BG3, BG4, BG5;
-        Texture2D lightTex, blackTex, vignette;
+        Texture2D lightTex, blackTex, vignette, pixel;
         Rectangle vignetteRect;
         Texture2D bankedCurve;
 
@@ -41,6 +41,7 @@ namespace Grubby_Escape
 
         Texture2D crystalFG1, crystalFG2, blackFader;
         List<Texture2D> rocksFG;
+        List<Vector2> rockPositions12, rockPositions14;
 
         // Music
 
@@ -97,9 +98,14 @@ namespace Grubby_Escape
             camera = new Camera2D(GraphicsDevice.Viewport);
             generator = new Random();
 
+            pixel = new Texture2D(GraphicsDevice, 1, 1);
+            pixel.SetData(new[] { Color.White });
+
             smokeTextures = new List<Texture2D>();
 
             rocksFG = new List<Texture2D>();
+            rockPositions12 = new List<Vector2>();
+            rockPositions14 = new List<Vector2>();
 
             grubIdle = new List<Texture2D>();
             grubAlert = new List<Texture2D>();
@@ -160,6 +166,30 @@ namespace Grubby_Escape
             smokeSystem.RestoreDefaults();
 
             vignetteRect = new Rectangle(vignette.Width * -6, vignette.Height * -6, vignette.Width * 12, vignette.Height * 12);
+
+
+            // Rock positions
+
+            for (int j = 0; j < 15; j++)
+            {
+                for (int i = 0; i < rocksFG.Count; i++)
+                {
+                    float x = -900 + (1200 * j) + (100 * i);
+                    float y = -250;
+                    rockPositions14.Add(new Vector2(x, y));
+                }
+            }
+
+            for (int j = 0; j < 15; j++)
+            {
+                for (int i = 0; i < rocksFG.Count; i++)
+                {
+                    float x = -600 + (1200 * j) + (80 * i);
+                    float y = -220;
+                    rockPositions12.Add(new Vector2(x, y));
+                }
+            }
+
         }
 
         protected override void LoadContent()
@@ -351,12 +381,13 @@ namespace Grubby_Escape
             _spriteBatch.Draw(BG5, new Rectangle(1400, -300, 1000, 1200), Color.White);
             _spriteBatch.Draw(BG3, new Rectangle(2000, -100, 1500, 1800), Color.White);
             _spriteBatch.Draw(BG5, new Rectangle(2400, 500, 1000, 1200), Color.White);
-            _spriteBatch.Draw(lightTex, new Rectangle(-14000, -14000, 30000, 30000), Color.Pink * 0.5f);
-            _spriteBatch.Draw(blackTex, new Rectangle(-1000, -400, 10000, 450), Color.Black);
+            _spriteBatch.Draw(pixel, new Rectangle(-1000, -1000, 6000, 6000), Color.White);
+            _spriteBatch.Draw(pixel, new Rectangle(-1000, -400, 10000, 450), Color.Black);
             _spriteBatch.Draw(blackFader, new Rectangle(-10000, -200, 30000, 420), Color.White);
 
             _spriteBatch.End();
 
+            // Mid ground
 
             _spriteBatch.Begin(transformMatrix: camera.Transform);
 
@@ -369,7 +400,7 @@ namespace Grubby_Escape
             {
                 _spriteBatch.Draw(woodFloor, new Vector2(-359, 0 + (290 * i)), null, Color.White, MathHelper.ToRadians(90), new Vector2(woodFloor.Width / 2, woodFloor.Height / 2), 1, SpriteEffects.None, 0);
             }
-            _spriteBatch.Draw(blackTex, new Rectangle(-1000, 790, 6756, 1000), Color.Black);
+            _spriteBatch.Draw(pixel, new Rectangle(-1000, 790, 6756, 1000), Color.Black);
             
             for (int i = 0; i < 25; i++)
             {
@@ -389,7 +420,7 @@ namespace Grubby_Escape
 
             // Right side
 
-            _spriteBatch.Draw(blackTex, new Rectangle(6750, 790, 10000, 1000), Color.Black);
+            _spriteBatch.Draw(pixel, new Rectangle(6750, 790, 10000, 1000), Color.Black);
             for (int i = 0; i < 25; i++)
             {
                 _spriteBatch.Draw(woodFloor, new Vector2(6750 + (290 * i), 780), Color.White);
@@ -417,12 +448,14 @@ namespace Grubby_Escape
 
             _spriteBatch.Begin(transformMatrix: camera.GetParallaxTransform(1.2f));
 
+            int rockIndex = 0;
 
             for (int j = 0; j < 15; j++)
             {
                 for (int i = 0; i < rocksFG.Count; i++)
                 {
-                    _spriteBatch.Draw(rocksFG[i], new Vector2(-600 + (1200 * j) + (80 * i), -220), Color.White);
+                    _spriteBatch.Draw(rocksFG[i], rockPositions12[rockIndex], Color.White);
+                    rockIndex++;
                 }
             }
 
@@ -430,11 +463,14 @@ namespace Grubby_Escape
 
             _spriteBatch.Begin(transformMatrix: camera.GetParallaxTransform(1.4f));
 
+            rockIndex = 0;
+
             for (int j = 0; j < 15; j++)
             {
                 for (int i = 0; i < rocksFG.Count; i++)
                 {
-                    _spriteBatch.Draw(rocksFG[i], new Vector2(-900 + (1200 * j) + (100 * i), -250), Color.White);
+                    _spriteBatch.Draw(rocksFG[i], rockPositions14[rockIndex], Color.White);
+                    rockIndex++;
                 }
             }
 
@@ -444,7 +480,7 @@ namespace Grubby_Escape
 
             _spriteBatch.Begin(transformMatrix: camera.Transform);
 
-            _spriteBatch.Draw(vignette, new Rectangle(vignetteRect.X + grubby.Hitbox.Center.X, vignetteRect.Y + grubby.Hitbox.Center.Y, vignetteRect.Width, vignetteRect.Height), Color.White * 1);
+            _spriteBatch.Draw(vignette, new Rectangle(vignetteRect.X + grubby.Hitbox.Center.X, vignetteRect.Y + grubby.Hitbox.Center.Y, vignetteRect.Width, vignetteRect.Height), Color.White);
 
             _spriteBatch.End();
 
