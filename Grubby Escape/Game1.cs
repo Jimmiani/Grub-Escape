@@ -24,6 +24,7 @@ namespace Grubby_Escape
         GameState gameState;
         Camera2D camera;
         Random generator;
+        ResolutionScaler resolutionScaler;
 
         // Particles
 
@@ -33,7 +34,7 @@ namespace Grubby_Escape
         // Backgrounds
 
         Texture2D BG1, BG2, BG3, BG4, BG5;
-        Texture2D lightTex, blackTex, vignette, pixel;
+        Texture2D lightTex, vignette, pixel, lightEffect;
         Rectangle vignetteRect;
         Texture2D bankedCurve;
 
@@ -93,6 +94,8 @@ namespace Grubby_Escape
 
             _graphics.IsFullScreen = true;
             _graphics.ApplyChanges();
+
+            resolutionScaler = new ResolutionScaler(GraphicsDevice, 2560, 1440);
 
             gameState = GameState.Start;
             camera = new Camera2D(GraphicsDevice.Viewport);
@@ -165,7 +168,8 @@ namespace Grubby_Escape
                 true);
             smokeSystem.RestoreDefaults();
 
-            vignetteRect = new Rectangle(vignette.Width * -16, vignette.Height * -16, vignette.Width * 32, vignette.Height * 32);
+            int size = 60;
+            vignetteRect = new Rectangle(vignette.Width * -size / 2, vignette.Height * -size / 2, vignette.Width * size, vignette.Height * size);
 
 
             // Rock positions
@@ -202,7 +206,7 @@ namespace Grubby_Escape
 
             for (int i = 1; i <= 5; i++)
                 smokeTextures.Add(Content.Load<Texture2D>($"Grubby Escape/Images/Particles/Smoke/abyss_smoke_0{i}"));
-            vignette = Content.Load<Texture2D>("Grubby Escape/Images/Lights/credits vignette");
+            vignette = Content.Load<Texture2D>("Grubby Escape/Images/Lights/vignette_large_v01");
 
             // Crystals
 
@@ -225,6 +229,7 @@ namespace Grubby_Escape
             BG4 = Content.Load<Texture2D>("Grubby Escape/Images/Background/Extremely Far/BG_egg_05");
             BG5 = Content.Load<Texture2D>("Grubby Escape/Images/Background/Extremely Far/BG_twist");
             lightTex = Content.Load<Texture2D>("Grubby Escape/Images/Lights/white_light");
+            lightEffect = Content.Load<Texture2D>("Grubby Escape/Images/Lights/light_effect_v02");
 
             bankedCurve = Content.Load<Texture2D>("Grubby Escape/Images/Rails/banked_curve");
 
@@ -236,7 +241,6 @@ namespace Grubby_Escape
             railFloor = Content.Load<Texture2D>("Grubby Escape/Images/Rails/mine_rail_01");
             railBrokenL = Content.Load<Texture2D>("Grubby Escape/Images/Rails/mine_rail_02");
             railBrokenR = Content.Load<Texture2D>("Grubby Escape/Images/Rails/mine_rail_03");
-            blackTex = Content.Load<Texture2D>("Grubby Escape/Images/Floor/white_square");
 
             // Grubby
 
@@ -343,7 +347,7 @@ namespace Grubby_Escape
                 if (cartStartTimer > 1 && !hasStarted)
                 {
                     camera.Shake(3, 2, true);
-                    cart.Start(25);
+                    cart.Start(8);
                     hasStarted = true;
                 }
 
@@ -368,6 +372,8 @@ namespace Grubby_Escape
 
         protected override void Draw(GameTime gameTime)
         {
+            resolutionScaler.DrawToCanvas();
+
             GraphicsDevice.Clear(Color.Black);
 
             // Background
@@ -381,6 +387,7 @@ namespace Grubby_Escape
             _spriteBatch.Draw(BG5, new Rectangle(1400, -300, 1000, 1200), Color.White);
             _spriteBatch.Draw(BG3, new Rectangle(2000, -100, 1500, 1800), Color.White);
             _spriteBatch.Draw(BG5, new Rectangle(2400, 500, 1000, 1200), Color.White);
+            _spriteBatch.Draw(lightEffect, new Rectangle(-10000, -2500, 20000, 5000), Color.Pink * 0.4f);
             _spriteBatch.Draw(pixel, new Rectangle(-1000, -400, 10000, 450), Color.Black);
             _spriteBatch.Draw(blackFader, new Rectangle(-10000, -200, 30000, 420), Color.White);
 
@@ -400,7 +407,7 @@ namespace Grubby_Escape
                 _spriteBatch.Draw(woodFloor, new Vector2(-359, 0 + (290 * i)), null, Color.White, MathHelper.ToRadians(90), new Vector2(woodFloor.Width / 2, woodFloor.Height / 2), 1, SpriteEffects.None, 0);
             }
             _spriteBatch.Draw(pixel, new Rectangle(-1000, 790, 6756, 1000), Color.Black);
-            
+
             for (int i = 0; i < 25; i++)
             {
                 _spriteBatch.Draw(woodFloor, new Vector2(-1500 + (290 * i), 780), Color.White);
@@ -482,6 +489,8 @@ namespace Grubby_Escape
             _spriteBatch.Draw(vignette, new Rectangle(vignetteRect.X + grubby.Hitbox.Center.X, vignetteRect.Y + grubby.Hitbox.Center.Y, vignetteRect.Width, vignetteRect.Height), Color.White);
 
             _spriteBatch.End();
+
+            resolutionScaler.DrawToScreen(_spriteBatch);
 
             base.Draw(gameTime);
         }

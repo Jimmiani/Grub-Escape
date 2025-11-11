@@ -1984,7 +1984,7 @@
 /processorParam:TextureFormat=Color
 /build:Grubby Escape/Images/Lights/black_fader_GG.png;Grubby Escape/Images/Lights/black_fader_GG
 
-#begin Grubby Escape/Images/Lights/credits vignette.png
+#begin Grubby Escape/Images/Lights/light_effect_v02.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -1994,7 +1994,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Lights/credits vignette.png
+/build:Grubby Escape/Images/Lights/light_effect_v02.png;Grubby Escape/Images/Lights/light_effect_v02
 
 #begin Grubby Escape/Images/Lights/ruin_beam_glow.png
 /importer:TextureImporter
@@ -2007,6 +2007,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Grubby Escape/Images/Lights/ruin_beam_glow.png;Grubby Escape/Images/Lights/ruin_beam_glow
+
+#begin Grubby Escape/Images/Lights/vignette_large_v01.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Lights/vignette_large_v01.png;Grubby Escape/Images/Lights/vignette_large_v01
 
 #begin Grubby Escape/Images/Lights/white_light.png
 /importer:TextureImporter
