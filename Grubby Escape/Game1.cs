@@ -35,6 +35,7 @@ namespace Grubby_Escape
         Texture2D BG1, BG2, BG3, BG4, BG5;
         Texture2D lightTex, blackTex, vignette;
         Rectangle vignetteRect;
+        Texture2D bankedCurve;
 
         // Foreground
 
@@ -129,14 +130,6 @@ namespace Grubby_Escape
             mainMusic.IsLooped = true;
             mainMusic.Play();
 
-            bassMusic.Volume = 0;
-            bassMusic.IsLooped = true;
-            bassMusic.Play();
-
-            actionMusic.Volume = 0;
-            actionMusic.IsLooped = true;
-            actionMusic.Play();
-
             machineryAtmos.Volume = 0.5f;
             machineryAtmos.IsLooped = true;
             machineryAtmos.Play();
@@ -202,6 +195,8 @@ namespace Grubby_Escape
             BG4 = Content.Load<Texture2D>("Grubby Escape/Images/Background/Extremely Far/BG_egg_05");
             BG5 = Content.Load<Texture2D>("Grubby Escape/Images/Background/Extremely Far/BG_twist");
             lightTex = Content.Load<Texture2D>("Grubby Escape/Images/Lights/white_light");
+
+            bankedCurve = Content.Load<Texture2D>("Grubby Escape/Images/Rails/banked_curve");
 
             // Cart
 
@@ -318,7 +313,7 @@ namespace Grubby_Escape
                 if (cartStartTimer > 1 && !hasStarted)
                 {
                     camera.Shake(3, 2, true);
-                    cart.Start(8);
+                    cart.Start(25);
                     hasStarted = true;
                 }
 
@@ -345,6 +340,8 @@ namespace Grubby_Escape
         {
             GraphicsDevice.Clear(Color.Black);
 
+            // Background
+
             _spriteBatch.Begin(transformMatrix: camera.GetParallaxTransform(0.1f));
 
             _spriteBatch.Draw(BG4, new Rectangle(200, -300, 1400, 1600), null, Color.White, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
@@ -364,9 +361,7 @@ namespace Grubby_Escape
             _spriteBatch.Begin(transformMatrix: camera.Transform);
 
             _spriteBatch.Draw(lightTex, new Rectangle(grubby.Hitbox.Center.X - 400, grubby.Hitbox.Center.Y - 400, 800, 800), Color.White * 0.2f);
-
-
-            // Ceiling
+            _spriteBatch.Draw(bankedCurve, new Rectangle(5200, 0, bankedCurve.Width * 2, bankedCurve.Height * 2), Color.White);
 
 
             // Left side

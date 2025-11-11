@@ -2092,6 +2092,18 @@
 /processorParam:TextureFormat=Color
 /build:Grubby Escape/Images/Particles/Smoke/wispy_smoke_particle_abyss.png;Grubby Escape/Images/Particles/Smoke/wispy_smoke_particle_abyss
 
+#begin Grubby Escape/Images/Rails/banked_curve.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Rails/banked_curve.png;Grubby Escape/Images/Rails/banked_curve
+
 #begin Grubby Escape/Images/Rails/mine_rail_01.png
 /importer:TextureImporter
 /processor:TextureProcessor
