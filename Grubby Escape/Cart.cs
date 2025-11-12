@@ -33,6 +33,7 @@ namespace Grubby_Escape
         private SoundEffect _stopSfx;
         private float _startTimer;
         private float _moveSpeed;
+        public Vector2 Velocity => _velocity;
 
         public Cart(Texture2D cartTexture, Texture2D wheelTexture, Vector2 startingPos, SoundEffect startSfx, SoundEffect movingSfx, SoundEffect stopSfx)
         {

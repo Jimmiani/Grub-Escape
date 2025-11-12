@@ -12,7 +12,8 @@ namespace Grubby_Escape
     {
         Start,
         TowardsBrokenRail,
-        Reverse
+        Reverse,
+        Prepare
     }
     public class Game1 : Game
     {
@@ -23,6 +24,7 @@ namespace Grubby_Escape
         KeyboardState keyboardState, prevKeyboardState;
         GameState gameState;
         Camera2D camera;
+        Vector2 cameraTarget;
         Random generator;
         ResolutionScaler resolutionScaler;
 
@@ -95,10 +97,10 @@ namespace Grubby_Escape
             _graphics.IsFullScreen = true;
             _graphics.ApplyChanges();
 
-            resolutionScaler = new ResolutionScaler(GraphicsDevice, 2560, 1440);
+            resolutionScaler = new ResolutionScaler(GraphicsDevice, 1920, 1080);
 
             gameState = GameState.Start;
-            camera = new Camera2D(GraphicsDevice.Viewport);
+            camera = new Camera2D(GraphicsDevice.Viewport, new Rectangle(-359, 0, 10000, 1080), 1920, 1080);
             generator = new Random();
 
             pixel = new Texture2D(GraphicsDevice, 1, 1);
@@ -129,9 +131,11 @@ namespace Grubby_Escape
             cartStopTimer = 0;
 
             base.Initialize();
-            
+
             grubby = new Grub(grubIdle, idleEffect, sadEffect, grubAlert, alertEffect, grubJump, jumpEffect);
             cart = new Cart(cartTexture, wheelTexture, new Vector2(300, 600), startSfx, movingSfx, stopSfx);
+
+            cameraTarget = new Vector2(0, 0);
 
             grubby.Position = new Vector2(0, 630);
 
@@ -145,7 +149,7 @@ namespace Grubby_Escape
 
             // Particles
 
-            smokeSystem = new ParticleSystem(smokeTextures, new Rectangle(5750, 1300, 1000, 300), EmitterShape.Rectangle);
+            smokeSystem = new ParticleSystem(smokeTextures, new Rectangle(5750, 1150, 1000, 300), EmitterShape.Rectangle);
 
             smokeSystem.SetDefaults(
                 Color.White,
@@ -168,7 +172,7 @@ namespace Grubby_Escape
                 true);
             smokeSystem.RestoreDefaults();
 
-            int size = 60;
+            int size = 50;
             vignetteRect = new Rectangle(vignette.Width * -size / 2, vignette.Height * -size / 2, vignette.Width * size, vignette.Height * size);
 
 
@@ -178,8 +182,8 @@ namespace Grubby_Escape
             {
                 for (int i = 0; i < rocksFG.Count; i++)
                 {
-                    float x = -900 + (1200 * j) + (100 * i);
-                    float y = -250;
+                    float x = -900 + (1200 * j) + (150 * i);
+                    float y = -80;
                     rockPositions14.Add(new Vector2(x, y));
                 }
             }
@@ -188,8 +192,8 @@ namespace Grubby_Escape
             {
                 for (int i = 0; i < rocksFG.Count; i++)
                 {
-                    float x = -600 + (1200 * j) + (80 * i);
-                    float y = -220;
+                    float x = -600 + (1200 * j) + (120 * i);
+                    float y = -50;
                     rockPositions12.Add(new Vector2(x, y));
                 }
             }
@@ -294,14 +298,15 @@ namespace Grubby_Escape
 
             prevMouseState = mouseState;
             mouseState = Mouse.GetState();
-            Vector2 mouseWorldPos = Vector2.Transform(mouseState.Position.ToVector2(), Matrix.Invert(camera.Transform));
+            Vector2 mouseRT = resolutionScaler.GetMouseWorldPosition();
+            Vector2 mouseWorldPos = Vector2.Transform(mouseRT, Matrix.Invert(camera.Transform));
 
             prevKeyboardState = keyboardState;
             keyboardState = Keyboard.GetState();
 
             grubby.Update(mouseState, prevMouseState, gameTime);
             cart.Update(gameTime);
-            camera.Update(gameTime);
+            camera.Update(gameTime, cameraTarget, cart.Velocity);
             smokeSystem.Update(gameTime);
 
             Debug.WriteLine(mouseWorldPos);
@@ -314,7 +319,7 @@ namespace Grubby_Escape
 
             if (gameState == GameState.Start)
             {
-                camera.Follow(new Vector2(cart.Hitbox.Center.X + 500, cart.Hitbox.Center.Y - 100));
+                cameraTarget = new Vector2(0, 0);
 
                 if (!isDragging && grubby.Hitbox.Contains(mouseWorldPos) && mouseState.LeftButton == ButtonState.Pressed && prevMouseState.LeftButton == ButtonState.Released)
                 {
@@ -341,7 +346,7 @@ namespace Grubby_Escape
             }
             else if (gameState == GameState.TowardsBrokenRail)
             {
-                camera.Follow(new Vector2(cart.Hitbox.Center.X + 500, cart.Hitbox.Center.Y - 100));
+                cameraTarget = new Vector2(cart.Hitbox.Center.X + 500, 0);
                 cartStartTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
                 if (cartStartTimer > 1 && !hasStarted)
@@ -366,6 +371,34 @@ namespace Grubby_Escape
                 }
             }
 
+            else if (gameState == GameState.Reverse)
+            {
+                if (mouseState.LeftButton == ButtonState.Pressed)
+                {
+                    cameraTarget = new Vector2(cart.Hitbox.Center.X + 1000, 0);
+                }
+                else
+                {
+                    cameraTarget = new Vector2(cart.Hitbox.Center.X + 500, 0);
+                }
+
+                if (keyboardState.IsKeyDown(Keys.R) && prevKeyboardState.IsKeyUp(Keys.R) && hasStarted == false)
+                {
+                    cart.Start(-4);
+                    grubby.Happy();
+                    hasStarted = true;
+                }
+
+                if (cart.Hitbox.X < 4500)
+                {
+                    cart.Stop();
+                    gameState = GameState.Prepare;
+                }
+            }
+            else if (gameState == GameState.Prepare)
+            {
+                cameraTarget = new Vector2(cart.Hitbox.Center.X + 500, 0);
+            }
 
                 base.Update(gameTime);
         }
@@ -387,7 +420,7 @@ namespace Grubby_Escape
             _spriteBatch.Draw(BG5, new Rectangle(1400, -300, 1000, 1200), Color.White);
             _spriteBatch.Draw(BG3, new Rectangle(2000, -100, 1500, 1800), Color.White);
             _spriteBatch.Draw(BG5, new Rectangle(2400, 500, 1000, 1200), Color.White);
-            _spriteBatch.Draw(lightEffect, new Rectangle(-10000, -2500, 20000, 5000), Color.Pink * 0.4f);
+            _spriteBatch.Draw(lightEffect, new Rectangle(-10000, -2500, 20000, 5000), Color.Pink * 0.45f);
             _spriteBatch.Draw(pixel, new Rectangle(-1000, -400, 10000, 450), Color.Black);
             _spriteBatch.Draw(blackFader, new Rectangle(-10000, -200, 30000, 420), Color.White);
 
@@ -398,7 +431,6 @@ namespace Grubby_Escape
             _spriteBatch.Begin(transformMatrix: camera.Transform);
 
             _spriteBatch.Draw(lightTex, new Rectangle(grubby.Hitbox.Center.X - 400, grubby.Hitbox.Center.Y - 400, 800, 800), Color.White * 0.2f);
-            _spriteBatch.Draw(bankedCurve, new Rectangle(5200, 0, bankedCurve.Width * 2, bankedCurve.Height * 2), Color.White);
 
 
             // Left side
