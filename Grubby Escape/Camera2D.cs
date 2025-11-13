@@ -43,10 +43,11 @@ namespace Grubby_Escape
         public float LookAheadLerp = 3f;           // How fast look-ahead adjusts
         private Vector2 _lookAhead = Vector2.Zero; // Current look-ahead offset
 
-        public Camera2D(Viewport viewport, Rectangle levelBounds, int internalWidth, int internalHeight)
+        public Camera2D(Viewport viewport, Rectangle levelBounds, Vector2 startingPos, int internalWidth, int internalHeight)
         {
             Viewport = viewport;
             LevelBounds = levelBounds;
+            Position = startingPos;
             InternalWidth = internalWidth;
             InternalHeight = internalHeight;
         }
@@ -147,6 +148,9 @@ namespace Grubby_Escape
                 Matrix.CreateRotationZ(Rotation) *
                 Matrix.CreateScale(Zoom, Zoom, 1f) *
                 Matrix.CreateTranslation(new Vector3(InternalWidth / 2f, InternalHeight / 2f, 0f));
+
+
+            Debug.WriteLine($"Camera Position: {Position}");
         }
         public void Shake(float intensity, float duration, bool fade)
         {

@@ -97,7 +97,7 @@ namespace Grubby_Escape
                     }
                 }
 
-                if (_idleTimer > 4)
+                if (_idleTimer > 3.5f)
                 {
                     _idleEffect[_idleIndex].Play();
                     _idleTimer = 0;

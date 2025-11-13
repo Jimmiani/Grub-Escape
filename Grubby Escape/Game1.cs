@@ -100,7 +100,6 @@ namespace Grubby_Escape
             resolutionScaler = new ResolutionScaler(GraphicsDevice, 1920, 1080);
 
             gameState = GameState.Start;
-            camera = new Camera2D(GraphicsDevice.Viewport, new Rectangle(-359, 0, 10000, 1080), 1920, 1080);
             generator = new Random();
 
             pixel = new Texture2D(GraphicsDevice, 1, 1);
@@ -135,9 +134,11 @@ namespace Grubby_Escape
             grubby = new Grub(grubIdle, idleEffect, sadEffect, grubAlert, alertEffect, grubJump, jumpEffect);
             cart = new Cart(cartTexture, wheelTexture, new Vector2(300, 600), startSfx, movingSfx, stopSfx);
 
-            cameraTarget = new Vector2(0, 0);
+            cameraTarget = new Vector2(600, 540);
 
             grubby.Position = new Vector2(0, 630);
+
+            camera = new Camera2D(GraphicsDevice.Viewport, new Rectangle(-359, 0, 10000, 1080), cameraTarget, 1920, 1080);
 
             mainMusic.Volume = 0.5f;
             mainMusic.IsLooped = true;
@@ -319,7 +320,7 @@ namespace Grubby_Escape
 
             if (gameState == GameState.Start)
             {
-                cameraTarget = new Vector2(0, 0);
+                cameraTarget = new Vector2(cart.Hitbox.Center.X, 0);
 
                 if (!isDragging && grubby.Hitbox.Contains(mouseWorldPos) && mouseState.LeftButton == ButtonState.Pressed && prevMouseState.LeftButton == ButtonState.Released)
                 {
