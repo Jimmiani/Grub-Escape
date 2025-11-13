@@ -431,8 +431,8 @@ namespace Grubby_Escape
 
             _spriteBatch.Begin(transformMatrix: camera.Transform);
 
-            _spriteBatch.Draw(lightTex, new Rectangle(grubby.Hitbox.Center.X - 400, grubby.Hitbox.Center.Y - 400, 800, 800), Color.White * 0.2f);
 
+            _spriteBatch.Draw(lightTex, new Rectangle(grubby.Hitbox.Center.X - 400, grubby.Hitbox.Center.Y - 400, 800, 800), Color.White * 0.2f);
 
             // Left side
             for (int i = 0; i < 4; i++)

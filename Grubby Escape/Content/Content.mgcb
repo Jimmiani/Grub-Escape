@@ -2114,7 +2114,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Rails/banked_curve.png;Grubby Escape/Images/Rails/banked_curve
+/build:Grubby Escape/Images/Rails/banked_curve.png
 
 #begin Grubby Escape/Images/Rails/mine_rail_01.png
 /importer:TextureImporter

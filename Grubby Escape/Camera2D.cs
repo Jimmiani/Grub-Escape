@@ -148,9 +148,6 @@ namespace Grubby_Escape
                 Matrix.CreateRotationZ(Rotation) *
                 Matrix.CreateScale(Zoom, Zoom, 1f) *
                 Matrix.CreateTranslation(new Vector3(InternalWidth / 2f, InternalHeight / 2f, 0f));
-
-
-            Debug.WriteLine($"Camera Position: {Position}");
         }
         public void Shake(float intensity, float duration, bool fade)
         {
