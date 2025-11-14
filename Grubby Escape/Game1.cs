@@ -16,7 +16,15 @@ namespace Grubby_Escape
         TowardsBrokenRail,
         Reverse,
         Prepare,
+        TransitionOut,
+        Math,
         TransitionIn
+    }
+
+    enum MathState
+    {
+        TransitionIn,
+        PictorialRepresentation
     }
     public class Game1 : Game
     {
@@ -26,11 +34,17 @@ namespace Grubby_Escape
         MouseState mouseState, prevMouseState;
         KeyboardState keyboardState, prevKeyboardState;
         GameState gameState;
+        MathState mathState;
         Camera2D camera;
         Vector2 cameraTarget;
         Random generator;
         ResolutionScaler resolutionScaler;
+
+        // Transition
+
         float transitionTimer;
+        Color transitionColor;
+        SoundEffect transitionSfx;
 
         // Particles
 
@@ -105,6 +119,7 @@ namespace Grubby_Escape
             resolutionScaler = new ResolutionScaler(GraphicsDevice, 1920, 1080);
 
             gameState = GameState.Waiting;
+            mathState = MathState.TransitionIn;
             generator = new Random();
 
             pixel = new Texture2D(GraphicsDevice, 1, 1);
@@ -134,6 +149,10 @@ namespace Grubby_Escape
             hasFallen = false;
             cartStartTimer = 0;
             cartStopTimer = 0;
+
+
+            transitionTimer = 0;
+            transitionColor = Color.Black * 0;
 
             bankedTextures = new List<Texture2D>();
 
@@ -311,6 +330,10 @@ namespace Grubby_Escape
             actionMusic = actionMusicSfx.CreateInstance();
             machineryAtmos = machineryAtmosSfx.CreateInstance();
             crystalAtmos = crystalAtmosSfx.CreateInstance();
+
+            // Transition
+
+            transitionSfx = Content.Load<SoundEffect>("Grubby Escape/Audio/Sound Effects/Start/spa_heal");
         }
 
         protected override void Update(GameTime gameTime)
@@ -326,16 +349,14 @@ namespace Grubby_Escape
             prevKeyboardState = keyboardState;
             keyboardState = Keyboard.GetState();
 
-            grubby.Update(mouseState, prevMouseState, gameTime);
-            cart.Update(gameTime);
-            camera.Update(gameTime, cameraTarget, cart.Velocity);
-            smokeSystem.Update(gameTime);
 
-            Debug.WriteLine(cart.Position);
-
-            if (mouseState.RightButton == ButtonState.Pressed)
-                camera.Zoom = 0.1f;
-
+            if (gameState != GameState.Math)
+            {
+                grubby.Update(mouseState, prevMouseState, gameTime);
+                cart.Update(gameTime);
+                camera.Update(gameTime, cameraTarget, cart.Velocity);
+                smokeSystem.Update(gameTime);
+            }
             if (isOnCart)
                 grubby.Position = new Vector2(cart.Position.X + 30, cart.Position.Y - 65);
             if (gameState == GameState.Waiting)
@@ -453,140 +474,210 @@ namespace Grubby_Escape
 
                 if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
                 {
-                    // enter effect play
-                    gameState = GameState.TransitionIn;
+                    transitionSfx.Play();
+                    gameState = GameState.TransitionOut;
+                }
+            }
+            else if (gameState == GameState.TransitionOut)
+            {
+                transitionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                transitionColor = Color.Black * (transitionTimer / 2);
+
+                if (mainMusic.Volume > 0)
+                {
+                    float newVolume = 0.5f - (transitionTimer / 2f);
+                    mainMusic.Volume = Math.Clamp(newVolume, 0f, 1f);
+                }
+                if (machineryAtmos.Volume > 0)
+                {
+                    float newVolume = 0.5f - (transitionTimer / 2f);
+                    machineryAtmos.Volume = Math.Clamp(newVolume, 0f, 1f);
+                }
+                if (crystalAtmos.Volume > 0)
+                {
+                    float newVolume = 1f - (transitionTimer / 2f);
+                    crystalAtmos.Volume = Math.Clamp(newVolume, 0f, 1f);
+                }
+
+                if (transitionTimer > 5)
+                {
+                    gameState = GameState.Math;
+                    transitionTimer = 0;
+                }
+            }
+            else if (gameState == GameState.Math)
+            {
+                if (mathState == MathState.TransitionIn)
+                {
+                    transitionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                    transitionColor = Color.Black * (1 - transitionTimer / 2);
+
+                    if (mainMusic.Volume < 1)
+                    {
+                        float newVolume = transitionTimer / 2f;
+                        mainMusic.Volume = Math.Clamp(newVolume, 0f, 1f);
+                    }
+                    if (crystalAtmos.Volume < 1)
+                    {
+                        float newVolume = transitionTimer / 2f;
+                        crystalAtmos.Volume = Math.Clamp(newVolume, 0f, 1f);
+                    }
+
+                    if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
+                    {
+                        mathState = MathState.PictorialRepresentation;
+                    }
                 }
             }
 
-            base.Update(gameTime);
+                base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             resolutionScaler.DrawToCanvas();
 
-            GraphicsDevice.Clear(Color.Black);
-
-            // Background
-
-            _spriteBatch.Begin(transformMatrix: camera.GetParallaxTransform(0.1f));
-
-            _spriteBatch.Draw(BG4, new Rectangle(200, -300, 1400, 1600), null, Color.White, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
-            _spriteBatch.Draw(BG1, new Rectangle(-300, -500, 1000, 1500), Color.White);
-            _spriteBatch.Draw(BG2, new Rectangle(1500, 600, 1000, 1100), Color.White);
-            _spriteBatch.Draw(BG3, new Rectangle(-500, 400, 1500, 1800), Color.White);
-            _spriteBatch.Draw(BG5, new Rectangle(1400, -300, 1000, 1200), Color.White);
-            _spriteBatch.Draw(BG3, new Rectangle(2000, -100, 1500, 1800), Color.White);
-            _spriteBatch.Draw(BG5, new Rectangle(2400, 500, 1000, 1200), Color.White);
-            _spriteBatch.Draw(lightEffect, new Rectangle(-10000, -2500, 20000, 5000), Color.Pink * 0.45f);
-            _spriteBatch.Draw(pixel, new Rectangle(-1000, -400, 10000, 450), Color.Black);
-            _spriteBatch.Draw(blackFader, new Rectangle(-10000, -200, 30000, 420), Color.White);
-
-            _spriteBatch.End();
-
-            // Mid ground
-
-            _spriteBatch.Begin(transformMatrix: camera.Transform);
-
-
-            _spriteBatch.Draw(lightTex, new Rectangle(grubby.Hitbox.Center.X - 400, grubby.Hitbox.Center.Y - 400, 800, 800), Color.White * 0.2f);
-
-            // Left side
-            for (int i = 0; i < 4; i++)
+            if (gameState != GameState.Math)
             {
-                _spriteBatch.Draw(woodFloor, new Vector2(-359, 0 + (290 * i)), null, Color.White, MathHelper.ToRadians(90), new Vector2(woodFloor.Width / 2, woodFloor.Height / 2), 1, SpriteEffects.None, 0);
-            }
-            _spriteBatch.Draw(pixel, new Rectangle(-1000, 790, 6756, 1000), Color.Black);
+                GraphicsDevice.Clear(Color.Black);
 
-            for (int i = 0; i < 25; i++)
-            {
-                _spriteBatch.Draw(woodFloor, new Vector2(-1500 + (290 * i), 780), Color.White);
-            }
-            for (int i = 0; i < 20; i++)
-            {
-                _spriteBatch.Draw(railFloor, new Vector2(150 + (270 * i), 770), Color.White);
-            }
-            for (int i = 0; i < 4; i++)
-            {
-                _spriteBatch.Draw(woodFloor, new Vector2(5750, 940 + (290 * i)), null, Color.White, MathHelper.ToRadians(90), new Vector2(woodFloor.Width / 2, woodFloor.Height / 2), 1, SpriteEffects.None, 0);
-            }
-            _spriteBatch.Draw(railBrokenL, new Vector2(5560, 760), Color.White);
+                // Background
 
-            _spriteBatch.Draw(crystalFG1, new Vector2(-440, 580), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.FlipVertically, 0);
+                _spriteBatch.Begin(transformMatrix: camera.GetParallaxTransform(0.1f));
 
-            // Right side
+                _spriteBatch.Draw(BG4, new Rectangle(200, -300, 1400, 1600), null, Color.White, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
+                _spriteBatch.Draw(BG1, new Rectangle(-300, -500, 1000, 1500), Color.White);
+                _spriteBatch.Draw(BG2, new Rectangle(1500, 600, 1000, 1100), Color.White);
+                _spriteBatch.Draw(BG3, new Rectangle(-500, 400, 1500, 1800), Color.White);
+                _spriteBatch.Draw(BG5, new Rectangle(1400, -300, 1000, 1200), Color.White);
+                _spriteBatch.Draw(BG3, new Rectangle(2000, -100, 1500, 1800), Color.White);
+                _spriteBatch.Draw(BG5, new Rectangle(2400, 500, 1000, 1200), Color.White);
+                _spriteBatch.Draw(lightEffect, new Rectangle(-10000, -2500, 20000, 5000), Color.Pink * 0.45f);
+                _spriteBatch.Draw(pixel, new Rectangle(-1000, -400, 10000, 450), Color.Black);
+                _spriteBatch.Draw(blackFader, new Rectangle(-10000, -200, 30000, 420), Color.White);
 
-            _spriteBatch.Draw(pixel, new Rectangle(6750, 790, 10000, 1000), Color.Black);
-            for (int i = 0; i < 25; i++)
-            {
-                _spriteBatch.Draw(woodFloor, new Vector2(6750 + (290 * i), 780), Color.White);
-            }
-            for (int i = 0; i < 15; i++)
-            {
-                _spriteBatch.Draw(railFloor, new Vector2(6750 + (270 * i), 770), Color.White);
-            }
-            for (int i = 0; i < 4; i++)
-            {
-                _spriteBatch.Draw(woodFloor, new Vector2(6750, 940 + (290 * i)), null, Color.White, MathHelper.ToRadians(270), new Vector2(woodFloor.Width / 2, woodFloor.Height / 2), 1, SpriteEffects.None, 0);
-            }
-            _spriteBatch.Draw(railBrokenR, new Vector2(6500, 770), Color.White);
-            cart.Draw(_spriteBatch);
-            grubby.Draw(_spriteBatch, true);
+                _spriteBatch.End();
 
-            // Middle
+                // Mid ground
 
-            _spriteBatch.Draw(blackFader, new Rectangle(3500, 900, 6000, 900), Color.White);
-            smokeSystem.Draw(_spriteBatch);
+                _spriteBatch.Begin(transformMatrix: camera.Transform);
 
-            // Banked Curve
 
-            for (int i = 0; i < 30; i++)
-            {
-                for (int j = 0; j < bankedTextures.Count; j++)
+                _spriteBatch.Draw(lightTex, new Rectangle(grubby.Hitbox.Center.X - 400, grubby.Hitbox.Center.Y - 400, 800, 800), Color.White * 0.2f);
+
+                // Left side
+                for (int i = 0; i < 4; i++)
                 {
-                    _spriteBatch.Draw(bankedTextures[j], new Vector2((3000 + (60 * i)) + (20 * j), (910 + (18 * i)) + (6 * j)), null, Color.White, MathHelper.ToRadians(135), new Vector2(bankedTextures[j].Width / 2, bankedTextures[j].Height / 2), 1, SpriteEffects.FlipHorizontally, 1);
+                    _spriteBatch.Draw(woodFloor, new Vector2(-359, 0 + (290 * i)), null, Color.White, MathHelper.ToRadians(90), new Vector2(woodFloor.Width / 2, woodFloor.Height / 2), 1, SpriteEffects.None, 0);
                 }
-            }
+                _spriteBatch.Draw(pixel, new Rectangle(-1000, 790, 6756, 1000), Color.Black);
 
-            _spriteBatch.End();
-
-            // Foregorund
-
-            _spriteBatch.Begin(transformMatrix: camera.GetParallaxTransform(1.2f));
-
-            int rockIndex = 0;
-
-            for (int j = 0; j < 15; j++)
-            {
-                for (int i = 0; i < rocksFG.Count; i++)
+                for (int i = 0; i < 25; i++)
                 {
-                    _spriteBatch.Draw(rocksFG[i], rockPositions12[rockIndex], Color.White);
-                    rockIndex++;
+                    _spriteBatch.Draw(woodFloor, new Vector2(-1500 + (290 * i), 780), Color.White);
                 }
-            }
-
-            _spriteBatch.End();
-
-            _spriteBatch.Begin(transformMatrix: camera.GetParallaxTransform(1.4f));
-
-            rockIndex = 0;
-
-            for (int j = 0; j < 15; j++)
-            {
-                for (int i = 0; i < rocksFG.Count; i++)
+                for (int i = 0; i < 20; i++)
                 {
-                    _spriteBatch.Draw(rocksFG[i], rockPositions14[rockIndex], Color.White);
-                    rockIndex++;
+                    _spriteBatch.Draw(railFloor, new Vector2(150 + (270 * i), 770), Color.White);
                 }
+                for (int i = 0; i < 4; i++)
+                {
+                    _spriteBatch.Draw(woodFloor, new Vector2(5750, 940 + (290 * i)), null, Color.White, MathHelper.ToRadians(90), new Vector2(woodFloor.Width / 2, woodFloor.Height / 2), 1, SpriteEffects.None, 0);
+                }
+                _spriteBatch.Draw(railBrokenL, new Vector2(5560, 760), Color.White);
+
+                _spriteBatch.Draw(crystalFG1, new Vector2(-440, 580), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.FlipVertically, 0);
+
+                // Right side
+
+                _spriteBatch.Draw(pixel, new Rectangle(6750, 790, 10000, 1000), Color.Black);
+                for (int i = 0; i < 25; i++)
+                {
+                    _spriteBatch.Draw(woodFloor, new Vector2(6750 + (290 * i), 780), Color.White);
+                }
+                for (int i = 0; i < 15; i++)
+                {
+                    _spriteBatch.Draw(railFloor, new Vector2(6750 + (270 * i), 770), Color.White);
+                }
+                for (int i = 0; i < 4; i++)
+                {
+                    _spriteBatch.Draw(woodFloor, new Vector2(6750, 940 + (290 * i)), null, Color.White, MathHelper.ToRadians(270), new Vector2(woodFloor.Width / 2, woodFloor.Height / 2), 1, SpriteEffects.None, 0);
+                }
+                _spriteBatch.Draw(railBrokenR, new Vector2(6500, 770), Color.White);
+                cart.Draw(_spriteBatch);
+                grubby.Draw(_spriteBatch, true);
+
+                // Middle
+
+                _spriteBatch.Draw(blackFader, new Rectangle(3500, 900, 6000, 900), Color.White);
+                smokeSystem.Draw(_spriteBatch);
+
+                // Banked Curve
+
+                for (int i = 0; i < 30; i++)
+                {
+                    for (int j = 0; j < bankedTextures.Count; j++)
+                    {
+                        _spriteBatch.Draw(bankedTextures[j], new Vector2((3000 + (60 * i)) + (20 * j), (910 + (18 * i)) + (6 * j)), null, Color.White, MathHelper.ToRadians(135), new Vector2(bankedTextures[j].Width / 2, bankedTextures[j].Height / 2), 1, SpriteEffects.FlipHorizontally, 1);
+                    }
+                }
+
+                _spriteBatch.End();
+
+                // Foregorund
+
+                _spriteBatch.Begin(transformMatrix: camera.GetParallaxTransform(1.2f));
+
+                int rockIndex = 0;
+
+                for (int j = 0; j < 15; j++)
+                {
+                    for (int i = 0; i < rocksFG.Count; i++)
+                    {
+                        _spriteBatch.Draw(rocksFG[i], rockPositions12[rockIndex], Color.White);
+                        rockIndex++;
+                    }
+                }
+
+                _spriteBatch.End();
+
+                _spriteBatch.Begin(transformMatrix: camera.GetParallaxTransform(1.4f));
+
+                rockIndex = 0;
+
+                for (int j = 0; j < 15; j++)
+                {
+                    for (int i = 0; i < rocksFG.Count; i++)
+                    {
+                        _spriteBatch.Draw(rocksFG[i], rockPositions14[rockIndex], Color.White);
+                        rockIndex++;
+                    }
+                }
+
+                _spriteBatch.End();
+
+                // Vignette
+
+                _spriteBatch.Begin(transformMatrix: camera.Transform);
+
+                _spriteBatch.Draw(vignette, new Rectangle(vignetteRect.X + grubby.Hitbox.Center.X, vignetteRect.Y + grubby.Hitbox.Center.Y, vignetteRect.Width, vignetteRect.Height), Color.White);
+
+                _spriteBatch.End();
             }
 
-            _spriteBatch.End();
+            else if (gameState == GameState.Math)
+            {
+                GraphicsDevice.Clear(Color.LightGray);
+            }
 
-            // Vignette
 
-            _spriteBatch.Begin(transformMatrix: camera.Transform);
+            // Transitions
 
-            _spriteBatch.Draw(vignette, new Rectangle(vignetteRect.X + grubby.Hitbox.Center.X, vignetteRect.Y + grubby.Hitbox.Center.Y, vignetteRect.Width, vignetteRect.Height), Color.White);
+            _spriteBatch.Begin();
+
+            _spriteBatch.Draw(pixel, new Rectangle(-500, -500, 4000, 3000), transitionColor);
 
             _spriteBatch.End();
 
