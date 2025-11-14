@@ -12,6 +12,8 @@ namespace Grubby_Escape
 
     enum CartState
     {
+        Falling1,
+        Falling2,
         Start,
         Moving,
         Stop,
@@ -33,9 +35,15 @@ namespace Grubby_Escape
         private SoundEffect _stopSfx;
         private float _startTimer;
         private float _moveSpeed;
+        private int _floor;
+        private float _fallSpeed;
+        private float _fallTimer;
+        private SoundEffect _fallingEffect;
+        private SoundEffectInstance _fallingEffectInstance;
+        private SoundEffect _hitGroundEffect;
         public Vector2 Velocity => _velocity;
 
-        public Cart(Texture2D cartTexture, Texture2D wheelTexture, Vector2 startingPos, SoundEffect startSfx, SoundEffect movingSfx, SoundEffect stopSfx)
+        public Cart(Texture2D cartTexture, Texture2D wheelTexture, Vector2 startingPos, SoundEffect startSfx, SoundEffect movingSfx, SoundEffect stopSfx, SoundEffect hitGroundEffect, SoundEffect fallingEffect)
         {
             _cartTex = cartTexture;
             _wheelTex = wheelTexture;
@@ -49,11 +57,48 @@ namespace Grubby_Escape
             _velocity = new Vector2(0, 0);
             _hitbox = new Rectangle((int)_position.X, (int)_position.Y, cartTexture.Width, cartTexture.Height);
             _moveSpeed = 6;
+            _floor = 600;
+            _fallSpeed = 5;
+            _fallTimer = 2;
+            _hitGroundEffect = hitGroundEffect;
+            _fallingEffect = fallingEffect;
+            _fallingEffectInstance = _fallingEffect.CreateInstance();
         }
 
         public void Update(GameTime gameTime)
         {
-            if (_cartState == CartState.Start)
+            if (_cartState == CartState.Falling1)
+            {
+                _startTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                if (_fallingEffectInstance.State != SoundState.Playing)
+                {
+                    _fallingEffectInstance.Play();
+                }
+
+                if (_startTimer > _fallTimer)
+                {
+                    _fallingEffectInstance.Stop();
+                    _cartState = CartState.Falling2;
+                    _startTimer = 0;
+                }
+            }
+            else if (_cartState == CartState.Falling2)
+            {
+                _startTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                _velocity.Y = _fallSpeed * _startTimer;
+
+                if (_position.Y > _floor)
+                {
+                    _position.Y = _floor;
+                    _velocity.Y = 0;
+                    _cartState = CartState.Stopped;
+                    _hitGroundEffect.Play();
+                    _startTimer = 0;
+                }
+            }
+            else if (_cartState == CartState.Start)
             {
                 _startTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -127,6 +172,15 @@ namespace Grubby_Escape
             _stopSfx.Play();
             _movingSfxInstance.Stop();
             _cartState = CartState.Stop;
+        }
+        public void Fall(float speed, int groundLevel, float time)
+        {
+            _fallSpeed = speed;
+            _floor = groundLevel;
+            _fallTimer = time;
+            _fallingEffectInstance.Play();
+
+            _cartState = CartState.Falling1;
         }
 
         public Rectangle Hitbox

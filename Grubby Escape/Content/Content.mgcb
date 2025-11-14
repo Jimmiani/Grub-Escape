@@ -121,6 +121,12 @@
 /processorParam:Quality=Best
 /build:Grubby Escape/Audio/Sound Effects/Grubs/Sad/grub_sad_3.wav;Grubby Escape/Audio/Sound Effects/Grubs/Sad/grub_sad_3
 
+#begin Grubby Escape/Audio/Sound Effects/Rails/false_knight_land_1st_time.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Grubby Escape/Audio/Sound Effects/Rails/false_knight_land_1st_time.wav
+
 #begin Grubby Escape/Audio/Sound Effects/Rails/lift_activate.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -138,6 +144,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Grubby Escape/Audio/Sound Effects/Rails/mines_conveyor_loop.wav;Grubby Escape/Audio/Sound Effects/Rails/mines_conveyor_loop
+
+#begin Grubby Escape/Audio/Sound Effects/Rails/misc_rumble_loop.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Grubby Escape/Audio/Sound Effects/Rails/misc_rumble_loop.wav
 
 #begin Grubby Escape/Audio/Sound Effects/Start/spa_heal.wav
 /importer:WavImporter

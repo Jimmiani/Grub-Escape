@@ -10,6 +10,8 @@ namespace Grubby_Escape
 {
     enum GameState
     {
+        Waiting,
+        CartFall,
         Start,
         TowardsBrokenRail,
         Reverse,
@@ -68,13 +70,14 @@ namespace Grubby_Escape
 
         bool isOnCart;
         bool isDragging;
+        bool hasFallen;
 
         // Cart
 
         Cart cart;
         Texture2D cartTexture;
         Texture2D wheelTexture;
-        SoundEffect startSfx, movingSfx, stopSfx;
+        SoundEffect startSfx, movingSfx, stopSfx, landSfx, fallSfx;
         float cartStartTimer, cartStopTimer;
         bool hasStarted, hasStopped;
 
@@ -100,7 +103,7 @@ namespace Grubby_Escape
 
             resolutionScaler = new ResolutionScaler(GraphicsDevice, 1920, 1080);
 
-            gameState = GameState.Start;
+            gameState = GameState.Waiting;
             generator = new Random();
 
             pixel = new Texture2D(GraphicsDevice, 1, 1);
@@ -127,6 +130,7 @@ namespace Grubby_Escape
             isDragging = false;
             hasStarted = false;
             hasStopped = false;
+            hasFallen = false;
             cartStartTimer = 0;
             cartStopTimer = 0;
 
@@ -135,7 +139,7 @@ namespace Grubby_Escape
             base.Initialize();
 
             grubby = new Grub(grubIdle, idleEffect, sadEffect, grubAlert, alertEffect, grubJump, jumpEffect);
-            cart = new Cart(cartTexture, wheelTexture, new Vector2(300, 600), startSfx, movingSfx, stopSfx);
+            cart = new Cart(cartTexture, wheelTexture, new Vector2(300, -200), startSfx, movingSfx, stopSfx, landSfx, fallSfx);
 
             cameraTarget = new Vector2(600, 540);
 
@@ -286,6 +290,8 @@ namespace Grubby_Escape
             movingSfx = Content.Load<SoundEffect>("Grubby Escape/Audio/Sound Effects/Rails/mines_conveyor_loop");
             startSfx = Content.Load<SoundEffect>("Grubby Escape/Audio/Sound Effects/Rails/lift_activate");
             stopSfx = Content.Load<SoundEffect>("Grubby Escape/Audio/Sound Effects/Rails/lift_arrive");
+            landSfx = Content.Load<SoundEffect>("Grubby Escape/Audio/Sound Effects/Rails/false_knight_land_1st_time");
+            fallSfx = Content.Load<SoundEffect>("Grubby Escape/Audio/Sound Effects/Rails/misc_rumble_loop");
 
             // Music
 
@@ -318,15 +324,43 @@ namespace Grubby_Escape
             camera.Update(gameTime, cameraTarget, cart.Velocity);
             smokeSystem.Update(gameTime);
 
-            Debug.WriteLine(mouseWorldPos);
+            Debug.WriteLine(cart.Position);
 
             if (mouseState.RightButton == ButtonState.Pressed)
                 camera.Zoom = 0.1f;
 
             if (isOnCart)
                 grubby.Position = new Vector2(cart.Position.X + 30, cart.Position.Y - 65);
+            if (gameState == GameState.Waiting)
+            {
+                if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
+                {
+                    cart.Fall(100, 600, 3);
+                    camera.Shake(5, 4, false);
+                    gameState = GameState.CartFall;
+                    grubby.Happy();
+                }
+            }
+            else if (gameState == GameState.CartFall)
+            {
 
-            if (gameState == GameState.Start)
+                if (cart.Position.Y > 610 && !hasFallen)
+                {
+                    hasFallen = true;
+                    camera.Shake(15, 1, true);
+                }
+                if (hasFallen)
+                {
+                    cartStartTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    if (cartStartTimer > 1.5f)
+                    {
+                        grubby.Jump();
+                        gameState = GameState.Start;
+                        cartStartTimer = 0;
+                    }
+                }
+            }
+            else if (gameState == GameState.Start)
             {
                 cameraTarget = new Vector2(cart.Hitbox.Center.X, 0);
 
