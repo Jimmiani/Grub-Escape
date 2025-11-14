@@ -15,7 +15,8 @@ namespace Grubby_Escape
         Start,
         TowardsBrokenRail,
         Reverse,
-        Prepare
+        Prepare,
+        TransitionIn
     }
     public class Game1 : Game
     {
@@ -29,6 +30,7 @@ namespace Grubby_Escape
         Vector2 cameraTarget;
         Random generator;
         ResolutionScaler resolutionScaler;
+        float transitionTimer;
 
         // Particles
 
@@ -70,7 +72,6 @@ namespace Grubby_Escape
 
         bool isOnCart;
         bool isDragging;
-        bool hasFallen;
 
         // Cart
 
@@ -79,7 +80,7 @@ namespace Grubby_Escape
         Texture2D wheelTexture;
         SoundEffect startSfx, movingSfx, stopSfx, landSfx, fallSfx;
         float cartStartTimer, cartStopTimer;
-        bool hasStarted, hasStopped;
+        bool hasStarted, hasStopped, hasFallen;
 
         // Floors
 
@@ -443,11 +444,18 @@ namespace Grubby_Escape
                     cart.Stop();
                     gameState = GameState.Prepare;
                     grubby.Jump();
+                    hasStarted = false;
                 }
             }
             else if (gameState == GameState.Prepare)
             {
                 cameraTarget = new Vector2(cart.Hitbox.Center.X + 500, 0);
+
+                if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
+                {
+                    // enter effect play
+                    gameState = GameState.TransitionIn;
+                }
             }
 
             base.Update(gameTime);
@@ -532,15 +540,13 @@ namespace Grubby_Escape
 
             // Banked Curve
 
-            for (int i = 0; i < 14; i++)
+            for (int i = 0; i < 30; i++)
             {
                 for (int j = 0; j < bankedTextures.Count; j++)
                 {
-                    _spriteBatch.Draw(bankedTextures[j], new Vector2((3000 + (90 * i)) + (30 * j), (865 + (24 * i)) + (8 * j)), null, Color.White, MathHelper.ToRadians(195 - (1 * i) - (j * 1/3f)), new Vector2(bankedTextures[j].Width / 2, bankedTextures[j].Height / 2), 1, SpriteEffects.FlipHorizontally, 1);
+                    _spriteBatch.Draw(bankedTextures[j], new Vector2((3000 + (60 * i)) + (20 * j), (910 + (18 * i)) + (6 * j)), null, Color.White, MathHelper.ToRadians(135), new Vector2(bankedTextures[j].Width / 2, bankedTextures[j].Height / 2), 1, SpriteEffects.FlipHorizontally, 1);
                 }
             }
-
-
 
             _spriteBatch.End();
 
