@@ -125,7 +125,7 @@
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Grubby Escape/Audio/Sound Effects/Rails/false_knight_land_1st_time.wav
+/build:Grubby Escape/Audio/Sound Effects/Rails/false_knight_land_1st_time.wav;Grubby Escape/Audio/Sound Effects/Rails/false_knight_land_1st_time
 
 #begin Grubby Escape/Audio/Sound Effects/Rails/lift_activate.wav
 /importer:WavImporter
@@ -149,7 +149,7 @@
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Grubby Escape/Audio/Sound Effects/Rails/misc_rumble_loop.wav
+/build:Grubby Escape/Audio/Sound Effects/Rails/misc_rumble_loop.wav;Grubby Escape/Audio/Sound Effects/Rails/misc_rumble_loop
 
 #begin Grubby Escape/Audio/Sound Effects/Start/spa_heal.wav
 /importer:WavImporter
@@ -2044,6 +2044,102 @@
 /processorParam:TextureFormat=Color
 /build:Grubby Escape/Images/Lights/white_light.png;Grubby Escape/Images/Lights/white_light
 
+#begin Grubby Escape/Images/Particles/Crystals/floating_crystals_01.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Particles/Crystals/floating_crystals_01.png;Grubby Escape/Images/Particles/Crystals/floating_crystals_01
+
+#begin Grubby Escape/Images/Particles/Crystals/floating_crystals_02.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Particles/Crystals/floating_crystals_02.png;Grubby Escape/Images/Particles/Crystals/floating_crystals_02
+
+#begin Grubby Escape/Images/Particles/Crystals/floating_crystals_03.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Particles/Crystals/floating_crystals_03.png;Grubby Escape/Images/Particles/Crystals/floating_crystals_03
+
+#begin Grubby Escape/Images/Particles/Dust/hot_spring_smoke.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Particles/Dust/hot_spring_smoke.png;Grubby Escape/Images/Particles/Dust/hot_spring_smoke
+
+#begin Grubby Escape/Images/Particles/Rocks/rock_particles_01.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Particles/Rocks/rock_particles_01.png;Grubby Escape/Images/Particles/Rocks/rock_particles_01
+
+#begin Grubby Escape/Images/Particles/Rocks/rock_particles_02.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Particles/Rocks/rock_particles_02.png;Grubby Escape/Images/Particles/Rocks/rock_particles_02
+
+#begin Grubby Escape/Images/Particles/Rocks/rock_particles_03.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Particles/Rocks/rock_particles_03.png;Grubby Escape/Images/Particles/Rocks/rock_particles_03
+
+#begin Grubby Escape/Images/Particles/Rocks/rock_particles_04.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Particles/Rocks/rock_particles_04.png;Grubby Escape/Images/Particles/Rocks/rock_particles_04
+
 #begin Grubby Escape/Images/Particles/Smoke/abyss_smoke_01.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -2126,7 +2222,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Rails/banked_curve.png
+/build:Grubby Escape/Images/Rails/banked_curve.png;Grubby Escape/Images/Rails/banked_curve
 
 #begin Grubby Escape/Images/Rails/mine_rail_01.png
 /importer:TextureImporter
@@ -2210,7 +2306,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Rails/mines_metal_thin_floors_0001_a.png
+/build:Grubby Escape/Images/Rails/mines_metal_thin_floors_0001_a.png;Grubby Escape/Images/Rails/mines_metal_thin_floors_0001_a
 
 #begin Grubby Escape/Images/Rails/mines_metal_thin_floors_0002_a.png
 /importer:TextureImporter
@@ -2222,7 +2318,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Rails/mines_metal_thin_floors_0002_a.png
+/build:Grubby Escape/Images/Rails/mines_metal_thin_floors_0002_a.png;Grubby Escape/Images/Rails/mines_metal_thin_floors_0002_a
 
 #begin Grubby Escape/Images/Rails/mines_metal_thin_floors_0004_a.png
 /importer:TextureImporter
@@ -2234,7 +2330,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Grubby Escape/Images/Rails/mines_metal_thin_floors_0004_a.png
+/build:Grubby Escape/Images/Rails/mines_metal_thin_floors_0004_a.png;Grubby Escape/Images/Rails/mines_metal_thin_floors_0004_a
 
 #begin Grubby Escape/Images/Start Screen/grubby_home.png
 /importer:TextureImporter
