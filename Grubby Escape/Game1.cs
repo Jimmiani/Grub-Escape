@@ -50,8 +50,8 @@ namespace Grubby_Escape
 
         // Music
 
-        SoundEffect mainMusicSfx, bassMusicSfx, actionMusicSfx, machineryAtmosSfx;
-        SoundEffectInstance mainMusic, bassMusic, actionMusic, machineryAtmos;
+        SoundEffect mainMusicSfx, bassMusicSfx, actionMusicSfx, machineryAtmosSfx, crystalAtmosSfx;
+        SoundEffectInstance mainMusic, bassMusic, actionMusic, machineryAtmos, crystalAtmos;
 
         // Grubby
 
@@ -154,6 +154,10 @@ namespace Grubby_Escape
             machineryAtmos.Volume = 0.5f;
             machineryAtmos.IsLooped = true;
             machineryAtmos.Play();
+
+            crystalAtmos.Volume = 1;
+            crystalAtmos.IsLooped = true;
+            crystalAtmos.Play();
 
             // Particles
 
@@ -299,11 +303,13 @@ namespace Grubby_Escape
             bassMusicSfx = Content.Load<SoundEffect>("Grubby Escape/Audio/Music/Songs/S26 Crystal BASS");
             actionMusicSfx = Content.Load<SoundEffect>("Grubby Escape/Audio/Music/Songs/S26 Crystal ACTION");
             machineryAtmosSfx = Content.Load<SoundEffect>("Grubby Escape/Audio/Music/Atmos/mines_machinery_atmos");
+            crystalAtmosSfx = Content.Load<SoundEffect>("Grubby Escape/Audio/Music/Atmos/mines_crystal_shimmer_loop");
 
             mainMusic = mainMusicSfx.CreateInstance();
             bassMusic = bassMusicSfx.CreateInstance();
             actionMusic = actionMusicSfx.CreateInstance();
             machineryAtmos = machineryAtmosSfx.CreateInstance();
+            crystalAtmos = crystalAtmosSfx.CreateInstance();
         }
 
         protected override void Update(GameTime gameTime)
@@ -347,7 +353,7 @@ namespace Grubby_Escape
                 if (cart.Position.Y > 610 && !hasFallen)
                 {
                     hasFallen = true;
-                    camera.Shake(15, 1, true);
+                    camera.Shake(25, 1, true);
                 }
                 if (hasFallen)
                 {
@@ -425,7 +431,7 @@ namespace Grubby_Escape
                     cameraTarget = new Vector2(cart.Hitbox.Center.X + 500, 0);
                 }
 
-                if (keyboardState.IsKeyDown(Keys.R) && prevKeyboardState.IsKeyUp(Keys.R) && hasStarted == false)
+                if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter) && hasStarted == false)
                 {
                     cart.Start(-4);
                     grubby.Happy();
@@ -436,6 +442,7 @@ namespace Grubby_Escape
                 {
                     cart.Stop();
                     gameState = GameState.Prepare;
+                    grubby.Jump();
                 }
             }
             else if (gameState == GameState.Prepare)
@@ -443,7 +450,7 @@ namespace Grubby_Escape
                 cameraTarget = new Vector2(cart.Hitbox.Center.X + 500, 0);
             }
 
-                base.Update(gameTime);
+            base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)

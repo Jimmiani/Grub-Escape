@@ -78,7 +78,6 @@ namespace Grubby_Escape
 
                 if (_startTimer > _fallTimer)
                 {
-                    _fallingEffectInstance.Stop();
                     _cartState = CartState.Falling2;
                     _startTimer = 0;
                 }
@@ -91,6 +90,7 @@ namespace Grubby_Escape
 
                 if (_position.Y > _floor)
                 {
+                    _fallingEffectInstance.Stop();
                     _position.Y = _floor;
                     _velocity.Y = 0;
                     _cartState = CartState.Stopped;
