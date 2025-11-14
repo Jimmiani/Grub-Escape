@@ -81,6 +81,7 @@ namespace Grubby_Escape
         // Floors
 
         Texture2D woodFloor, railFloor, railBrokenL, railBrokenR, crystalFloor1, crystalFloor2;
+        List<Texture2D> bankedTextures;
 
         public Game1()
         {
@@ -128,6 +129,8 @@ namespace Grubby_Escape
             hasStopped = false;
             cartStartTimer = 0;
             cartStopTimer = 0;
+
+            bankedTextures = new List<Texture2D>();
 
             base.Initialize();
 
@@ -235,7 +238,6 @@ namespace Grubby_Escape
             BG5 = Content.Load<Texture2D>("Grubby Escape/Images/Background/Extremely Far/BG_twist");
             lightTex = Content.Load<Texture2D>("Grubby Escape/Images/Lights/white_light");
             lightEffect = Content.Load<Texture2D>("Grubby Escape/Images/Lights/light_effect_v02");
-
             bankedCurve = Content.Load<Texture2D>("Grubby Escape/Images/Rails/banked_curve");
 
             // Cart
@@ -246,6 +248,12 @@ namespace Grubby_Escape
             railFloor = Content.Load<Texture2D>("Grubby Escape/Images/Rails/mine_rail_01");
             railBrokenL = Content.Load<Texture2D>("Grubby Escape/Images/Rails/mine_rail_02");
             railBrokenR = Content.Load<Texture2D>("Grubby Escape/Images/Rails/mine_rail_03");
+
+            // Banked Textures
+
+            bankedTextures.Add(Content.Load<Texture2D>("Grubby Escape/Images/Rails/mines_metal_thin_floors_0001_a"));
+            bankedTextures.Add(Content.Load<Texture2D>("Grubby Escape/Images/Rails/mines_metal_thin_floors_0002_a"));
+            bankedTextures.Add(Content.Load<Texture2D>("Grubby Escape/Images/Rails/mines_metal_thin_floors_0004_a"));
 
             // Grubby
 
@@ -390,7 +398,7 @@ namespace Grubby_Escape
                     hasStarted = true;
                 }
 
-                if (cart.Hitbox.X < 4500)
+                if (cart.Hitbox.X < 2800)
                 {
                     cart.Stop();
                     gameState = GameState.Prepare;
@@ -480,6 +488,18 @@ namespace Grubby_Escape
 
             _spriteBatch.Draw(blackFader, new Rectangle(3500, 900, 6000, 900), Color.White);
             smokeSystem.Draw(_spriteBatch);
+
+            // Banked Curve
+
+            for (int i = 0; i < 14; i++)
+            {
+                for (int j = 0; j < bankedTextures.Count; j++)
+                {
+                    _spriteBatch.Draw(bankedTextures[j], new Vector2((3000 + (90 * i)) + (30 * j), (865 + (24 * i)) + (8 * j)), null, Color.White, MathHelper.ToRadians(195 - (1 * i) - (j * 1/3f)), new Vector2(bankedTextures[j].Width / 2, bankedTextures[j].Height / 2), 1, SpriteEffects.FlipHorizontally, 1);
+                }
+            }
+
+
 
             _spriteBatch.End();
 
