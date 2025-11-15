@@ -49,7 +49,9 @@ namespace Grubby_Escape
         public float MinSize {  get; set; } = 0.5f;
         public float MaxSize { get; set; } = 2f;
         public float MaxOpacity { get; set; } = 1f;
+        public bool Fade { get; set; } = true;
         public bool FadeIn { get; set; } = true;
+        public bool FadeOut {  get; set; } = true;
         public bool Shrink { get; set; } = false;
         public float TimeUntilShrink { get; set; } = 1;
         public bool Grow {  get; set; } = false;
@@ -58,6 +60,7 @@ namespace Grubby_Escape
         // ---------- Defaults -----------
 
         private Color _defaultColor = Color.White;
+        private bool _defaultCanSpawn = true;
         private float _defaultSpawnRate = 1.0f;
         private int _defaultSpawnAmount = 1;
         private float _defaultMinYVelocity = -1f;
@@ -75,7 +78,10 @@ namespace Grubby_Escape
         private float _defaultMinSize = 0.5f;
         private float _defaultMaxSize = 2f;
         private float _defaultMaxOpacity = 1f;
+        private bool _defaultFade = true;
         private bool _defaultFadeIn = true;
+        private bool _defaultFadeOut = true;
+
         private bool _defaultShrink = false;
         private float _defaultShrinkTime = 1;
         private bool _defaultGrow = false;
@@ -121,7 +127,7 @@ namespace Grubby_Escape
 
             for (int i = 0; i < _particles.Count; i++)
             {
-                _particles[i].Update(FadeIn);
+                _particles[i].Update(Fade, FadeIn, FadeOut);
                 if (_particles[i].Color != Color && ColorChange)
                 {
                     _particles[i].Color = Color;
@@ -219,9 +225,17 @@ namespace Grubby_Escape
             Shrink = shrink;
             TimeUntilShrink = timeUntilShrink;
         }
-        public void SetDefaults(Color color, float spawnRate, int spawnAmount, float minXVel, float maxXVel, float minYVel, float maxYVel, bool highVelocityMode, float minAngVel, float maxAngVel, float minTTL, float maxTTL, float minSize, float maxSize, float maxOpacity, bool fadeIn, bool shrink, float timeUntilShrink, bool grow, float growTime)
+        public void SetOpacityInfo(float maxOpacity, bool fade, bool fadeIn, bool fadeOut)
+        {
+            MaxOpacity = maxOpacity;
+            Fade = fade;
+            FadeIn = fadeIn;
+            FadeOut = fadeOut;
+        }
+        public void SetDefaults(Color color, bool canSpawn, float spawnRate, int spawnAmount, float minXVel, float maxXVel, float minYVel, float maxYVel, bool highVelocityMode, float minAngVel, float maxAngVel, float minTTL, float maxTTL, float minSize, float maxSize, float maxOpacity, bool fade, bool fadeIn, bool fadeOut, bool shrink, float timeUntilShrink, bool grow, float growTime)
         {
             _defaultColor = color;
+            _defaultCanSpawn = canSpawn;
             _defaultSpawnRate = spawnRate;
             _defaultSpawnAmount = spawnAmount;
             _defaultMinYVelocity = minYVel;
@@ -238,8 +252,11 @@ namespace Grubby_Escape
 
             _defaultMinSize = minSize;
             _defaultMaxSize = maxSize;
+
             _defaultMaxOpacity = maxOpacity;
+            _defaultFade = fade;
             _defaultFadeIn = fadeIn;
+            _defaultFadeOut = fadeOut;
 
             _defaultShrink = shrink;
             _defaultShrinkTime = timeUntilShrink;
@@ -249,6 +266,7 @@ namespace Grubby_Escape
         public void RestoreDefaults()
         {
             Color = _defaultColor;
+            CanSpawn = _defaultCanSpawn;
             SpawnRate = _defaultSpawnRate;
             SpawnAmount = _defaultSpawnAmount;
             MinYVelocity = _defaultMinYVelocity;
@@ -265,8 +283,11 @@ namespace Grubby_Escape
 
             MinSize = _defaultMinSize;
             MaxSize = _defaultMaxSize;
+
             MaxOpacity = _defaultMaxOpacity;
+            Fade = _defaultFade;
             FadeIn = _defaultFadeIn;
+            FadeOut = _defaultFadeOut;
 
             Shrink = _defaultShrink;
             TimeUntilShrink = _defaultShrinkTime;

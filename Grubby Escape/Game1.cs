@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 
 namespace Grubby_Escape
@@ -53,6 +54,9 @@ namespace Grubby_Escape
 
         ParticleSystem crystalSystemFG, crystalSystemMG, crystalSystemBG;
         List<Texture2D> crystalTextures;
+
+        ParticleSystem dustSystem;
+        List<Texture2D> dustTextures;
 
         // Backgrounds
 
@@ -130,6 +134,7 @@ namespace Grubby_Escape
 
             smokeTextures = new List<Texture2D>();
             crystalTextures = new List<Texture2D>();
+            dustTextures = new List<Texture2D>();
 
             rocksFG = new List<Texture2D>();
             rockPositions12 = new List<Vector2>();
@@ -189,6 +194,7 @@ namespace Grubby_Escape
 
             smokeSystem.SetDefaults(
                 Color.White,
+                true,
                 0.07f,
                 1,
                 0,
@@ -204,17 +210,21 @@ namespace Grubby_Escape
                 4,
                 0.9f,
                 true,
+                true,
+                true,
                 false,
                 1,
                 false,
                 1);
             smokeSystem.RestoreDefaults();
 
+
             crystalSystemFG = new ParticleSystem(crystalTextures, new Rectangle(-1000, -1000, 20000, 3000), EmitterShape.Rectangle);
 
             crystalSystemFG.SetDefaults(
                 Color.White,
-                0.05f,
+                true,
+                0.1f,
                 1,
                 0,
                 0,
@@ -225,15 +235,104 @@ namespace Grubby_Escape
                 10,
                 8,
                 9,
-                0.8f,
                 0.9f,
+                1,
                 0.5f,
+                false,
+                false,
                 false,
                 true,
                 2,
                 true,
                 0.4f);
             crystalSystemFG.RestoreDefaults();
+
+
+            crystalSystemMG = new ParticleSystem(crystalTextures, new Rectangle(-1000, -500, 10000, 2500), EmitterShape.Rectangle);
+
+            crystalSystemMG.SetDefaults(
+                Color.White,
+                true,
+                0.1f,
+                1,
+                0,
+                0,
+                -0.3f,
+                -0.4f,
+                false,
+                -10,
+                10,
+                8,
+                9,
+                0.6f,
+                0.7f,
+                0.5f,
+                false,
+                false,
+                false,
+                true,
+                2,
+                true,
+                0.4f);
+            crystalSystemMG.RestoreDefaults();
+
+
+            crystalSystemBG = new ParticleSystem(crystalTextures, new Rectangle(-500, -500, 6000, 2000), EmitterShape.Rectangle);
+
+            crystalSystemBG.SetDefaults(
+                Color.White,
+                true,
+                0.1f,
+                1,
+                0,
+                0,
+                -0.2f,
+                -0.3f,
+                false,
+                -10,
+                10,
+                8,
+                9,
+                0.4f,
+                0.5f,
+                0.3f,
+                false,
+                false,
+                false,
+                true,
+                2,
+                true,
+                0.4f);
+            crystalSystemBG.RestoreDefaults();
+
+
+            dustSystem = new ParticleSystem(dustTextures, new Rectangle(325, -300, 225, 100), EmitterShape.Rectangle);
+
+            dustSystem.SetDefaults(
+                Color.White,
+                false,
+                0.02f,
+                1,
+                -0.08f,
+                0.08f,
+                14,
+                15,
+                false,
+                -20,
+                20,
+                0.7f,
+                1f,
+                1.4f,
+                2f,
+                0.15f,
+                true,
+                false,
+                true,
+                false,
+                1,
+                false,
+                1);
+            dustSystem.RestoreDefaults();
 
             int size = 50;
             vignetteRect = new Rectangle(vignette.Width * -size / 2, vignette.Height * -size / 2, vignette.Width * size, vignette.Height * size);
@@ -275,6 +374,8 @@ namespace Grubby_Escape
                 smokeTextures.Add(Content.Load<Texture2D>($"Grubby Escape/Images/Particles/Smoke/abyss_smoke_0{i}"));
             for (int i = 1; i <= 3; i++)
                 crystalTextures.Add(Content.Load<Texture2D>($"Grubby Escape/Images/Particles/Crystals/floating_crystals_0{i}"));
+            for (int i = 1; i <= 1; i++)
+                dustTextures.Add(Content.Load<Texture2D>($"Grubby Escape/Images/Particles/Dust/hot_spring_smoke"));
             vignette = Content.Load<Texture2D>("Grubby Escape/Images/Lights/vignette_large_v01");
 
             // Crystals
@@ -390,13 +491,19 @@ namespace Grubby_Escape
                 camera.Update(gameTime, cameraTarget, cart.Velocity);
                 smokeSystem.Update(gameTime);
                 crystalSystemFG.Update(gameTime);
+                crystalSystemMG.Update(gameTime);
+                crystalSystemBG.Update(gameTime);
+                dustSystem.Update(gameTime);
             }
             if (isOnCart)
                 grubby.Position = new Vector2(cart.Position.X + 30, cart.Position.Y - 65);
+
+            Debug.WriteLine(mouseWorldPos);
             if (gameState == GameState.Waiting)
             {
                 if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
                 {
+                    dustSystem.CanSpawn = true;
                     cart.Fall(100, 600, 3);
                     camera.Shake(5, 4, false);
                     gameState = GameState.CartFall;
@@ -410,6 +517,7 @@ namespace Grubby_Escape
                 {
                     hasFallen = true;
                     camera.Shake(25, 1, true);
+                    dustSystem.RestoreDefaults();
                 }
                 if (hasFallen)
                 {
@@ -594,12 +702,23 @@ namespace Grubby_Escape
 
                 _spriteBatch.End();
 
+                // Background particles
+
+                _spriteBatch.Begin(transformMatrix: camera.GetParallaxTransform(0.6f));
+
+                crystalSystemBG.Draw(_spriteBatch);
+
+                _spriteBatch.End();
+
                 // Mid ground
 
                 _spriteBatch.Begin(transformMatrix: camera.Transform);
 
+                crystalSystemMG.Draw(_spriteBatch);
 
                 _spriteBatch.Draw(lightTex, new Rectangle(grubby.Hitbox.Center.X - 400, grubby.Hitbox.Center.Y - 400, 800, 800), Color.White * 0.2f);
+
+                dustSystem.Draw(_spriteBatch);
 
                 // Left side
                 for (int i = 0; i < 4; i++)

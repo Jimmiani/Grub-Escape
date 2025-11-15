@@ -47,7 +47,7 @@ namespace Grubby_Escape
             Opacity = opacity;
         }
 
-        public void Update(bool fade)
+        public void Update(bool fade, bool fadeIn, bool fadeOut)
         {
             TTL--;
             Position += Velocity;
@@ -56,11 +56,11 @@ namespace Grubby_Escape
             if (fade)
             {
                 _lifePercent = 1f - (TTL / InitialTTL);
-                if (_lifePercent < 0.3f)
+                if (_lifePercent < 0.3f && fadeIn)
                 {
                     Opacity = (_lifePercent / 0.3f) * _maxOpacity;
                 }
-                else if (_lifePercent > 0.7f)
+                else if (_lifePercent > 0.7f && fadeOut)
                 {
                     Opacity = ((1f - _lifePercent) / 0.3f) * _maxOpacity;
                 }
