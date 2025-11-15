@@ -50,12 +50,14 @@ namespace Grubby_Escape
         public float MaxSize { get; set; } = 2f;
         public float MaxOpacity { get; set; } = 1f;
         public bool FadeIn { get; set; } = true;
+        public bool Shrink { get; set; } = false;
+        public float TimeUntilShrink { get; set; } = 1;
+        public bool Grow {  get; set; } = false;
+        public float GrowTime { get; set; } = 1;
 
         // ---------- Defaults -----------
 
         private Color _defaultColor = Color.White;
-        private bool _defaultColorChange = false;
-        private bool _defaultCanSpawn = true;
         private float _defaultSpawnRate = 1.0f;
         private int _defaultSpawnAmount = 1;
         private float _defaultMinYVelocity = -1f;
@@ -74,6 +76,10 @@ namespace Grubby_Escape
         private float _defaultMaxSize = 2f;
         private float _defaultMaxOpacity = 1f;
         private bool _defaultFadeIn = true;
+        private bool _defaultShrink = false;
+        private float _defaultShrinkTime = 1;
+        private bool _defaultGrow = false;
+        private float _defaultGrowTime = 1;
 
         public ParticleSystem(List<Texture2D> textures, Vector2 location, EmitterShape shape)
         {
@@ -119,6 +125,16 @@ namespace Grubby_Escape
                 if (_particles[i].Color != Color && ColorChange)
                 {
                     _particles[i].Color = Color;
+                }
+                if (Grow && GrowTime > (_particles[i].InitialTTL / 60) - (_particles[i].TTL / 60))
+                {
+                    float t = ((_particles[i].InitialTTL / 60) - (_particles[i].TTL / 60)) / GrowTime;
+                    _particles[i].Size = MathHelper.Lerp(0, _particles[i].InitialSize, t);
+                }
+                if ((_particles[i].TTL / 60) < TimeUntilShrink && Shrink)
+                {
+                    float t = 1 - (_particles[i].TTL / 60 / TimeUntilShrink);
+                    _particles[i].Size = MathHelper.Lerp(_particles[i].Size, 0, t);
                 }
                 if (_particles[i].TTL <= 0)
                 {
@@ -198,11 +214,14 @@ namespace Grubby_Escape
             SpawnRate = rate;
             SpawnAmount = amount;
         }
-        public void SetDefaults(Color color, bool colorChange, bool canSpawn, float spawnRate, int spawnAmount, float minXVel, float maxXVel, float minYVel, float maxYVel, bool highVelocityMode, float minAngVel, float maxAngVel, float minTTL, float maxTTL, float minSize, float maxSize, float maxOpacity, bool fadeIn)
+        public void SetShrinkInfo(bool shrink, float timeUntilShrink)
+        {
+            Shrink = shrink;
+            TimeUntilShrink = timeUntilShrink;
+        }
+        public void SetDefaults(Color color, float spawnRate, int spawnAmount, float minXVel, float maxXVel, float minYVel, float maxYVel, bool highVelocityMode, float minAngVel, float maxAngVel, float minTTL, float maxTTL, float minSize, float maxSize, float maxOpacity, bool fadeIn, bool shrink, float timeUntilShrink, bool grow, float growTime)
         {
             _defaultColor = color;
-            _defaultColorChange = colorChange;
-            _defaultCanSpawn = canSpawn;
             _defaultSpawnRate = spawnRate;
             _defaultSpawnAmount = spawnAmount;
             _defaultMinYVelocity = minYVel;
@@ -221,12 +240,15 @@ namespace Grubby_Escape
             _defaultMaxSize = maxSize;
             _defaultMaxOpacity = maxOpacity;
             _defaultFadeIn = fadeIn;
+
+            _defaultShrink = shrink;
+            _defaultShrinkTime = timeUntilShrink;
+            _defaultGrow = grow;
+            _defaultGrowTime = growTime;
         }
         public void RestoreDefaults()
         {
             Color = _defaultColor;
-            ColorChange = _defaultColorChange;
-            CanSpawn = _defaultCanSpawn;
             SpawnRate = _defaultSpawnRate;
             SpawnAmount = _defaultSpawnAmount;
             MinYVelocity = _defaultMinYVelocity;
@@ -245,6 +267,11 @@ namespace Grubby_Escape
             MaxSize = _defaultMaxSize;
             MaxOpacity = _defaultMaxOpacity;
             FadeIn = _defaultFadeIn;
+
+            Shrink = _defaultShrink;
+            TimeUntilShrink = _defaultShrinkTime;
+            Grow = _defaultGrow;
+            GrowTime = _defaultGrowTime;
         }
     }
 }

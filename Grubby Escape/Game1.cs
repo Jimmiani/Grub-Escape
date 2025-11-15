@@ -51,6 +51,9 @@ namespace Grubby_Escape
         ParticleSystem smokeSystem;
         List<Texture2D> smokeTextures;
 
+        ParticleSystem crystalSystemFG, crystalSystemMG, crystalSystemBG;
+        List<Texture2D> crystalTextures;
+
         // Backgrounds
 
         Texture2D BG1, BG2, BG3, BG4, BG5;
@@ -126,6 +129,7 @@ namespace Grubby_Escape
             pixel.SetData(new[] { Color.White });
 
             smokeTextures = new List<Texture2D>();
+            crystalTextures = new List<Texture2D>();
 
             rocksFG = new List<Texture2D>();
             rockPositions12 = new List<Vector2>();
@@ -185,9 +189,7 @@ namespace Grubby_Escape
 
             smokeSystem.SetDefaults(
                 Color.White,
-                false,
-                true,
-                0.1f,
+                0.07f,
                 1,
                 0,
                 0,
@@ -201,8 +203,37 @@ namespace Grubby_Escape
                 3,
                 4,
                 0.9f,
-                true);
+                true,
+                false,
+                1,
+                false,
+                1);
             smokeSystem.RestoreDefaults();
+
+            crystalSystemFG = new ParticleSystem(crystalTextures, new Rectangle(-1000, -1000, 20000, 3000), EmitterShape.Rectangle);
+
+            crystalSystemFG.SetDefaults(
+                Color.White,
+                0.05f,
+                1,
+                0,
+                0,
+                -0.4f,
+                -0.5f,
+                false,
+                -10,
+                10,
+                8,
+                9,
+                0.8f,
+                0.9f,
+                0.5f,
+                false,
+                true,
+                2,
+                true,
+                0.4f);
+            crystalSystemFG.RestoreDefaults();
 
             int size = 50;
             vignetteRect = new Rectangle(vignette.Width * -size / 2, vignette.Height * -size / 2, vignette.Width * size, vignette.Height * size);
@@ -242,6 +273,8 @@ namespace Grubby_Escape
 
             for (int i = 1; i <= 5; i++)
                 smokeTextures.Add(Content.Load<Texture2D>($"Grubby Escape/Images/Particles/Smoke/abyss_smoke_0{i}"));
+            for (int i = 1; i <= 3; i++)
+                crystalTextures.Add(Content.Load<Texture2D>($"Grubby Escape/Images/Particles/Crystals/floating_crystals_0{i}"));
             vignette = Content.Load<Texture2D>("Grubby Escape/Images/Lights/vignette_large_v01");
 
             // Crystals
@@ -356,6 +389,7 @@ namespace Grubby_Escape
                 cart.Update(gameTime);
                 camera.Update(gameTime, cameraTarget, cart.Velocity);
                 smokeSystem.Update(gameTime);
+                crystalSystemFG.Update(gameTime);
             }
             if (isOnCart)
                 grubby.Position = new Vector2(cart.Position.X + 30, cart.Position.Y - 65);
@@ -655,6 +689,14 @@ namespace Grubby_Escape
                         rockIndex++;
                     }
                 }
+
+                _spriteBatch.End();
+
+                // Crystal system FG
+
+                _spriteBatch.Begin(transformMatrix: camera.GetParallaxTransform(2));
+
+                crystalSystemFG.Draw(_spriteBatch);
 
                 _spriteBatch.End();
 

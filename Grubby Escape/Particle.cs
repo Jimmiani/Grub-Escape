@@ -22,7 +22,8 @@ namespace Grubby_Escape
         public float Size { get; set; }                // The size of the particle
         public float TTL { get; set; }                // The 'time to live' of the particle
         public float Opacity { get; set; }
-        private float _initialTTL;
+        public float InitialTTL { get; set; }
+        public float InitialSize { get; set; }
         private float _lifePercent;
         private float _maxOpacity;
         
@@ -38,11 +39,12 @@ namespace Grubby_Escape
             AngularVelocity = angularVelocity;
             Color = color;
             Size = size;
+            InitialSize = size;
             TTL = ttl;
-            _initialTTL = ttl;
+            InitialTTL = ttl;
             _lifePercent = 1;
             _maxOpacity = opacity;
-            Opacity = 1;
+            Opacity = opacity;
         }
 
         public void Update(bool fade)
@@ -53,7 +55,7 @@ namespace Grubby_Escape
 
             if (fade)
             {
-                _lifePercent = 1f - (TTL / _initialTTL);
+                _lifePercent = 1f - (TTL / InitialTTL);
                 if (_lifePercent < 0.3f)
                 {
                     Opacity = (_lifePercent / 0.3f) * _maxOpacity;
@@ -67,7 +69,6 @@ namespace Grubby_Escape
                     Opacity = _maxOpacity;
                 }
             }
-            
         }
 
         public void Draw(SpriteBatch spriteBatch)
