@@ -55,6 +55,9 @@ namespace Grubby_Escape
         ParticleSystem crystalSystemFG, crystalSystemMG, crystalSystemBG;
         List<Texture2D> crystalTextures;
 
+        ParticleSystem dotSystemFG, dotSystemMG, dotSystemBG;
+        List<Texture2D> dotTextures;
+
         ParticleSystem dustSystem, cartDustSystem;
         List<Texture2D> dustTextures;
 
@@ -138,6 +141,7 @@ namespace Grubby_Escape
 
             smokeTextures = new List<Texture2D>();
             crystalTextures = new List<Texture2D>();
+            dotTextures = new List<Texture2D>();
             dustTextures = new List<Texture2D>();
             rockTextures = new List<Texture2D>();
 
@@ -361,10 +365,13 @@ namespace Grubby_Escape
 
 
             rockSystem = new ParticleSystem(rockTextures, new Rectangle(315, -100, 230, 20), EmitterShape.Rectangle);
-
-            rockSystem.SetDefaults(Color.White, false, 0.3f, 1, -320, 320, 1000, 1000, false, -90, 90, 1, 2, 0.8f, 1, 1, false, false, false, true, 0.2f, false, 1, true, 1500);
-
+            rockSystem.SetDefaults(Color.White, false, 0.2f, 1, -320, 320, 1000, 1000, false, -90, 90, 1, 2, 0.8f, 0.7f, 1.3f, false, false, false, true, 0.2f, false, 1, true, 1500);
             rockSystem.RestoreDefaults();
+
+
+            dotSystemBG = new ParticleSystem(dotTextures, new Rectangle(-500, -500, 6000, 2000), EmitterShape.Rectangle);
+            dotSystemBG.SetDefaults(Color.Pink, true, 0.1f, 1, -10, 10, -10, -15, false, -60, 60, 9, 12, 0.3f, 0.5f, 0.4f, true, true, true, false, 1, false, 1, false, 800);
+            dotSystemBG.RestoreDefaults();
 
             int size = 50;
             vignetteRect = new Rectangle(vignette.Width * -size / 2, vignette.Height * -size / 2, vignette.Width * size, vignette.Height * size);
@@ -415,6 +422,8 @@ namespace Grubby_Escape
                 crystalTextures.Add(Content.Load<Texture2D>($"Grubby Escape/Images/Particles/Crystals/floating_crystals_0{i}"));
             for (int i = 1; i <= 1; i++)
                 dustTextures.Add(Content.Load<Texture2D>($"Grubby Escape/Images/Particles/Dust/hot_spring_smoke"));
+            for (int i = 1; i <= 1; i++)
+                dotTextures.Add(Content.Load<Texture2D>($"Grubby Escape/Images/Particles/Dot/particle_01"));
             for (int i = 1; i <= 4; i++)
                 rockTextures.Add(Content.Load<Texture2D>($"Grubby Escape/Images/Particles/Rocks/rock_particles_0{i}"));
             vignette = Content.Load<Texture2D>("Grubby Escape/Images/Lights/vignette_large_v01");
@@ -537,6 +546,7 @@ namespace Grubby_Escape
                 dustSystem.Update(gameTime);
                 rockSystem.Update(gameTime);
                 cartDustSystem.Update(gameTime);
+                dotSystemBG.Update(gameTime);
             }
             if (isOnCart)
                 grubby.Position = new Vector2(cart.Position.X + 30, cart.Position.Y - 65);
@@ -778,9 +788,11 @@ namespace Grubby_Escape
 
                 // Background particles
 
-                _spriteBatch.Begin(transformMatrix: camera.GetParallaxTransform(0.6f));
+                _spriteBatch.Begin(transformMatrix: camera.GetParallaxTransform(0.7f));
 
                 crystalSystemBG.Draw(_spriteBatch);
+                dotSystemBG.Draw(_spriteBatch);
+
 
                 _spriteBatch.End();
 
@@ -906,7 +918,7 @@ namespace Grubby_Escape
 
             else if (gameState == GameState.Math)
             {
-                GraphicsDevice.Clear(Color.Gray);
+                GraphicsDevice.Clear(Color.DarkGray);
             }
 
 

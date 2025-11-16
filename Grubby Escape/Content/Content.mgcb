@@ -2080,6 +2080,18 @@
 /processorParam:TextureFormat=Color
 /build:Grubby Escape/Images/Particles/Crystals/floating_crystals_03.png;Grubby Escape/Images/Particles/Crystals/floating_crystals_03
 
+#begin Grubby Escape/Images/Particles/Dot/particle_01.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Particles/Dot/particle_01.png;Grubby Escape/Images/Particles/Dot/particle_01
+
 #begin Grubby Escape/Images/Particles/Dust/hot_spring_smoke.png
 /importer:TextureImporter
 /processor:TextureProcessor
