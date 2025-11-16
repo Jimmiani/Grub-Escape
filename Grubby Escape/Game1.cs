@@ -64,6 +64,7 @@ namespace Grubby_Escape
         Texture2D lightTex, vignette, pixel, lightEffect;
         Rectangle vignetteRect;
         Texture2D bankedCurve;
+        List<Texture2D> backgrounds;
 
         // Foreground
 
@@ -164,6 +165,7 @@ namespace Grubby_Escape
             transitionColor = Color.Black * 0;
 
             bankedTextures = new List<Texture2D>();
+            backgrounds = new List<Texture2D>();
 
             base.Initialize();
 
@@ -311,19 +313,19 @@ namespace Grubby_Escape
             dustSystem.SetDefaults(
                 Color.White,
                 false,
-                0.02f,
+                0.01f,
                 1,
-                -0.08f,
-                0.08f,
+                -0.18f,
+                0.18f,
                 14,
                 15,
                 false,
-                -20,
-                20,
+                -360,
+                360,
                 0.7f,
                 1f,
+                1.2f,
                 1.4f,
-                2f,
                 0.15f,
                 true,
                 false,
@@ -359,6 +361,14 @@ namespace Grubby_Escape
                     rockPositions12.Add(new Vector2(x, y));
                 }
             }
+
+            // Backgrounds
+
+            backgrounds.Add(BG1);
+            backgrounds.Add(BG2);
+            backgrounds.Add(BG3);
+            backgrounds.Add(BG4);
+            backgrounds.Add(BG5);
 
         }
 
@@ -517,7 +527,11 @@ namespace Grubby_Escape
                 {
                     hasFallen = true;
                     camera.Shake(25, 1, true);
-                    dustSystem.RestoreDefaults();
+                    dustSystem.SetVelocity(-1, 1, -0.5f, -0.2f);
+                    dustSystem.SetSpawnInfo(1.5f, 15);
+                    dustSystem.SetLifespan(1.4f, 1.6f);
+                    dustSystem.SetAngularVelocity(-30, 30);
+                    dustSystem.EmitterBoundary = new Rectangle(315, 780, 230, 20);
                 }
                 if (hasFallen)
                 {
@@ -527,6 +541,7 @@ namespace Grubby_Escape
                         grubby.Jump();
                         gameState = GameState.Start;
                         cartStartTimer = 0;
+                        dustSystem.CanSpawn = false;
                     }
                 }
             }
@@ -687,15 +702,26 @@ namespace Grubby_Escape
 
                 // Background
 
-                _spriteBatch.Begin(transformMatrix: camera.GetParallaxTransform(0.1f));
+                _spriteBatch.Begin(transformMatrix: camera.GetParallaxTransform(0.5f));
 
-                _spriteBatch.Draw(BG4, new Rectangle(200, -300, 1400, 1600), null, Color.White, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
-                _spriteBatch.Draw(BG1, new Rectangle(-300, -500, 1000, 1500), Color.White);
-                _spriteBatch.Draw(BG2, new Rectangle(1500, 600, 1000, 1100), Color.White);
-                _spriteBatch.Draw(BG3, new Rectangle(-500, 400, 1500, 1800), Color.White);
-                _spriteBatch.Draw(BG5, new Rectangle(1400, -300, 1000, 1200), Color.White);
-                _spriteBatch.Draw(BG3, new Rectangle(2000, -100, 1500, 1800), Color.White);
-                _spriteBatch.Draw(BG5, new Rectangle(2400, 500, 1000, 1200), Color.White);
+                //_spriteBatch.Draw(BG4, new Rectangle(200, -300, 1400, 1600), null, Color.White, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
+                //_spriteBatch.Draw(BG1, new Rectangle(-300, -500, 1000, 1500), Color.White);
+                //_spriteBatch.Draw(BG2, new Rectangle(1500, 600, 1000, 1100), Color.White);
+                //_spriteBatch.Draw(BG3, new Rectangle(-500, 400, 1500, 1800), Color.White);
+                //_spriteBatch.Draw(BG5, new Rectangle(1400, -300, 1000, 1200), Color.White);
+                //_spriteBatch.Draw(BG3, new Rectangle(2000, -100, 1500, 1800), Color.White);
+                //_spriteBatch.Draw(BG5, new Rectangle(2400, 500, 1000, 1200), Color.White);
+
+
+                for (int i = 0; i < 5; i++)
+                {
+                    for (int j = 0; j < backgrounds.Count; j++)
+                    {
+                        _spriteBatch.Draw(backgrounds[j], new Vector2(-200 * i + 40 * j, -200 * i + 40 * j), null, Color.White, 0, Vector2.Zero, 5, SpriteEffects.None, 1);
+                    }
+                }
+
+
                 _spriteBatch.Draw(lightEffect, new Rectangle(-10000, -2500, 20000, 5000), Color.Pink * 0.45f);
                 _spriteBatch.Draw(pixel, new Rectangle(-1000, -400, 10000, 450), Color.Black);
                 _spriteBatch.Draw(blackFader, new Rectangle(-10000, -200, 30000, 420), Color.White);
@@ -830,7 +856,7 @@ namespace Grubby_Escape
 
             else if (gameState == GameState.Math)
             {
-                GraphicsDevice.Clear(Color.LightGray);
+                GraphicsDevice.Clear(Color.Gray);
             }
 
 
