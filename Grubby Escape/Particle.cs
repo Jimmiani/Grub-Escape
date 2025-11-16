@@ -47,22 +47,23 @@ namespace Grubby_Escape
             Opacity = opacity;
         }
 
-        public void Update(bool fade, bool fadeIn, bool fadeOut)
+        public void Update(GameTime gameTime, bool fade, bool fadeIn, bool fadeOut, float fadeInLength, float fadeOutLength)
         {
+            float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
             TTL--;
-            Position += Velocity;
-            Angle += AngularVelocity;
+            Position += Velocity * dt;
+            Angle += AngularVelocity * dt;
 
             if (fade)
             {
                 _lifePercent = 1f - (TTL / InitialTTL);
-                if (_lifePercent < 0.3f && fadeIn)
+                if (_lifePercent < fadeInLength && fadeIn)
                 {
-                    Opacity = (_lifePercent / 0.3f) * _maxOpacity;
+                    Opacity = (_lifePercent / fadeInLength) * _maxOpacity;
                 }
-                else if (_lifePercent > 0.7f && fadeOut)
+                else if (_lifePercent > fadeOutLength && fadeOut)
                 {
-                    Opacity = ((1f - _lifePercent) / 0.3f) * _maxOpacity;
+                    Opacity = ((1f - _lifePercent) / (1 - fadeOutLength)) * _maxOpacity;
                 }
                 else
                 {

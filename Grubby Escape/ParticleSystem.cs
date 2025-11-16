@@ -52,10 +52,14 @@ namespace Grubby_Escape
         public bool Fade { get; set; } = true;
         public bool FadeIn { get; set; } = true;
         public bool FadeOut {  get; set; } = true;
+        public float FadeInUntil { get; set; } = 0.3f;
+        public float FadeOutAfter { get; set; } = 0.7f;
         public bool Shrink { get; set; } = false;
-        public float TimeUntilShrink { get; set; } = 1;
+        public float ShrinkTime { get; set; } = 1;
         public bool Grow {  get; set; } = false;
         public float GrowTime { get; set; } = 1;
+        public bool Gravity { get; set; } = false;
+        public float GravityConstant { get; set; } = 800;
 
         // ---------- Defaults -----------
 
@@ -86,6 +90,8 @@ namespace Grubby_Escape
         private float _defaultShrinkTime = 1;
         private bool _defaultGrow = false;
         private float _defaultGrowTime = 1;
+        private bool _defaultGravity = false;
+        private float _defaultGravityConstant = 800;
 
         public ParticleSystem(List<Texture2D> textures, Vector2 location, EmitterShape shape)
         {
@@ -111,9 +117,11 @@ namespace Grubby_Escape
 
         public void Update(GameTime gameTime)
         {
+            float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
             if (CanSpawn)
             {
-                _spawnTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                _spawnTimer += dt;
                 if (_spawnTimer >= SpawnRate)
                 {
                     _spawnTimer -= SpawnRate;
@@ -127,7 +135,7 @@ namespace Grubby_Escape
 
             for (int i = 0; i < _particles.Count; i++)
             {
-                _particles[i].Update(Fade, FadeIn, FadeOut);
+                _particles[i].Update(gameTime, Fade, FadeIn, FadeOut, FadeInUntil, FadeOutAfter);
                 if (_particles[i].Color != Color && ColorChange)
                 {
                     _particles[i].Color = Color;
@@ -137,16 +145,30 @@ namespace Grubby_Escape
                     float t = ((_particles[i].InitialTTL / 60) - (_particles[i].TTL / 60)) / GrowTime;
                     _particles[i].Size = MathHelper.Lerp(0, _particles[i].InitialSize, t);
                 }
-                if ((_particles[i].TTL / 60) < TimeUntilShrink && Shrink)
+                if ((_particles[i].TTL / 60) < ShrinkTime && Shrink)
                 {
-                    float t = 1 - (_particles[i].TTL / 60 / TimeUntilShrink);
+                    float t = 1 - (_particles[i].TTL / 60 / ShrinkTime);
                     _particles[i].Size = MathHelper.Lerp(_particles[i].Size, 0, t);
+                }
+                if (Gravity)
+                {
+                    float vx = _particles[i].Velocity.X;
+                    float vy = _particles[i].Velocity.Y + GravityConstant * dt;
+
+                    _particles[i].Velocity = new Vector2(vx, vy);
                 }
                 if (_particles[i].TTL <= 0)
                 {
                     _particles.RemoveAt(i);
                     i--;
                 }
+            }
+        }
+        public void Spawn(int amount)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                _particles.Add(GenerateNewParticle());
             }
         }
 
@@ -212,18 +234,18 @@ namespace Grubby_Escape
         }
         public void SetAngularVelocity(float min, float max)
         {
-            MaxAngularVelocity = MathHelper.ToRadians(max / 60);
-            MinAngularVelocity = MathHelper.ToRadians(min / 60);
+            MaxAngularVelocity = MathHelper.ToRadians(max);
+            MinAngularVelocity = MathHelper.ToRadians(min);
         }
         public void SetSpawnInfo(float rate, int amount)
         {
             SpawnRate = rate;
             SpawnAmount = amount;
         }
-        public void SetShrinkInfo(bool shrink, float timeUntilShrink)
+        public void SetShrinkInfo(bool shrink, float shrinkTime)
         {
             Shrink = shrink;
-            TimeUntilShrink = timeUntilShrink;
+            ShrinkTime = shrinkTime;
         }
         public void SetOpacityInfo(float maxOpacity, bool fade, bool fadeIn, bool fadeOut)
         {
@@ -232,7 +254,7 @@ namespace Grubby_Escape
             FadeIn = fadeIn;
             FadeOut = fadeOut;
         }
-        public void SetDefaults(Color color, bool canSpawn, float spawnRate, int spawnAmount, float minXVel, float maxXVel, float minYVel, float maxYVel, bool highVelocityMode, float minAngVel, float maxAngVel, float minTTL, float maxTTL, float minSize, float maxSize, float maxOpacity, bool fade, bool fadeIn, bool fadeOut, bool shrink, float timeUntilShrink, bool grow, float growTime)
+        public void SetDefaults(Color color, bool canSpawn, float spawnRate, int spawnAmount, float minXVel, float maxXVel, float minYVel, float maxYVel, bool highVelocityMode, float minAngVel, float maxAngVel, float minTTL, float maxTTL, float minSize, float maxSize, float maxOpacity, bool fade, bool fadeIn, bool fadeOut, bool shrink, float shrinkTime, bool grow, float growTime, bool gravity, float gravityConstant)
         {
             _defaultColor = color;
             _defaultCanSpawn = canSpawn;
@@ -244,8 +266,8 @@ namespace Grubby_Escape
             _defaultMaxXVelocity = maxXVel;
             _defaultHighVelocityMode = highVelocityMode;
 
-            _defaultMinAngularVelocity = MathHelper.ToRadians(minAngVel / 60);
-            _defaultMaxAngularVelocity = MathHelper.ToRadians(maxAngVel / 60);
+            _defaultMinAngularVelocity = MathHelper.ToRadians(minAngVel);
+            _defaultMaxAngularVelocity = MathHelper.ToRadians(maxAngVel);
 
             _defaultMinTTL = minTTL * 60;
             _defaultMaxTTL = maxTTL * 60;
@@ -259,9 +281,12 @@ namespace Grubby_Escape
             _defaultFadeOut = fadeOut;
 
             _defaultShrink = shrink;
-            _defaultShrinkTime = timeUntilShrink;
+            _defaultShrinkTime = shrinkTime;
             _defaultGrow = grow;
             _defaultGrowTime = growTime;
+
+            _defaultGravity = gravity;
+            _defaultGravityConstant = gravityConstant;
         }
         public void RestoreDefaults()
         {
@@ -290,9 +315,12 @@ namespace Grubby_Escape
             FadeOut = _defaultFadeOut;
 
             Shrink = _defaultShrink;
-            TimeUntilShrink = _defaultShrinkTime;
+            ShrinkTime = _defaultShrinkTime;
             Grow = _defaultGrow;
             GrowTime = _defaultGrowTime;
+
+            Gravity = _defaultGravity;
+            GravityConstant = _defaultGravityConstant;
         }
     }
 }

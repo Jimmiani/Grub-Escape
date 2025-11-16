@@ -55,8 +55,11 @@ namespace Grubby_Escape
         ParticleSystem crystalSystemFG, crystalSystemMG, crystalSystemBG;
         List<Texture2D> crystalTextures;
 
-        ParticleSystem dustSystem;
+        ParticleSystem dustSystem, cartDustSystem;
         List<Texture2D> dustTextures;
+
+        ParticleSystem rockSystem;
+        List<Texture2D> rockTextures;
 
         // Backgrounds
 
@@ -136,6 +139,7 @@ namespace Grubby_Escape
             smokeTextures = new List<Texture2D>();
             crystalTextures = new List<Texture2D>();
             dustTextures = new List<Texture2D>();
+            rockTextures = new List<Texture2D>();
 
             rocksFG = new List<Texture2D>();
             rockPositions12 = new List<Vector2>();
@@ -201,8 +205,8 @@ namespace Grubby_Escape
                 1,
                 0,
                 0,
-                -0.5f,
-                -1,
+                -30,
+                -60,
                 false,
                 -15,
                 15,
@@ -217,7 +221,9 @@ namespace Grubby_Escape
                 false,
                 1,
                 false,
-                1);
+                1,
+                false,
+                800);
             smokeSystem.RestoreDefaults();
 
 
@@ -230,13 +236,13 @@ namespace Grubby_Escape
                 1,
                 0,
                 0,
-                -0.4f,
-                -0.5f,
+                -24f,
+                -30f,
                 false,
                 -10,
                 10,
-                8,
                 9,
+                12,
                 0.9f,
                 1,
                 0.5f,
@@ -244,9 +250,11 @@ namespace Grubby_Escape
                 false,
                 false,
                 true,
-                2,
+                1f,
                 true,
-                0.4f);
+                0.4f,
+                false,
+                800);
             crystalSystemFG.RestoreDefaults();
 
 
@@ -259,13 +267,13 @@ namespace Grubby_Escape
                 1,
                 0,
                 0,
-                -0.3f,
-                -0.4f,
+                -18f,
+                -24f,
                 false,
                 -10,
                 10,
-                8,
                 9,
+                12,
                 0.6f,
                 0.7f,
                 0.5f,
@@ -273,9 +281,11 @@ namespace Grubby_Escape
                 false,
                 false,
                 true,
-                2,
+                1f,
                 true,
-                0.4f);
+                0.4f,
+                false,
+                800);
             crystalSystemMG.RestoreDefaults();
 
 
@@ -288,13 +298,13 @@ namespace Grubby_Escape
                 1,
                 0,
                 0,
-                -0.2f,
-                -0.3f,
+                -12f,
+                -18f,
                 false,
                 -10,
                 10,
-                8,
                 9,
+                12,
                 0.4f,
                 0.5f,
                 0.3f,
@@ -302,28 +312,30 @@ namespace Grubby_Escape
                 false,
                 false,
                 true,
-                2,
+                1f,
                 true,
-                0.4f);
+                0.4f,
+                false,
+                800);
             crystalSystemBG.RestoreDefaults();
 
 
-            dustSystem = new ParticleSystem(dustTextures, new Rectangle(325, -300, 225, 100), EmitterShape.Rectangle);
+            dustSystem = new ParticleSystem(dustTextures, new Rectangle(325, -100, 225, 100), EmitterShape.Rectangle);
 
             dustSystem.SetDefaults(
                 Color.White,
                 false,
                 0.01f,
                 1,
-                -0.18f,
-                0.18f,
-                14,
-                15,
+                -12f,
+                12f,
+                700,
+                800,
                 false,
                 -360,
                 360,
-                0.7f,
-                1f,
+                0.5f,
+                0.8f,
                 1.2f,
                 1.4f,
                 0.15f,
@@ -333,8 +345,26 @@ namespace Grubby_Escape
                 false,
                 1,
                 false,
-                1);
+                1,
+                false,
+                800);
+            dustSystem.FadeOutAfter = 0.2f;
             dustSystem.RestoreDefaults();
+
+
+            cartDustSystem = new ParticleSystem(dustTextures, new Rectangle(325, -100, 225, 100), EmitterShape.Rectangle);
+
+            cartDustSystem.SetDefaults(Color.White, true, 0.05f, 1, -10, 10, -70, -90, false, -180, 180, 0.8f, 1, 0.6f, 0.7f, 0.1f, true, true, true, false, 1, false, 1, false, 800);
+            cartDustSystem.FadeInUntil = 0.1f;
+            cartDustSystem.FadeOutAfter = 0.4f;
+            cartDustSystem.RestoreDefaults();
+
+
+            rockSystem = new ParticleSystem(rockTextures, new Rectangle(315, -100, 230, 20), EmitterShape.Rectangle);
+
+            rockSystem.SetDefaults(Color.White, false, 0.3f, 1, -320, 320, 1000, 1000, false, -90, 90, 1, 2, 0.8f, 1, 1, false, false, false, true, 0.2f, false, 1, true, 1500);
+
+            rockSystem.RestoreDefaults();
 
             int size = 50;
             vignetteRect = new Rectangle(vignette.Width * -size / 2, vignette.Height * -size / 2, vignette.Width * size, vignette.Height * size);
@@ -385,6 +415,8 @@ namespace Grubby_Escape
                 crystalTextures.Add(Content.Load<Texture2D>($"Grubby Escape/Images/Particles/Crystals/floating_crystals_0{i}"));
             for (int i = 1; i <= 1; i++)
                 dustTextures.Add(Content.Load<Texture2D>($"Grubby Escape/Images/Particles/Dust/hot_spring_smoke"));
+            for (int i = 1; i <= 4; i++)
+                rockTextures.Add(Content.Load<Texture2D>($"Grubby Escape/Images/Particles/Rocks/rock_particles_0{i}"));
             vignette = Content.Load<Texture2D>("Grubby Escape/Images/Lights/vignette_large_v01");
 
             // Crystals
@@ -503,11 +535,18 @@ namespace Grubby_Escape
                 crystalSystemMG.Update(gameTime);
                 crystalSystemBG.Update(gameTime);
                 dustSystem.Update(gameTime);
+                rockSystem.Update(gameTime);
+                cartDustSystem.Update(gameTime);
             }
             if (isOnCart)
                 grubby.Position = new Vector2(cart.Position.X + 30, cart.Position.Y - 65);
             if (mouseState.RightButton == ButtonState.Pressed)
                 camera.Zoom = 0.1f;
+            if (Math.Abs(cart.Velocity.X) > 0)
+            {
+                cartDustSystem.CanSpawn = true;
+                cartDustSystem.EmitterBoundary = new Rectangle(cart.Hitbox.X - 30, cart.Hitbox.Bottom, cart.Hitbox.Width + 30, -10);
+            }
 
             Debug.WriteLine(mouseWorldPos);
             if (gameState == GameState.Waiting)
@@ -515,6 +554,7 @@ namespace Grubby_Escape
                 if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
                 {
                     dustSystem.CanSpawn = true;
+                    rockSystem.CanSpawn = true;
                     cart.Fall(100, 600, 3);
                     camera.Shake(5, 4, false);
                     gameState = GameState.CartFall;
@@ -528,11 +568,19 @@ namespace Grubby_Escape
                 {
                     hasFallen = true;
                     camera.Shake(25, 1, true);
-                    dustSystem.SetVelocity(-1, 1, -0.5f, -0.2f);
-                    dustSystem.SetSpawnInfo(1.5f, 15);
+                    dustSystem.SetVelocity(-60, 60, -30, -12);
                     dustSystem.SetLifespan(1.4f, 1.6f);
                     dustSystem.SetAngularVelocity(-30, 30);
                     dustSystem.EmitterBoundary = new Rectangle(315, 780, 230, 20);
+                    dustSystem.Spawn(15);
+
+                    rockSystem.SetVelocity(-400, 400, -1000, -1800);
+                    rockSystem.EmitterBoundary = new Rectangle(315, 780, 230, 20);
+                    rockSystem.Spawn(15);
+                    rockSystem.GravityConstant = 3500;
+
+                    dustSystem.CanSpawn = false;
+                    rockSystem.CanSpawn = false;
                 }
                 if (hasFallen)
                 {
@@ -542,7 +590,6 @@ namespace Grubby_Escape
                         grubby.Jump();
                         gameState = GameState.Start;
                         cartStartTimer = 0;
-                        dustSystem.CanSpawn = false;
                     }
                 }
             }
@@ -596,6 +643,8 @@ namespace Grubby_Escape
                         grubby.Sad();
                         gameState = GameState.Reverse;
                         hasStarted = false;
+                        hasStopped = false;
+                        cartDustSystem.CanSpawn = false;
                     }
                 }
             }
@@ -629,6 +678,11 @@ namespace Grubby_Escape
             else if (gameState == GameState.Prepare)
             {
                 cameraTarget = new Vector2(cart.Hitbox.Center.X + 500, 0);
+
+                if (Math.Abs(cart.Velocity.X) <= 0)
+                {
+                    cartDustSystem.CanSpawn = false;
+                }
 
                 if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
                 {
@@ -705,28 +759,18 @@ namespace Grubby_Escape
 
                 _spriteBatch.Begin(transformMatrix: camera.GetParallaxTransform(0.5f));
 
-                //_spriteBatch.Draw(BG4, new Rectangle(200, -300, 1400, 1600), null, Color.White, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
-                //_spriteBatch.Draw(BG1, new Rectangle(-300, -500, 1000, 1500), Color.White);
-                //_spriteBatch.Draw(BG2, new Rectangle(1500, 600, 1000, 1100), Color.White);
-                //_spriteBatch.Draw(BG3, new Rectangle(-500, 400, 1500, 1800), Color.White);
-                //_spriteBatch.Draw(BG5, new Rectangle(1400, -300, 1000, 1200), Color.White);
-                //_spriteBatch.Draw(BG3, new Rectangle(2000, -100, 1500, 1800), Color.White);
-                //_spriteBatch.Draw(BG5, new Rectangle(2400, 500, 1000, 1200), Color.White);
-
-
                 for (int i = 0; i < 5; i++)
                 {
                     for (int j = 0; j < backgrounds.Count; j++)
                     {
                         if (i % 2 == 0)
-                            _spriteBatch.Draw(backgrounds[(backgrounds.Count - 1) - j], new Vector2(-200 + (2300 * i) + (800 * j), -100 + 200 * j), null, Color.White, 0, Vector2.Zero, 8, SpriteEffects.None, 1);
+                            _spriteBatch.Draw(backgrounds[(backgrounds.Count - 1) - j], new Vector2(-200 + (2300 * i) + (1000 * j), -100 + 200 * j), null, Color.White, 0, Vector2.Zero, 8, SpriteEffects.None, 1);
                         else
-                            _spriteBatch.Draw(backgrounds[j], new Vector2(-800 + (1900 * i) + (600 * j), 800 - (250 * j)), null, Color.White, 0, Vector2.Zero, 8, SpriteEffects.None, 1);
+                            _spriteBatch.Draw(backgrounds[j], new Vector2(-1350 + (1900 * i) + (700 * j), 400 - (100 * j)), null, Color.White, 0, Vector2.Zero, 8, SpriteEffects.None, 1);
                     }
                 }
 
-
-                _spriteBatch.Draw(lightEffect, new Rectangle(-10000, -2500, 20000, 5000), Color.Pink * 0.45f);
+                _spriteBatch.Draw(lightEffect, new Rectangle(-15000, -2500, 30000, 5000), Color.Pink * 0.45f);
                 _spriteBatch.Draw(pixel, new Rectangle(-1000, -400, 10000, 450), Color.Black);
                 _spriteBatch.Draw(blackFader, new Rectangle(-10000, -200, 30000, 420), Color.White);
 
@@ -749,6 +793,7 @@ namespace Grubby_Escape
                 _spriteBatch.Draw(lightTex, new Rectangle(grubby.Hitbox.Center.X - 400, grubby.Hitbox.Center.Y - 400, 800, 800), Color.White * 0.2f);
 
                 dustSystem.Draw(_spriteBatch);
+                rockSystem.Draw(_spriteBatch);
 
                 // Left side
                 for (int i = 0; i < 4; i++)
@@ -791,6 +836,7 @@ namespace Grubby_Escape
                 _spriteBatch.Draw(railBrokenR, new Vector2(6500, 770), Color.White);
                 cart.Draw(_spriteBatch);
                 grubby.Draw(_spriteBatch, true);
+                cartDustSystem.Draw(_spriteBatch);
 
                 // Middle
 
