@@ -367,7 +367,6 @@ namespace Grubby_Escape
             backgrounds.Add(BG1);
             backgrounds.Add(BG2);
             backgrounds.Add(BG3);
-            backgrounds.Add(BG4);
             backgrounds.Add(BG5);
 
         }
@@ -507,6 +506,8 @@ namespace Grubby_Escape
             }
             if (isOnCart)
                 grubby.Position = new Vector2(cart.Position.X + 30, cart.Position.Y - 65);
+            if (mouseState.RightButton == ButtonState.Pressed)
+                camera.Zoom = 0.1f;
 
             Debug.WriteLine(mouseWorldPos);
             if (gameState == GameState.Waiting)
@@ -717,7 +718,10 @@ namespace Grubby_Escape
                 {
                     for (int j = 0; j < backgrounds.Count; j++)
                     {
-                        _spriteBatch.Draw(backgrounds[j], new Vector2(-200 * i + 40 * j, -200 * i + 40 * j), null, Color.White, 0, Vector2.Zero, 5, SpriteEffects.None, 1);
+                        if (i % 2 == 0)
+                            _spriteBatch.Draw(backgrounds[(backgrounds.Count - 1) - j], new Vector2(-200 + (2300 * i) + (800 * j), -100 + 200 * j), null, Color.White, 0, Vector2.Zero, 8, SpriteEffects.None, 1);
+                        else
+                            _spriteBatch.Draw(backgrounds[j], new Vector2(-800 + (1900 * i) + (600 * j), 800 - (250 * j)), null, Color.White, 0, Vector2.Zero, 8, SpriteEffects.None, 1);
                     }
                 }
 
