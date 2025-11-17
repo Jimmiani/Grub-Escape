@@ -370,8 +370,16 @@ namespace Grubby_Escape
 
 
             dotSystemBG = new ParticleSystem(dotTextures, new Rectangle(-500, -500, 6000, 2000), EmitterShape.Rectangle);
-            dotSystemBG.SetDefaults(Color.Pink, true, 0.1f, 1, -10, 10, -10, -15, false, -60, 60, 9, 12, 0.3f, 0.5f, 0.4f, true, true, true, false, 1, false, 1, false, 800);
+            dotSystemBG.SetDefaults(Color.Pink, true, 0.1f, 1, -10, 10, -10, -15, false, -60, 60, 9, 12, 0.2f, 0.3f, 0.4f, true, true, true, false, 1, false, 1, false, 800);
             dotSystemBG.RestoreDefaults();
+
+            dotSystemMG = new ParticleSystem(dotTextures, new Rectangle(-500, -500, 10000, 2500), EmitterShape.Rectangle);
+            dotSystemMG.SetDefaults(Color.Pink, true, 0.1f, 1, -10, 10, -10, -15, false, -60, 60, 9, 12, 0.4f, 0.5f, 0.4f, true, true, true, false, 1, false, 1, false, 800);
+            dotSystemMG.RestoreDefaults();
+
+            dotSystemFG = new ParticleSystem(dotTextures, new Rectangle(-500, -500, 15000, 3000), EmitterShape.Rectangle);
+            dotSystemFG.SetDefaults(Color.Pink, true, 0.1f, 1, -10, 10, -10, -15, false, -60, 60, 9, 12, 0.6f, 0.7f, 0.4f, true, true, true, false, 1, false, 1, false, 800);
+            dotSystemFG.RestoreDefaults();
 
             int size = 50;
             vignetteRect = new Rectangle(vignette.Width * -size / 2, vignette.Height * -size / 2, vignette.Width * size, vignette.Height * size);
@@ -547,6 +555,8 @@ namespace Grubby_Escape
                 rockSystem.Update(gameTime);
                 cartDustSystem.Update(gameTime);
                 dotSystemBG.Update(gameTime);
+                dotSystemMG.Update(gameTime);
+                dotSystemFG.Update(gameTime);
             }
             if (isOnCart)
                 grubby.Position = new Vector2(cart.Position.X + 30, cart.Position.Y - 65);
@@ -584,10 +594,10 @@ namespace Grubby_Escape
                     dustSystem.EmitterBoundary = new Rectangle(315, 780, 230, 20);
                     dustSystem.Spawn(15);
 
-                    rockSystem.SetVelocity(-400, 400, -1000, -1800);
+                    rockSystem.SetVelocity(-400, 400, -1300, -1900);
                     rockSystem.EmitterBoundary = new Rectangle(315, 780, 230, 20);
-                    rockSystem.Spawn(15);
-                    rockSystem.GravityConstant = 3500;
+                    rockSystem.Spawn(20);
+                    rockSystem.GravityConstant = 4500;
 
                     dustSystem.CanSpawn = false;
                     rockSystem.CanSpawn = false;
@@ -708,17 +718,17 @@ namespace Grubby_Escape
 
                 if (mainMusic.Volume > 0)
                 {
-                    float newVolume = 0.5f - (transitionTimer / 2f);
+                    float newVolume = 0.5f - (transitionTimer / 4f);
                     mainMusic.Volume = Math.Clamp(newVolume, 0f, 1f);
                 }
                 if (machineryAtmos.Volume > 0)
                 {
-                    float newVolume = 0.5f - (transitionTimer / 2f);
+                    float newVolume = 0.5f - (transitionTimer / 4f);
                     machineryAtmos.Volume = Math.Clamp(newVolume, 0f, 1f);
                 }
                 if (crystalAtmos.Volume > 0)
                 {
-                    float newVolume = 1f - (transitionTimer / 2f);
+                    float newVolume = 1f - (transitionTimer / 4f);
                     crystalAtmos.Volume = Math.Clamp(newVolume, 0f, 1f);
                 }
 
@@ -738,12 +748,12 @@ namespace Grubby_Escape
 
                     if (mainMusic.Volume < 1)
                     {
-                        float newVolume = transitionTimer / 2f;
+                        float newVolume = transitionTimer / 3f;
                         mainMusic.Volume = Math.Clamp(newVolume, 0f, 1f);
                     }
                     if (crystalAtmos.Volume < 1)
                     {
-                        float newVolume = transitionTimer / 2f;
+                        float newVolume = transitionTimer / 3f;
                         crystalAtmos.Volume = Math.Clamp(newVolume, 0f, 1f);
                     }
 
@@ -801,6 +811,7 @@ namespace Grubby_Escape
                 _spriteBatch.Begin(transformMatrix: camera.Transform);
 
                 crystalSystemMG.Draw(_spriteBatch);
+                dotSystemMG.Draw(_spriteBatch);
 
                 _spriteBatch.Draw(lightTex, new Rectangle(grubby.Hitbox.Center.X - 400, grubby.Hitbox.Center.Y - 400, 800, 800), Color.White * 0.2f);
 
@@ -904,6 +915,7 @@ namespace Grubby_Escape
                 _spriteBatch.Begin(transformMatrix: camera.GetParallaxTransform(2));
 
                 crystalSystemFG.Draw(_spriteBatch);
+                dotSystemFG.Draw(_spriteBatch);
 
                 _spriteBatch.End();
 
