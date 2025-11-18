@@ -136,20 +136,25 @@ namespace Grubby_Escape
             for (int i = 0; i < _particles.Count; i++)
             {
                 _particles[i].Update(gameTime, Fade, FadeIn, FadeOut, FadeInUntil, FadeOutAfter);
+
+                // Color Change
                 if (_particles[i].Color != Color && ColorChange)
                 {
                     _particles[i].Color = Color;
                 }
+                // Grow
                 if (Grow && GrowTime > (_particles[i].InitialTTL / 60) - (_particles[i].TTL / 60))
                 {
                     float t = ((_particles[i].InitialTTL / 60) - (_particles[i].TTL / 60)) / GrowTime;
                     _particles[i].Size = MathHelper.Lerp(0, _particles[i].InitialSize, t);
                 }
+                // Shrink
                 if ((_particles[i].TTL / 60) < ShrinkTime && Shrink)
                 {
                     float t = 1 - (_particles[i].TTL / 60 / ShrinkTime);
                     _particles[i].Size = MathHelper.Lerp(_particles[i].Size, 0, t);
                 }
+                // Gravity
                 if (Gravity)
                 {
                     float vx = _particles[i].Velocity.X;
@@ -157,6 +162,7 @@ namespace Grubby_Escape
 
                     _particles[i].Velocity = new Vector2(vx, vy);
                 }
+                // Remove
                 if (_particles[i].TTL <= 0)
                 {
                     _particles.RemoveAt(i);
