@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Grubby_Escape.Content;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -13,7 +14,10 @@ namespace Grubby_Escape
     {
         Waiting,
         CartFall,
-        Start,
+        CartTooTall,
+        Lumafly,
+        Pickup,
+        FlyAway,
         TowardsBrokenRail,
         Reverse,
         Prepare,
@@ -40,6 +44,7 @@ namespace Grubby_Escape
         Vector2 cameraTarget;
         Random generator;
         ResolutionScaler resolutionScaler;
+        Lumafly lumafly;
 
         // Transition
 
@@ -100,6 +105,11 @@ namespace Grubby_Escape
 
         bool isOnCart;
         bool isDragging;
+        bool isPickedUp;
+        bool isHappy;
+
+        List<Texture2D> lumaflyTextures;
+        float lumaTimer;
 
         // Cart
 
@@ -155,6 +165,9 @@ namespace Grubby_Escape
             grubBounce = new List<Texture2D>();
             grubWave = new List<Texture2D>();
 
+            lumaflyTextures = new List<Texture2D>();
+            lumaTimer = 0;
+
             sadEffect = new List<SoundEffect>();
             alertEffect = new List<SoundEffect>();
             jumpEffect = new List<SoundEffect>();
@@ -162,6 +175,8 @@ namespace Grubby_Escape
 
             isOnCart = false;
             isDragging = false;
+            isPickedUp = false;
+            isHappy = false;
             hasStarted = false;
             hasStopped = false;
             hasFallen = false;
@@ -179,6 +194,7 @@ namespace Grubby_Escape
 
             grubby = new Grub(grubIdle, idleEffect, sadEffect, grubAlert, alertEffect, grubJump, jumpEffect);
             cart = new Cart(cartTexture, wheelTexture, new Vector2(300, -200), startSfx, movingSfx, stopSfx, landSfx, fallSfx);
+            lumafly = new Lumafly(lumaflyTextures, new Vector2(2000, -50));
 
             cameraTarget = new Vector2(600, 540);
 
@@ -488,6 +504,9 @@ namespace Grubby_Escape
             for (int i = 0; i <= 22; i++)
                 grubWave.Add(Content.Load<Texture2D>("Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_" + i.ToString("D3")));
 
+            for (int i = 0; i <= 3; i++)
+                lumaflyTextures.Add(Content.Load<Texture2D>("Grubby Escape/Images/Lumafly 12/Bug_" + i.ToString("D3")));
+
             // --------------------------- Audio -------------------------------
 
             // Grubby
@@ -544,6 +563,7 @@ namespace Grubby_Escape
 
             if (gameState != GameState.Math)
             {
+                lumafly.Update(gameTime);
                 grubby.Update(mouseState, prevMouseState, gameTime);
                 cart.Update(gameTime);
                 camera.Update(gameTime, cameraTarget, cart.Velocity);
@@ -560,15 +580,16 @@ namespace Grubby_Escape
             }
             if (isOnCart)
                 grubby.Position = new Vector2(cart.Position.X + 30, cart.Position.Y - 65);
-            if (mouseState.RightButton == ButtonState.Pressed)
-                camera.Zoom = 0.1f;
+            if (isPickedUp)
+                grubby.Position = new Vector2(lumafly.Hitbox.Center.X - grubby.Hitbox.Width / 2, lumafly.Hitbox.Bottom - 120);
+
+
             if (Math.Abs(cart.Velocity.X) > 0)
             {
                 cartDustSystem.CanSpawn = true;
                 cartDustSystem.EmitterBoundary = new Rectangle(cart.Hitbox.X - 30, cart.Hitbox.Bottom, cart.Hitbox.Width + 30, -10);
             }
 
-            Debug.WriteLine(mouseWorldPos);
             if (gameState == GameState.Waiting)
             {
                 if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
@@ -608,36 +629,66 @@ namespace Grubby_Escape
                     if (cartStartTimer > 1.5f)
                     {
                         grubby.Jump();
-                        gameState = GameState.Start;
+                        gameState = GameState.CartTooTall;
                         cartStartTimer = 0;
                     }
                 }
             }
-            else if (gameState == GameState.Start)
+            else if (gameState == GameState.CartTooTall)
+            {
+                if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
+                {
+                    grubby.Sad();
+                    gameState = GameState.Lumafly;
+                }
+            }
+            else if (gameState == GameState.Lumafly)
             {
                 cameraTarget = new Vector2(cart.Hitbox.Center.X, 0);
 
-                if (!isDragging && grubby.Hitbox.Contains(mouseWorldPos) && mouseState.LeftButton == ButtonState.Pressed && prevMouseState.LeftButton == ButtonState.Released)
+                if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
                 {
-                    isDragging = true;
+                    lumafly.Move(new Vector2(grubby.Hitbox.Center.X - lumafly.Hitbox.Width / 2, grubby.Position.Y - 60), 250);
+                }
+                if (lumafly.Hitbox.X < 900)
+                {
                     grubby.Happy();
+                    if (lumafly.ReachedTarget)
+                    {
+                        gameState = GameState.Pickup;
+                        isPickedUp = true;
+                    }
                 }
-                if (isDragging && mouseState.LeftButton == ButtonState.Pressed)
+            }
+            else if (gameState == GameState.Pickup)
+            {
+                lumaTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                if (lumaTimer > 1.5f)
                 {
-                    grubby.Position = new Vector2(mouseWorldPos.X - grubby.Hitbox.Width / 2, mouseWorldPos.Y - grubby.Hitbox.Height / 2);
+                    if (lumafly.ReachedTarget && lumaTimer > 1.7f)
+                    {
+                        isPickedUp = false;
+                        isOnCart = true;
+                        gameState = GameState.FlyAway;
+                        lumaTimer = 0;
+                    }
+                    lumafly.Move(new Vector2(cart.Position.X + 30, cart.Position.Y - 65 - 60), 300);
+
                 }
-                if (isDragging && mouseState.LeftButton == ButtonState.Released && !grubby.Hitbox.Intersects(cart.Hitbox))
+            }
+            else if (gameState == GameState.FlyAway)
+            {
+                lumaTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                if (lumaTimer > 1)
                 {
-                    isDragging = false;
-                    grubby.Position = new Vector2(0, 630);
-                    grubby.Sad();
+                    lumafly.Move(new Vector2(5000, -600), 550);
                 }
-                else if (isDragging && mouseState.LeftButton == ButtonState.Released && grubby.Hitbox.Intersects(cart.Hitbox))
+                if (lumaTimer > 1.8f)
                 {
-                    isDragging = false;
-                    isOnCart = true;
-                    gameState = GameState.TowardsBrokenRail;
                     grubby.Jump();
+                    gameState = GameState.TowardsBrokenRail;
                 }
             }
             else if (gameState == GameState.TowardsBrokenRail)
@@ -875,6 +926,8 @@ namespace Grubby_Escape
                         _spriteBatch.Draw(bankedTextures[j], new Vector2((3000 + (60 * i)) + (20 * j), (910 + (18 * i)) + (6 * j)), null, Color.White, MathHelper.ToRadians(135), new Vector2(bankedTextures[j].Width / 2, bankedTextures[j].Height / 2), 1, SpriteEffects.FlipHorizontally, 1);
                     }
                 }
+
+                lumafly.Draw(_spriteBatch);
 
                 _spriteBatch.End();
 

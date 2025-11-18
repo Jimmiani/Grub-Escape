@@ -2044,6 +2044,54 @@
 /processorParam:TextureFormat=Color
 /build:Grubby Escape/Images/Lights/white_light.png;Grubby Escape/Images/Lights/white_light
 
+#begin Grubby Escape/Images/Lumafly 12/Bug_000.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Lumafly 12/Bug_000.png;Grubby Escape/Images/Lumafly 12/Bug_000
+
+#begin Grubby Escape/Images/Lumafly 12/Bug_001.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Lumafly 12/Bug_001.png;Grubby Escape/Images/Lumafly 12/Bug_001
+
+#begin Grubby Escape/Images/Lumafly 12/Bug_002.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Lumafly 12/Bug_002.png;Grubby Escape/Images/Lumafly 12/Bug_002
+
+#begin Grubby Escape/Images/Lumafly 12/Bug_003.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Lumafly 12/Bug_003.png;Grubby Escape/Images/Lumafly 12/Bug_003
+
 #begin Grubby Escape/Images/Particles/Crystals/floating_crystals_01.png
 /importer:TextureImporter
 /processor:TextureProcessor

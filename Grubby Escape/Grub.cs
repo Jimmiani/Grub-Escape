@@ -204,10 +204,13 @@ namespace Grubby_Escape
 
         public void Happy()
         {
-            _alertEffect[_generator.Next(0, _alertEffect.Count)].Play();
+            if (grubState != GrubState.Alert)
+            {
+                _alertEffect[_generator.Next(0, _alertEffect.Count)].Play();
 
-            _currentFrame = 0;
-            grubState = GrubState.Alert;
+                _currentFrame = 0;
+                grubState = GrubState.Alert;
+            }
         }
 
         public void Jump()
