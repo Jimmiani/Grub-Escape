@@ -29,7 +29,13 @@ namespace Grubby_Escape
     enum MathState
     {
         TransitionIn,
-        PictorialRepresentation
+        Intro,
+        PicRep,
+        PhysicsRep,
+        WordRep,
+        MathRep,
+        Test,
+        TransitionOut
     }
     public class Game1 : Game
     {
@@ -45,6 +51,7 @@ namespace Grubby_Escape
         Random generator;
         ResolutionScaler resolutionScaler;
         Lumafly lumafly;
+        DrawingCanvas canvas;
 
         // Transition
 
@@ -129,7 +136,7 @@ namespace Grubby_Escape
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            IsMouseVisible = false;
+            IsMouseVisible = true;
         }
 
         protected override void Initialize()
@@ -142,10 +149,11 @@ namespace Grubby_Escape
 
             resolutionScaler = new ResolutionScaler(GraphicsDevice, 1920, 1080);
 
-            gameState = GameState.Waiting;
+            gameState = GameState.Math;
             mathState = MathState.TransitionIn;
             generator = new Random();
 
+            canvas = new DrawingCanvas(GraphicsDevice, resolutionScaler);
             pixel = new Texture2D(GraphicsDevice, 1, 1);
             pixel.SetData(new[] { Color.White });
 
@@ -791,6 +799,11 @@ namespace Grubby_Escape
             }
             else if (gameState == GameState.Math)
             {
+                canvas.Update(gameTime);
+                if (keyboardState.IsKeyDown(Keys.Back))
+                {
+                    canvas.Clear();
+                }
                 if (mathState == MathState.TransitionIn)
                 {
                     transitionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -810,8 +823,12 @@ namespace Grubby_Escape
 
                     if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
                     {
-                        mathState = MathState.PictorialRepresentation;
+                        mathState = MathState.Intro;
                     }
+                }
+                else if (mathState == MathState.Intro)
+                {
+
                 }
             }
 
@@ -983,7 +1000,13 @@ namespace Grubby_Escape
 
             else if (gameState == GameState.Math)
             {
-                GraphicsDevice.Clear(Color.DarkGray);
+                GraphicsDevice.Clear(Color.White);
+
+                _spriteBatch.Begin();
+
+                canvas.Draw(_spriteBatch);
+
+                _spriteBatch.End();
             }
 
 
