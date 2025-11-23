@@ -157,6 +157,16 @@
 /processorParam:Quality=Best
 /build:Grubby Escape/Audio/Sound Effects/Start/spa_heal.wav;Grubby Escape/Audio/Sound Effects/Start/spa_heal
 
+#begin Grubby Escape/Font/OpenSans-Medium.ttf
+/copy:Grubby Escape/Font/OpenSans-Medium.ttf;Grubby Escape/Font/OpenSans-Medium
+
+#begin Grubby Escape/Font/timeFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Grubby Escape/Font/timeFont.spritefont
+
 #begin Grubby Escape/Font/VT323-Regular.ttf
 /copy:Grubby Escape/Font/VT323-Regular.ttf;Grubby Escape/Font/VT323-Regular
 

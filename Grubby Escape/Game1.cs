@@ -52,6 +52,7 @@ namespace Grubby_Escape
         ResolutionScaler resolutionScaler;
         Lumafly lumafly;
         DrawingCanvas canvas;
+        SpriteFont timeFont;
 
         // Math
 
@@ -62,6 +63,8 @@ namespace Grubby_Escape
         List<Concealer> mathRepConcealers;
 
         Texture2D introTex, picRepTex, physicsRepTex, wordRepTex, mathRepTex, testTex;
+        float timer;
+        bool timerHasStarted;
 
         // Transition
 
@@ -166,6 +169,8 @@ namespace Grubby_Escape
             canvas = new DrawingCanvas(GraphicsDevice, resolutionScaler);
             pixel = new Texture2D(GraphicsDevice, 1, 1);
             pixel.SetData(new[] { Color.White });
+            timer = 900;
+            timerHasStarted = false;
 
             smokeTextures = new List<Texture2D>();
             crystalTextures = new List<Texture2D>();
@@ -226,6 +231,26 @@ namespace Grubby_Escape
             introConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(550, 300, 290, 200)));
             introConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(840, 310, 246, 185)));
 
+            picRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(550, 0, 800, 150)));
+            picRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(0, 250, 900, 700)));
+            picRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(1100, 180, 820, 800)));
+
+            physicsRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(550, 0, 800, 150)));
+            physicsRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(150, 200, 550, 700)));
+            physicsRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(1050, 190, 800, 850)));
+
+            wordRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(550, 0, 800, 150)));
+            wordRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(200, 200, 700, 150)));
+            for (int i = 0; i < 8; i++)
+            {
+                wordRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(280, 366 + 61 * i, 620, 40)));
+            }
+            wordRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(1000, 220, 700, 120)));
+            wordRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(1020, 600, 600, 250)));
+            for (int i = 0; i < 4; i++)
+            {
+                wordRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(1020, 366 + 61 * i, 600, 40)));
+            }
 
 
             base.Initialize();
@@ -524,6 +549,7 @@ namespace Grubby_Escape
             mathRepTex = Content.Load<Texture2D>("Grubby Escape/Images/Math Slides/5");
             testTex = Content.Load<Texture2D>("Grubby Escape/Images/Math Slides/6");
 
+            timeFont = Content.Load<SpriteFont>("Grubby Escape/Font/timeFont");
 
             // Cart
 
@@ -846,6 +872,14 @@ namespace Grubby_Escape
                 {
                     canvas.Clear();
                 }
+                if (keyboardState.IsKeyDown(Keys.T))
+                {
+                    hasStarted = true;
+                }
+                if (hasStarted)
+                {
+                    timer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                }
                 if (mathState == MathState.TransitionIn)
                 {
                     transitionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -898,6 +932,54 @@ namespace Grubby_Escape
                     if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
                     {
                         mathState = MathState.PhysicsRep;
+                    }
+                }
+                else if (mathState == MathState.PhysicsRep)
+                {
+                    for (int i = 0; i < physicsRepConcealers.Count; i++)
+                    {
+                        physicsRepConcealers[i].Update(gameTime);
+                        if (physicsRepConcealers[i].Hitbox.Contains(mouseRT) && mouseState.RightButton == ButtonState.Pressed)
+                        {
+                            physicsRepConcealers[i].Remove();
+                        }
+                    }
+
+                    if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
+                    {
+                        mathState = MathState.WordRep;
+                    }
+                }
+                else if (mathState == MathState.WordRep)
+                {
+                    for (int i = 0; i < wordRepConcealers.Count; i++)
+                    {
+                        wordRepConcealers[i].Update(gameTime);
+                        if (wordRepConcealers[i].Hitbox.Contains(mouseRT) && mouseState.RightButton == ButtonState.Pressed)
+                        {
+                            wordRepConcealers[i].Remove();
+                        }
+                    }
+
+                    if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
+                    {
+                        mathState = MathState.MathRep;
+                    }
+                }
+                else if (mathState == MathState.MathRep)
+                {
+                    for (int i = 0; i < mathRepConcealers.Count; i++)
+                    {
+                        mathRepConcealers[i].Update(gameTime);
+                        if (mathRepConcealers[i].Hitbox.Contains(mouseRT) && mouseState.RightButton == ButtonState.Pressed)
+                        {
+                            mathRepConcealers[i].Remove();
+                        }
+                    }
+
+                    if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
+                    {
+                        mathState = MathState.Test;
                     }
                 }
             }
@@ -1072,11 +1154,19 @@ namespace Grubby_Escape
             {
                 GraphicsDevice.Clear(Color.White);
 
+                int totalSeconds = (int)timer;
+                int minutes = totalSeconds / 60;
+                int seconds = totalSeconds % 60;
+
+                string formattedTime = $"{minutes:00}:{seconds:00}";
+                Vector2 timeLocation = new Vector2(1647, 34);
+
                 _spriteBatch.Begin();
 
                 if (mathState == MathState.Intro)
                 {
                     _spriteBatch.Draw(introTex, Vector2.Zero, Color.White);
+                    _spriteBatch.DrawString(timeFont, formattedTime, timeLocation, Color.Black);
                     for (int i = 0; i < introConcealers.Count; i++)
                     {
                         introConcealers[i].Draw(_spriteBatch);
@@ -1085,12 +1175,44 @@ namespace Grubby_Escape
                 else if (mathState == MathState.PicRep)
                 {
                     _spriteBatch.Draw(picRepTex, Vector2.Zero, Color.White);
+                    _spriteBatch.DrawString(timeFont, formattedTime, timeLocation, Color.Black);
                     for (int i = 0; i < picRepConcealers.Count; i++)
                     {
                         picRepConcealers[i].Draw(_spriteBatch);
                     }
                 }
-
+                else if (mathState == MathState.PhysicsRep)
+                {
+                    _spriteBatch.Draw(physicsRepTex, Vector2.Zero, Color.White);
+                    _spriteBatch.DrawString(timeFont, formattedTime, timeLocation, Color.Black);
+                    for (int i = 0; i < physicsRepConcealers.Count; i++)
+                    {
+                        physicsRepConcealers[i].Draw(_spriteBatch);
+                    }
+                }
+                else if (mathState == MathState.WordRep)
+                {
+                    _spriteBatch.Draw(wordRepTex, Vector2.Zero, Color.White);
+                    _spriteBatch.DrawString(timeFont, formattedTime, timeLocation, Color.Black);
+                    for (int i = 0; i < wordRepConcealers.Count; i++)
+                    {
+                        wordRepConcealers[i].Draw(_spriteBatch);
+                    }
+                }
+                else if (mathState == MathState.MathRep)
+                {
+                    _spriteBatch.Draw(mathRepTex, Vector2.Zero, Color.White);
+                    _spriteBatch.DrawString(timeFont, formattedTime, timeLocation, Color.Black);
+                    for (int i = 0; i < mathRepConcealers.Count; i++)
+                    {
+                        mathRepConcealers[i].Draw(_spriteBatch);
+                    }
+                }
+                else if (mathState == MathState.Test)
+                {
+                    _spriteBatch.Draw(testTex, Vector2.Zero, Color.White);
+                    _spriteBatch.DrawString(timeFont, formattedTime, new Vector2(1650, 43), Color.Black);
+                }
                 canvas.Draw(_spriteBatch);
 
                 _spriteBatch.End();

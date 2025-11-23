@@ -27,6 +27,7 @@ namespace Grubby_Escape
         private Vector2 previousMousePosition;
         private KeyboardState previousKeyboardState;
         private const float INTERPOLATION_STEP = 3.0f; // The distance between inserted points (in pixels)
+        private float scale = 5.0f;
 
         // Properties for simple color cycling
         private List<Color> availableColors = new List<Color>
@@ -59,6 +60,16 @@ namespace Grubby_Escape
             if (currentKeyboardState.IsKeyDown(Keys.C) && previousKeyboardState.IsKeyUp(Keys.C))
             {
                 CycleColor();
+            }
+
+            if (currentKeyboardState.IsKeyDown(Keys.OemMinus) && previousKeyboardState.IsKeyUp(Keys.OemMinus))
+            {
+                scale--;
+            }
+
+            if (currentKeyboardState.IsKeyDown(Keys.OemPlus) && previousKeyboardState.IsKeyUp(Keys.OemPlus))
+            {
+                scale++;
             }
 
             // 2. Handle actual drawing with the left mouse button
@@ -126,7 +137,7 @@ namespace Grubby_Escape
                     point.Color,
                     0f,
                     Vector2.Zero,
-                    5f, // Scale factor to make the brush 5x5 pixels wide
+                    scale, // Scale factor to make the brush 5x5 pixels wide
                     SpriteEffects.None,
                     0f
                 );
