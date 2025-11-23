@@ -2174,6 +2174,18 @@
 /processorParam:TextureFormat=Color
 /build:Grubby Escape/Images/Math Slides/6.png;Grubby Escape/Images/Math Slides/6
 
+#begin Grubby Escape/Images/Math Slides/7.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Grubby Escape/Images/Math Slides/7.png;Grubby Escape/Images/Math Slides/7
+
 #begin Grubby Escape/Images/Particles/Crystals/floating_crystals_01.png
 /importer:TextureImporter
 /processor:TextureProcessor

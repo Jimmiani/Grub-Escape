@@ -34,6 +34,7 @@ namespace Grubby_Escape
         PhysicsRep,
         WordRep,
         MathRep,
+        Evaluation,
         Test,
         TransitionOut
     }
@@ -61,8 +62,9 @@ namespace Grubby_Escape
         List<Concealer> physicsRepConcealers;
         List<Concealer> wordRepConcealers;
         List<Concealer> mathRepConcealers;
+        List<Concealer> evalConcealers;
 
-        Texture2D introTex, picRepTex, physicsRepTex, wordRepTex, mathRepTex, testTex;
+        Texture2D introTex, picRepTex, physicsRepTex, wordRepTex, mathRepTex, evalTex, testTex;
         float timer;
         bool timerHasStarted;
 
@@ -157,7 +159,7 @@ namespace Grubby_Escape
             _graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             _graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
-            _graphics.IsFullScreen = true;
+            _graphics.IsFullScreen = false;
             _graphics.ApplyChanges();
 
             resolutionScaler = new ResolutionScaler(GraphicsDevice, 1920, 1080);
@@ -222,6 +224,7 @@ namespace Grubby_Escape
             physicsRepConcealers = new List<Concealer>();
             wordRepConcealers = new List<Concealer>();
             mathRepConcealers = new List<Concealer>();
+            evalConcealers = new List<Concealer>();
 
             introConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(1570, 0, 350, 200)));
             introConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(300, 50, 1250, 150)));
@@ -251,6 +254,31 @@ namespace Grubby_Escape
             {
                 wordRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(1020, 366 + 61 * i, 600, 40)));
             }
+
+            mathRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(1500, 275, 420, 525)));
+            mathRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(100, 0, 500, 120)));
+            for (int i = 0; i < 3; i++)
+            {
+                mathRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(0, 105 + 80 * i, 415, 70)));
+                mathRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(430, 105 + 80 * i, 415, 70)));
+            }
+            mathRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(100, 450, 500, 70)));
+            mathRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(0, 530, 415, 70)));
+            for (int i = 0; i < 2; i++)
+            {
+                mathRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(430, 530 + 80 * i, 415, 70)));
+                mathRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(100, 730 + 100 * i, 500, 80)));
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                mathRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(830, 0 + 120 * i, 500, 120)));
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                mathRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(830, 670 + 90 * i, 500, 92)));
+            }
+            mathRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(1550, 800, 370, 250)));
+
 
 
             base.Initialize();
@@ -285,7 +313,6 @@ namespace Grubby_Escape
                 Color.White,
                 true,
                 0.07f,
-                1,
                 0,
                 0,
                 -30,
@@ -316,7 +343,6 @@ namespace Grubby_Escape
                 Color.White,
                 true,
                 0.1f,
-                1,
                 0,
                 0,
                 -24f,
@@ -347,7 +373,6 @@ namespace Grubby_Escape
                 Color.White,
                 true,
                 0.1f,
-                1,
                 0,
                 0,
                 -18f,
@@ -378,7 +403,6 @@ namespace Grubby_Escape
                 Color.White,
                 true,
                 0.1f,
-                1,
                 0,
                 0,
                 -12f,
@@ -409,7 +433,6 @@ namespace Grubby_Escape
                 Color.White,
                 false,
                 0.01f,
-                1,
                 -12f,
                 12f,
                 700,
@@ -437,27 +460,27 @@ namespace Grubby_Escape
 
             cartDustSystem = new ParticleSystem(dustTextures, new Rectangle(325, -100, 225, 100), EmitterShape.Rectangle);
 
-            cartDustSystem.SetDefaults(Color.White, true, 0.05f, 1, -10, 10, -70, -90, false, -180, 180, 0.8f, 1, 0.6f, 0.7f, 0.1f, true, true, true, false, 1, false, 1, false, 800);
+            cartDustSystem.SetDefaults(Color.White, true, 0.05f, -10, 10, -70, -90, false, -180, 180, 0.8f, 1, 0.6f, 0.7f, 0.1f, true, true, true, false, 1, false, 1, false, 800);
             cartDustSystem.FadeInUntil = 0.1f;
             cartDustSystem.FadeOutAfter = 0.4f;
             cartDustSystem.RestoreDefaults();
 
 
             rockSystem = new ParticleSystem(rockTextures, new Rectangle(315, -100, 230, 20), EmitterShape.Rectangle);
-            rockSystem.SetDefaults(Color.White, false, 0.2f, 1, -320, 320, 1000, 1000, false, -90, 90, 1, 2, 0.8f, 0.7f, 1.3f, false, false, false, true, 0.2f, false, 1, true, 1500);
+            rockSystem.SetDefaults(Color.White, false, 0.2f, -320, 320, 1000, 1000, false, -90, 90, 1, 2, 0.8f, 0.7f, 1.3f, false, false, false, true, 0.2f, false, 1, true, 1500);
             rockSystem.RestoreDefaults();
 
 
             dotSystemBG = new ParticleSystem(dotTextures, new Rectangle(-500, -500, 6000, 2000), EmitterShape.Rectangle);
-            dotSystemBG.SetDefaults(Color.Pink, true, 0.1f, 1, -10, 10, -10, -15, false, -60, 60, 9, 12, 0.2f, 0.3f, 0.4f, true, true, true, false, 1, false, 1, false, 800);
+            dotSystemBG.SetDefaults(Color.Pink, true, 0.1f, -10, 10, -10, -15, false, -60, 60, 9, 12, 0.2f, 0.2f, 0.4f, true, true, true, false, 1, false, 1, false, 800);
             dotSystemBG.RestoreDefaults();
 
             dotSystemMG = new ParticleSystem(dotTextures, new Rectangle(-500, -500, 10000, 2500), EmitterShape.Rectangle);
-            dotSystemMG.SetDefaults(Color.Pink, true, 0.1f, 1, -10, 10, -10, -15, false, -60, 60, 9, 12, 0.4f, 0.5f, 0.4f, true, true, true, false, 1, false, 1, false, 800);
+            dotSystemMG.SetDefaults(Color.Pink, true, 0.1f, -10, 10, -10, -15, false, -60, 60, 9, 12, 0.3f, 0.3f, 0.4f, true, true, true, false, 1, false, 1, false, 800);
             dotSystemMG.RestoreDefaults();
 
             dotSystemFG = new ParticleSystem(dotTextures, new Rectangle(-500, -500, 15000, 3000), EmitterShape.Rectangle);
-            dotSystemFG.SetDefaults(Color.Pink, true, 0.1f, 1, -10, 10, -10, -15, false, -60, 60, 9, 12, 0.6f, 0.7f, 0.4f, true, true, true, false, 1, false, 1, false, 800);
+            dotSystemFG.SetDefaults(Color.Pink, true, 0.1f, -10, 10, -10, -15, false, -60, 60, 9, 12, 0.4f, 0.4f, 0.4f, true, true, true, false, 1, false, 1, false, 800);
             dotSystemFG.RestoreDefaults();
 
             int size = 50;
@@ -547,7 +570,8 @@ namespace Grubby_Escape
             physicsRepTex = Content.Load<Texture2D>("Grubby Escape/Images/Math Slides/3");
             wordRepTex = Content.Load<Texture2D>("Grubby Escape/Images/Math Slides/4");
             mathRepTex = Content.Load<Texture2D>("Grubby Escape/Images/Math Slides/5");
-            testTex = Content.Load<Texture2D>("Grubby Escape/Images/Math Slides/6");
+            evalTex = Content.Load<Texture2D>("Grubby Escape/Images/Math Slides/6");
+            testTex = Content.Load<Texture2D>("Grubby Escape/Images/Math Slides/7");
 
             timeFont = Content.Load<SpriteFont>("Grubby Escape/Font/timeFont");
 
@@ -979,12 +1003,34 @@ namespace Grubby_Escape
 
                     if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
                     {
+                        mathState = MathState.Evaluation;
+                    }
+                }
+                else if (mathState == MathState.Evaluation)
+                {
+                    for (int i = 0; i < evalConcealers.Count; i++)
+                    {
+                        evalConcealers[i].Update(gameTime);
+                        if (evalConcealers[i].Hitbox.Contains(mouseRT) && mouseState.RightButton == ButtonState.Pressed)
+                        {
+                            evalConcealers[i].Remove();
+                        }
+                    }
+
+                    if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
+                    {
                         mathState = MathState.Test;
                     }
                 }
+                else if (mathState == MathState.Test)
+                {
+                    if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
+                    {
+                        
+                    }
+                }
             }
-
-                base.Update(gameTime);
+            base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -1208,10 +1254,19 @@ namespace Grubby_Escape
                         mathRepConcealers[i].Draw(_spriteBatch);
                     }
                 }
+                else if (mathState == MathState.Evaluation)
+                {
+                    _spriteBatch.Draw(evalTex, Vector2.Zero, Color.White);
+                    _spriteBatch.DrawString(timeFont, formattedTime, timeLocation, Color.Black);
+                    for (int i = 0; i < evalConcealers.Count; i++)
+                    {
+                        evalConcealers[i].Draw(_spriteBatch);
+                    }
+                }
                 else if (mathState == MathState.Test)
                 {
                     _spriteBatch.Draw(testTex, Vector2.Zero, Color.White);
-                    _spriteBatch.DrawString(timeFont, formattedTime, new Vector2(1650, 43), Color.Black);
+                    _spriteBatch.DrawString(timeFont, formattedTime, timeLocation, Color.Black);
                 }
                 canvas.Draw(_spriteBatch);
 

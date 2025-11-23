@@ -66,7 +66,6 @@ namespace Grubby_Escape
         private Color _defaultColor = Color.White;
         private bool _defaultCanSpawn = true;
         private float _defaultSpawnRate = 1.0f;
-        private int _defaultSpawnAmount = 1;
         private float _defaultMinYVelocity = -1f;
         private float _defaultMaxYVelocity = 1f;
         private float _defaultMinXVelocity = -1f;
@@ -260,12 +259,11 @@ namespace Grubby_Escape
             FadeIn = fadeIn;
             FadeOut = fadeOut;
         }
-        public void SetDefaults(Color color, bool canSpawn, float spawnRate, int spawnAmount, float minXVel, float maxXVel, float minYVel, float maxYVel, bool highVelocityMode, float minAngVel, float maxAngVel, float minTTL, float maxTTL, float minSize, float maxSize, float maxOpacity, bool fade, bool fadeIn, bool fadeOut, bool shrink, float shrinkTime, bool grow, float growTime, bool gravity, float gravityConstant)
+        public void SetDefaults(Color color, bool canSpawn, float spawnRate, float minXVel, float maxXVel, float minYVel, float maxYVel, bool highVelocityMode, float minAngVel, float maxAngVel, float minTTL, float maxTTL, float minSize, float maxSize, float maxOpacity, bool fade, bool fadeIn, bool fadeOut, bool shrink, float shrinkTime, bool grow, float growTime, bool gravity, float gravityConstant)
         {
             _defaultColor = color;
             _defaultCanSpawn = canSpawn;
             _defaultSpawnRate = spawnRate;
-            _defaultSpawnAmount = spawnAmount;
             _defaultMinYVelocity = minYVel;
             _defaultMaxYVelocity = maxYVel;
             _defaultMinXVelocity = minXVel;
@@ -299,7 +297,6 @@ namespace Grubby_Escape
             Color = _defaultColor;
             CanSpawn = _defaultCanSpawn;
             SpawnRate = _defaultSpawnRate;
-            SpawnAmount = _defaultSpawnAmount;
             MinYVelocity = _defaultMinYVelocity;
             MaxYVelocity = _defaultMaxYVelocity;
             MinXVelocity = _defaultMinXVelocity;
