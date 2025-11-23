@@ -53,6 +53,16 @@ namespace Grubby_Escape
         Lumafly lumafly;
         DrawingCanvas canvas;
 
+        // Math
+
+        List<Concealer> introConcealers;
+        List<Concealer> picRepConcealers;
+        List<Concealer> physicsRepConcealers;
+        List<Concealer> wordRepConcealers;
+        List<Concealer> mathRepConcealers;
+
+        Texture2D introTex, picRepTex, physicsRepTex, wordRepTex, mathRepTex, testTex;
+
         // Transition
 
         float transitionTimer;
@@ -197,6 +207,26 @@ namespace Grubby_Escape
 
             bankedTextures = new List<Texture2D>();
             backgrounds = new List<Texture2D>();
+
+
+
+            // Concealers
+
+            introConcealers = new List<Concealer>();
+            picRepConcealers = new List<Concealer>();
+            physicsRepConcealers = new List<Concealer>();
+            wordRepConcealers = new List<Concealer>();
+            mathRepConcealers = new List<Concealer>();
+
+            introConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(1570, 0, 350, 200)));
+            introConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(300, 50, 1250, 150)));
+            introConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(670, 620, 550, 370)));
+            introConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(1085, 270, 205, 130)));
+            introConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(1080, 470, 300, 130)));
+            introConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(550, 300, 290, 200)));
+            introConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(840, 310, 246, 185)));
+
+
 
             base.Initialize();
 
@@ -438,6 +468,7 @@ namespace Grubby_Escape
             backgrounds.Add(BG3);
             backgrounds.Add(BG5);
 
+           
         }
 
         protected override void LoadContent()
@@ -483,6 +514,16 @@ namespace Grubby_Escape
             lightTex = Content.Load<Texture2D>("Grubby Escape/Images/Lights/white_light");
             lightEffect = Content.Load<Texture2D>("Grubby Escape/Images/Lights/light_effect_v02");
             bankedCurve = Content.Load<Texture2D>("Grubby Escape/Images/Rails/banked_curve");
+
+            // Math Textures
+
+            introTex = Content.Load<Texture2D>("Grubby Escape/Images/Math Slides/1");
+            picRepTex = Content.Load<Texture2D>("Grubby Escape/Images/Math Slides/2");
+            physicsRepTex = Content.Load<Texture2D>("Grubby Escape/Images/Math Slides/3");
+            wordRepTex = Content.Load<Texture2D>("Grubby Escape/Images/Math Slides/4");
+            mathRepTex = Content.Load<Texture2D>("Grubby Escape/Images/Math Slides/5");
+            testTex = Content.Load<Texture2D>("Grubby Escape/Images/Math Slides/6");
+
 
             // Cart
 
@@ -800,6 +841,7 @@ namespace Grubby_Escape
             else if (gameState == GameState.Math)
             {
                 canvas.Update(gameTime);
+                Debug.WriteLine(mouseRT);
                 if (keyboardState.IsKeyDown(Keys.Back))
                 {
                     canvas.Clear();
@@ -821,14 +863,42 @@ namespace Grubby_Escape
                         crystalAtmos.Volume = Math.Clamp(newVolume, 0f, 1f);
                     }
 
-                    if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
+                    if (mainMusic.Volume == 1 && crystalAtmos.Volume == 1)
                     {
                         mathState = MathState.Intro;
                     }
                 }
                 else if (mathState == MathState.Intro)
                 {
+                    for (int i = 0; i < introConcealers.Count; i++)
+                    {
+                        introConcealers[i].Update(gameTime);
+                        if (introConcealers[i].Hitbox.Contains(mouseRT) && mouseState.RightButton == ButtonState.Pressed)
+                        {
+                            introConcealers[i].Remove();
+                        }
+                    }
 
+                    if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
+                    {
+                        mathState = MathState.PicRep;
+                    }
+                }
+                else if (mathState == MathState.PicRep)
+                {
+                    for (int i = 0; i < picRepConcealers.Count; i++)
+                    {
+                        picRepConcealers[i].Update(gameTime);
+                        if (picRepConcealers[i].Hitbox.Contains(mouseRT) && mouseState.RightButton == ButtonState.Pressed)
+                        {
+                            picRepConcealers[i].Remove();
+                        }
+                    }
+
+                    if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
+                    {
+                        mathState = MathState.PhysicsRep;
+                    }
                 }
             }
 
@@ -1003,6 +1073,23 @@ namespace Grubby_Escape
                 GraphicsDevice.Clear(Color.White);
 
                 _spriteBatch.Begin();
+
+                if (mathState == MathState.Intro)
+                {
+                    _spriteBatch.Draw(introTex, Vector2.Zero, Color.White);
+                    for (int i = 0; i < introConcealers.Count; i++)
+                    {
+                        introConcealers[i].Draw(_spriteBatch);
+                    }
+                }
+                else if (mathState == MathState.PicRep)
+                {
+                    _spriteBatch.Draw(picRepTex, Vector2.Zero, Color.White);
+                    for (int i = 0; i < picRepConcealers.Count; i++)
+                    {
+                        picRepConcealers[i].Draw(_spriteBatch);
+                    }
+                }
 
                 canvas.Draw(_spriteBatch);
 

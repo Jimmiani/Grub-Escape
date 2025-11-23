@@ -25,17 +25,13 @@ namespace Grubby_Escape
         // Fields for smooth drawing interpolation and input debouncing
         private MouseState previousMouseState;
         private Vector2 previousMousePosition;
+        private KeyboardState previousKeyboardState;
         private const float INTERPOLATION_STEP = 3.0f; // The distance between inserted points (in pixels)
 
         // Properties for simple color cycling
         private List<Color> availableColors = new List<Color>
         {
             Color.Red,
-            Color.Orange,
-            Color.Yellow,
-            Color.Green,
-            Color.Blue,
-            Color.Purple,
             Color.Black
         };
         private int colorIndex = 0;
@@ -54,13 +50,13 @@ namespace Grubby_Escape
         }
         public void Update(GameTime gameTime)
         {
+            KeyboardState currentKeyboardState = Keyboard.GetState();
             MouseState currentMouseState = Mouse.GetState();
             Vector2 currentMousePosition = _resolutionScaler.GetMouseWorldPosition();
 
             // 1. Check for color change (Right-Click Debounce)
             // Only cycle color on the frame the button is pressed down (not every frame it is held)
-            if (currentMouseState.RightButton == ButtonState.Pressed &&
-                previousMouseState.RightButton == ButtonState.Released)
+            if (currentKeyboardState.IsKeyDown(Keys.C) && previousKeyboardState.IsKeyUp(Keys.C))
             {
                 CycleColor();
             }
@@ -104,6 +100,7 @@ namespace Grubby_Escape
             // 3. Store current state for the next frame's comparison
             previousMouseState = currentMouseState;
             previousMousePosition = currentMousePosition;
+            previousKeyboardState = currentKeyboardState;
         }
 
         private void AddDrawnPoint(Vector2 position)
