@@ -38,6 +38,17 @@ namespace Grubby_Escape
         Test,
         TransitionOut
     }
+
+    enum PinState
+    {
+        Waiting,
+        Approaching,
+        DiagonalTowards,
+        Circle,
+        DiagonalAway,
+        Leaving,
+        Stopped
+    }
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
@@ -47,6 +58,7 @@ namespace Grubby_Escape
         KeyboardState keyboardState, prevKeyboardState;
         GameState gameState;
         MathState mathState;
+        PinState pinState;
         Camera2D camera;
         Vector2 cameraTarget;
         Random generator;
@@ -67,6 +79,9 @@ namespace Grubby_Escape
         Texture2D introTex, picRepTex, physicsRepTex, wordRepTex, mathRepTex, evalTex, testTex;
         float timer;
         bool timerHasStarted;
+        Texture2D grubPinTex;
+        Vector2 grubPinPos, grubPinVel, circCenter;
+        float circRadius, circAngle, circSpeed;
 
         // Transition
 
@@ -139,6 +154,7 @@ namespace Grubby_Escape
         Texture2D cartTexture;
         Texture2D wheelTexture;
         SoundEffect startSfx, movingSfx, stopSfx, landSfx, fallSfx;
+        SoundEffectInstance movingSfxInstance;
         float cartStartTimer, cartStopTimer;
         bool hasStarted, hasStopped, hasFallen;
 
@@ -159,13 +175,22 @@ namespace Grubby_Escape
             _graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             _graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
-            _graphics.IsFullScreen = false;
+            _graphics.IsFullScreen = true;
             _graphics.ApplyChanges();
 
             resolutionScaler = new ResolutionScaler(GraphicsDevice, 1920, 1080);
 
             gameState = GameState.Math;
             mathState = MathState.TransitionIn;
+            pinState = PinState.Waiting;
+
+            grubPinPos = new Vector2(130, 233);
+            grubPinVel = Vector2.Zero;
+            circCenter = new Vector2(938, 740);
+            circRadius = 110;
+            circAngle = MathHelper.ToRadians(326);
+            circSpeed = 3;
+
             generator = new Random();
 
             canvas = new DrawingCanvas(GraphicsDevice, resolutionScaler);
@@ -266,7 +291,7 @@ namespace Grubby_Escape
             mathRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(0, 530, 415, 70)));
             for (int i = 0; i < 2; i++)
             {
-                mathRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(430, 530 + 80 * i, 415, 70)));
+                mathRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(430, 525 + 80 * i, 415, 70)));
                 mathRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(100, 730 + 100 * i, 500, 80)));
             }
             for (int i = 0; i < 5; i++)
@@ -278,6 +303,14 @@ namespace Grubby_Escape
                 mathRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(830, 670 + 90 * i, 500, 92)));
             }
             mathRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(1550, 800, 370, 250)));
+
+            evalConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(550, 0, 800, 130)));
+            for (int i = 0; i < 3; i++)
+            {
+                evalConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(70 + 600 * i, 350, 600, 100)));
+                evalConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(70 + 600 * i, 440, 600, 100)));
+                evalConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(70 + 600 * i, 540, 600, 300)));
+            }
 
 
 
@@ -304,6 +337,10 @@ namespace Grubby_Escape
             crystalAtmos.Volume = 1;
             crystalAtmos.IsLooped = true;
             crystalAtmos.Play();
+
+            actionMusic.Volume = 0;
+            actionMusic.IsLooped = true;
+            actionMusic.Play();
 
             // Particles
 
@@ -572,6 +609,7 @@ namespace Grubby_Escape
             mathRepTex = Content.Load<Texture2D>("Grubby Escape/Images/Math Slides/5");
             evalTex = Content.Load<Texture2D>("Grubby Escape/Images/Math Slides/6");
             testTex = Content.Load<Texture2D>("Grubby Escape/Images/Math Slides/7");
+            grubPinTex = Content.Load<Texture2D>("Grubby Escape/Images/Grubs/Grub Pin/grubby_location");
 
             timeFont = Content.Load<SpriteFont>("Grubby Escape/Font/timeFont");
 
@@ -622,6 +660,7 @@ namespace Grubby_Escape
             // Cart
 
             movingSfx = Content.Load<SoundEffect>("Grubby Escape/Audio/Sound Effects/Rails/mines_conveyor_loop");
+            movingSfxInstance = movingSfx.CreateInstance();
             startSfx = Content.Load<SoundEffect>("Grubby Escape/Audio/Sound Effects/Rails/lift_activate");
             stopSfx = Content.Load<SoundEffect>("Grubby Escape/Audio/Sound Effects/Rails/lift_arrive");
             landSfx = Content.Load<SoundEffect>("Grubby Escape/Audio/Sound Effects/Rails/false_knight_land_1st_time");
@@ -896,9 +935,13 @@ namespace Grubby_Escape
                 {
                     canvas.Clear();
                 }
-                if (keyboardState.IsKeyDown(Keys.T))
+                if (keyboardState.IsKeyDown(Keys.T) && hasStarted == false)
                 {
                     hasStarted = true;
+                }
+                else if (keyboardState.IsKeyDown(Keys.T) && hasStarted == true)
+                {
+                    hasStarted = false;
                 }
                 if (hasStarted)
                 {
@@ -924,6 +967,7 @@ namespace Grubby_Escape
                     if (mainMusic.Volume == 1 && crystalAtmos.Volume == 1)
                     {
                         mathState = MathState.Intro;
+                        transitionTimer = 0;
                     }
                 }
                 else if (mathState == MathState.Intro)
@@ -1024,10 +1068,74 @@ namespace Grubby_Escape
                 }
                 else if (mathState == MathState.Test)
                 {
-                    if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
+                    transitionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    if (actionMusic.Volume < 1)
                     {
-                        
+                        float newVolume = transitionTimer / 3;
+                        actionMusic.Volume = Math.Clamp(newVolume, 0f, 1f);
                     }
+                    grubPinVel = Vector2.Zero;
+                    if (pinState == PinState.Waiting)
+                    {
+                        grubPinVel = Vector2.Zero;
+                        if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
+                        {
+                            pinState = PinState.Approaching;
+                            movingSfxInstance.IsLooped = true;
+                            movingSfxInstance.Play();
+                        }
+                    }
+                    else if (pinState == PinState.Approaching)
+                    {
+                        grubPinVel = new Vector2(300, 0);
+                        if (grubPinPos.X > 523)
+                        {
+                            pinState = PinState.DiagonalTowards;
+                        }
+                    }
+                    else if (pinState == PinState.DiagonalTowards)
+                    {
+                        grubPinVel = new Vector2(250, 222);
+                        if (grubPinPos.Y > 670)
+                        {
+                            pinState = PinState.Circle;
+                        }
+                    }
+                    else if (pinState == PinState.Circle)
+                    {
+                        circAngle += circSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                        float x = circCenter.X + circRadius * (float)Math.Cos(circAngle);
+                        float y = circCenter.Y + circRadius * (float)Math.Sin(circAngle);
+
+                        grubPinPos = new Vector2(x, y);
+
+                        if (grubPinPos.Y < 650)
+                        {
+                            pinState = PinState.DiagonalAway;
+                        }
+                    }
+                    else if (pinState == PinState.DiagonalAway)
+                    {
+                        grubPinVel = new Vector2(210, -222);
+                        if (grubPinPos.Y < 233)
+                        {
+                            pinState = PinState.Leaving;
+                        }
+                    }
+                    else if (pinState == PinState.Leaving)
+                    {
+                        grubPinVel = new Vector2(300, 0);
+
+                        if (grubPinPos.X > 1730)
+                        {
+                            pinState = PinState.Stopped;
+                            movingSfxInstance.Stop();
+                            jumpEffect[1].Play();
+                        }
+                    }
+
+                    grubPinPos += grubPinVel * (float)gameTime.ElapsedGameTime.TotalSeconds;
                 }
             }
             base.Update(gameTime);
@@ -1266,6 +1374,7 @@ namespace Grubby_Escape
                 else if (mathState == MathState.Test)
                 {
                     _spriteBatch.Draw(testTex, Vector2.Zero, Color.White);
+                    _spriteBatch.Draw(grubPinTex, grubPinPos, Color.White);
                     _spriteBatch.DrawString(timeFont, formattedTime, timeLocation, Color.Black);
                 }
                 canvas.Draw(_spriteBatch);
