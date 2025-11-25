@@ -180,7 +180,7 @@ namespace Grubby_Escape
 
             resolutionScaler = new ResolutionScaler(GraphicsDevice, 1920, 1080);
 
-            gameState = GameState.Math;
+            gameState = GameState.Waiting;
             mathState = MathState.TransitionIn;
             pinState = PinState.Waiting;
 
