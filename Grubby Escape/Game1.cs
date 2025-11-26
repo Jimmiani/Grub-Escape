@@ -175,12 +175,12 @@ namespace Grubby_Escape
             _graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             _graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
-            _graphics.IsFullScreen = true;
+            _graphics.IsFullScreen = false;
             _graphics.ApplyChanges();
 
             resolutionScaler = new ResolutionScaler(GraphicsDevice, 1920, 1080);
 
-            gameState = GameState.Waiting;
+            gameState = GameState.Math;
             mathState = MathState.TransitionIn;
             pinState = PinState.Waiting;
 
@@ -261,11 +261,18 @@ namespace Grubby_Escape
 
             picRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(550, 0, 800, 150)));
             picRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(0, 250, 900, 700)));
+            for (int i = 0; i < 4; i++)
+            {
+                picRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(130, 450 + 110 * i, 330, 75)));
+                picRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(490, 450 + 110 * i, 330, 75)));
+            }
             picRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(1100, 180, 820, 800)));
+            picRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(1650, 180, 250, 200)));
 
             physicsRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(550, 0, 800, 150)));
             physicsRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(150, 200, 550, 700)));
             physicsRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(1050, 190, 800, 850)));
+            physicsRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(1180, 480, 120, 100)));
 
             wordRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(550, 0, 800, 150)));
             wordRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(200, 200, 700, 150)));
@@ -330,9 +337,9 @@ namespace Grubby_Escape
             mainMusic.IsLooped = true;
             mainMusic.Play();
 
-            machineryAtmos.Volume = 0.5f;
-            machineryAtmos.IsLooped = true;
-            machineryAtmos.Play();
+            bassMusic.Volume = 0;
+            bassMusic.IsLooped = true;
+            bassMusic.Play();
 
             crystalAtmos.Volume = 1;
             crystalAtmos.IsLooped = true;
@@ -823,7 +830,7 @@ namespace Grubby_Escape
                 {
                     lumafly.Move(new Vector2(5000, -600), 550);
                 }
-                if (lumaTimer > 1.8f)
+                if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
                 {
                     grubby.Jump();
                     gameState = GameState.TowardsBrokenRail;
@@ -910,11 +917,6 @@ namespace Grubby_Escape
                     float newVolume = 0.5f - (transitionTimer / 4f);
                     mainMusic.Volume = Math.Clamp(newVolume, 0f, 1f);
                 }
-                if (machineryAtmos.Volume > 0)
-                {
-                    float newVolume = 0.5f - (transitionTimer / 4f);
-                    machineryAtmos.Volume = Math.Clamp(newVolume, 0f, 1f);
-                }
                 if (crystalAtmos.Volume > 0)
                 {
                     float newVolume = 1f - (transitionTimer / 4f);
@@ -953,18 +955,23 @@ namespace Grubby_Escape
 
                     transitionColor = Color.Black * (1 - transitionTimer / 2);
 
-                    if (mainMusic.Volume < 1)
+                    if (mainMusic.Volume < 0.7f)
                     {
                         float newVolume = transitionTimer / 3f;
-                        mainMusic.Volume = Math.Clamp(newVolume, 0f, 1f);
+                        mainMusic.Volume = Math.Clamp(newVolume, 0f, 0.7f);
                     }
-                    if (crystalAtmos.Volume < 1)
+                    if (crystalAtmos.Volume < 0.7f)
                     {
                         float newVolume = transitionTimer / 3f;
-                        crystalAtmos.Volume = Math.Clamp(newVolume, 0f, 1f);
+                        crystalAtmos.Volume = Math.Clamp(newVolume, 0f, 0.7f);
+                    }
+                    if (bassMusic.Volume < 0.7f)
+                    {
+                        float newVolume = transitionTimer / 3f;
+                        bassMusic.Volume = Math.Clamp(newVolume, 0f, 0.7f);
                     }
 
-                    if (mainMusic.Volume == 1 && crystalAtmos.Volume == 1)
+                    if (mainMusic.Volume >= 0.7f && crystalAtmos.Volume >= 0.7f)
                     {
                         mathState = MathState.Intro;
                         transitionTimer = 0;
@@ -1069,10 +1076,17 @@ namespace Grubby_Escape
                 else if (mathState == MathState.Test)
                 {
                     transitionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    if (actionMusic.Volume < 1)
+                    if (actionMusic.Volume < 0.5f)
                     {
                         float newVolume = transitionTimer / 3;
-                        actionMusic.Volume = Math.Clamp(newVolume, 0f, 1f);
+                        actionMusic.Volume = Math.Clamp(newVolume, 0f, 0.5f);
+                    }
+                    if (crystalAtmos.Volume > 0.5f)
+                    {
+                        float newVolume = transitionTimer / 3;
+                        bassMusic.Volume = Math.Clamp(1 - newVolume, 0.5f, 1);
+                        mainMusic.Volume = Math.Clamp(1 - newVolume, 0.5f, 1);
+                        crystalAtmos.Volume = Math.Clamp(1 - newVolume, 0.5f, 1);
                     }
                     grubPinVel = Vector2.Zero;
                     if (pinState == PinState.Waiting)
