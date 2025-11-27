@@ -26,8 +26,8 @@ namespace Grubby_Escape
         private MouseState previousMouseState;
         private Vector2 previousMousePosition;
         private KeyboardState previousKeyboardState;
-        private const float INTERPOLATION_STEP = 3.0f; // The distance between inserted points (in pixels)
-        private float scale = 5.0f;
+        private const float INTERPOLATION_STEP = 2.0f; // The distance between inserted points (in pixels)
+        private float scale = 4.0f;
 
         // Properties for simple color cycling
         private List<Color> availableColors = new List<Color>

@@ -273,6 +273,11 @@ namespace Grubby_Escape
             physicsRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(150, 200, 550, 700)));
             physicsRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(1050, 190, 800, 850)));
             physicsRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(1180, 480, 120, 100)));
+            physicsRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(390, 780, 130, 40)));
+            physicsRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(486, 680, 40, 50)));
+            physicsRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(555, 360, 45, 50)));
+            physicsRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(390, 240, 130, 60)));
+            physicsRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(320, 370, 40, 35)));
 
             wordRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(550, 0, 800, 150)));
             wordRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(200, 200, 700, 150)));
@@ -793,7 +798,7 @@ namespace Grubby_Escape
 
                 if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
                 {
-                    lumafly.Move(new Vector2(grubby.Hitbox.Center.X - lumafly.Hitbox.Width / 2, grubby.Position.Y - 60), 250);
+                    lumafly.Move(new Vector2(grubby.Hitbox.Center.X - lumafly.Hitbox.Width / 2, grubby.Position.Y - 60), 140);
                 }
                 if (lumafly.Hitbox.X < 900)
                 {
@@ -826,14 +831,19 @@ namespace Grubby_Escape
             {
                 lumaTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+                if (lumaTimer > 1.5f && !isHappy)
+                {
+                    grubby.Jump();
+                    isHappy = true;
+                }
                 if (lumaTimer > 1)
                 {
                     lumafly.Move(new Vector2(5000, -600), 550);
                 }
                 if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
                 {
-                    grubby.Jump();
                     gameState = GameState.TowardsBrokenRail;
+                    isHappy = false;
                 }
             }
             else if (gameState == GameState.TowardsBrokenRail)
