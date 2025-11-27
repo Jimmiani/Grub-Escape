@@ -191,6 +191,7 @@ namespace Grubby_Escape
         public Vector2 Position
         {
             get { return _position; }
+            set { _position = value; }
         }
     }
 }

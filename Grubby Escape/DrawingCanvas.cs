@@ -33,6 +33,7 @@ namespace Grubby_Escape
         private List<Color> availableColors = new List<Color>
         {
             Color.Red,
+            Color.Blue,
             Color.Black
         };
         private int colorIndex = 0;

@@ -23,7 +23,8 @@ namespace Grubby_Escape
         Prepare,
         TransitionOut,
         Math,
-        TransitionIn
+        TransitionIn,
+        Burrow
     }
 
     enum MathState
@@ -132,6 +133,7 @@ namespace Grubby_Escape
         List<Texture2D> grubIdle;
         List<Texture2D> grubAlert;
         List<Texture2D> grubJump;
+        List<Texture2D> grubFreed;
         List<Texture2D> grubBounce;
         List<Texture2D> grubWave;
 
@@ -175,7 +177,7 @@ namespace Grubby_Escape
             _graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             _graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
-            _graphics.IsFullScreen = false;
+            _graphics.IsFullScreen = true;
             _graphics.ApplyChanges();
 
             resolutionScaler = new ResolutionScaler(GraphicsDevice, 1920, 1080);
@@ -214,6 +216,7 @@ namespace Grubby_Escape
             grubJump = new List<Texture2D>();
             grubBounce = new List<Texture2D>();
             grubWave = new List<Texture2D>();
+            grubFreed = new List<Texture2D>();
 
             lumaflyTextures = new List<Texture2D>();
             lumaTimer = 0;
@@ -328,7 +331,7 @@ namespace Grubby_Escape
 
             base.Initialize();
 
-            grubby = new Grub(grubIdle, idleEffect, sadEffect, grubAlert, alertEffect, grubJump, jumpEffect);
+            grubby = new Grub(grubIdle, idleEffect, sadEffect, grubAlert, alertEffect, grubJump, jumpEffect, grubFreed);
             cart = new Cart(cartTexture, wheelTexture, new Vector2(300, -200), startSfx, movingSfx, stopSfx, landSfx, fallSfx);
             lumafly = new Lumafly(lumaflyTextures, new Vector2(2000, -50));
 
@@ -336,7 +339,7 @@ namespace Grubby_Escape
 
             grubby.Position = new Vector2(0, 630);
 
-            camera = new Camera2D(GraphicsDevice.Viewport, new Rectangle(-359, 0, 10000, 1080), cameraTarget, 1920, 1080);
+            camera = new Camera2D(GraphicsDevice.Viewport, new Rectangle(-359, 0, 12000, 1080), cameraTarget, 1920, 1080);
 
             mainMusic.Volume = 0.5f;
             mainMusic.IsLooped = true;
@@ -652,6 +655,8 @@ namespace Grubby_Escape
                 grubBounce.Add(Content.Load<Texture2D>("Grubby Escape/Images/Grubs/Home Idle 12/Home Bounce_" + i.ToString("D3")));
             for (int i = 0; i <= 22; i++)
                 grubWave.Add(Content.Load<Texture2D>("Grubby Escape/Images/Grubs/Home Wave 12/Home Wave_" + i.ToString("D3")));
+            for (int i = 0; i <= 18; i++)
+                grubFreed.Add(Content.Load<Texture2D>("Grubby Escape/Images/Grubs/Freed 10/Freed_" + i.ToString("D3")));
 
             for (int i = 0; i <= 3; i++)
                 lumaflyTextures.Add(Content.Load<Texture2D>("Grubby Escape/Images/Lumafly 12/Bug_" + i.ToString("D3")));
@@ -733,6 +738,7 @@ namespace Grubby_Escape
             if (isPickedUp)
                 grubby.Position = new Vector2(lumafly.Hitbox.Center.X - grubby.Hitbox.Width / 2, lumafly.Hitbox.Bottom - 120);
 
+            Debug.WriteLine(mouseWorldPos);
 
             if (Math.Abs(cart.Velocity.X) > 0)
             {
@@ -1158,9 +1164,85 @@ namespace Grubby_Escape
                             jumpEffect[1].Play();
                         }
                     }
-
+                    else if (pinState == PinState.Stopped)
+                    {
+                        if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
+                        {
+                            transitionTimer = 0;
+                            mathState = MathState.TransitionOut;
+                            transitionSfx.Play();
+                        }
+                    }
                     grubPinPos += grubPinVel * (float)gameTime.ElapsedGameTime.TotalSeconds;
                 }
+                else if (mathState == MathState.TransitionOut)
+                {
+                    transitionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                    transitionColor = Color.Black * (transitionTimer / 2);
+
+                    if (mainMusic.Volume > 0)
+                    {
+                        float newVolume = 0.5f - (transitionTimer / 4f);
+                        mainMusic.Volume = Math.Clamp(newVolume, 0f, 1f);
+                    }
+                    if (crystalAtmos.Volume > 0)
+                    {
+                        float newVolume = 0.5f - (transitionTimer / 4f);
+                        crystalAtmos.Volume = Math.Clamp(newVolume, 0f, 1f);
+                    }
+                    if (bassMusic.Volume > 0)
+                    {
+                        float newVolume = 0.5f - (transitionTimer / 4f);
+                        bassMusic.Volume = Math.Clamp(newVolume, 0f, 1f);
+                    }
+                    if (actionMusic.Volume > 0)
+                    {
+                        float newVolume = 0.5f - (transitionTimer / 4f);
+                        actionMusic.Volume = Math.Clamp(newVolume, 0f, 1f);
+                    }
+
+                    if (transitionTimer > 5)
+                    {
+                        gameState = GameState.TransitionIn;
+                        transitionTimer = 0;
+
+                        isOnCart = false;
+                        grubby.Position = new Vector2(9000, 630);
+                        grubby.CurrentState = GrubState.Alert;
+                        cameraTarget = grubby.Position + new Vector2(300, 0);
+                        cart.Position = new Vector2(8600, 600);
+                        canvas.Clear();
+                    }
+                }
+            }
+            else if (gameState == GameState.TransitionIn)
+            {
+                transitionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                transitionColor = Color.Black * (1 - transitionTimer / 2);
+
+                if (mainMusic.Volume < 0.7f)
+                {
+                    float newVolume = transitionTimer / 3f;
+                    mainMusic.Volume = Math.Clamp(newVolume, 0f, 0.7f);
+                }
+                if (crystalAtmos.Volume < 0.7f)
+                {
+                    float newVolume = transitionTimer / 3f;
+                    crystalAtmos.Volume = Math.Clamp(newVolume, 0f, 0.7f);
+                }
+
+                if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
+                {
+                    gameState = GameState.Burrow;
+
+                    grubby.Burrow();
+                }
+            }
+            else if (gameState == GameState.Burrow)
+            {
+
             }
             base.Update(gameTime);
         }
@@ -1188,7 +1270,8 @@ namespace Grubby_Escape
                     }
                 }
 
-                _spriteBatch.Draw(lightEffect, new Rectangle(-15000, -2500, 30000, 5000), Color.Pink * 0.45f);
+                _spriteBatch.Draw(lightEffect, new Rectangle(-13000, -2500, 30000, 5000), Color.Pink * 0.45f);
+
                 _spriteBatch.Draw(pixel, new Rectangle(-1000, -400, 10000, 450), Color.Black);
                 _spriteBatch.Draw(blackFader, new Rectangle(-10000, -200, 30000, 420), Color.White);
 
@@ -1241,22 +1324,23 @@ namespace Grubby_Escape
 
                 // Right side
 
+                for (int i = 0; i < 4; i++)
+                {
+                    _spriteBatch.Draw(woodFloor, new Vector2(6750, 940 + (290 * i)), null, Color.White, MathHelper.ToRadians(270), new Vector2(woodFloor.Width / 2, woodFloor.Height / 2), 1, SpriteEffects.None, 0);
+                    _spriteBatch.Draw(woodFloor, new Vector2(10260, 0 + (290 * i)), null, Color.White, MathHelper.ToRadians(270), new Vector2(woodFloor.Width / 2, woodFloor.Height / 2), 1, SpriteEffects.None, 0);
+                }
                 _spriteBatch.Draw(pixel, new Rectangle(6750, 790, 10000, 1000), Color.Black);
                 for (int i = 0; i < 25; i++)
                 {
                     _spriteBatch.Draw(woodFloor, new Vector2(6750 + (290 * i), 780), Color.White);
                 }
-                for (int i = 0; i < 15; i++)
+                for (int i = 0; i < 8; i++)
                 {
                     _spriteBatch.Draw(railFloor, new Vector2(6750 + (270 * i), 770), Color.White);
                 }
-                for (int i = 0; i < 4; i++)
-                {
-                    _spriteBatch.Draw(woodFloor, new Vector2(6750, 940 + (290 * i)), null, Color.White, MathHelper.ToRadians(270), new Vector2(woodFloor.Width / 2, woodFloor.Height / 2), 1, SpriteEffects.None, 0);
-                }
                 _spriteBatch.Draw(railBrokenR, new Vector2(6500, 770), Color.White);
                 cart.Draw(_spriteBatch);
-                grubby.Draw(_spriteBatch, true);
+                grubby.Draw(_spriteBatch);
                 cartDustSystem.Draw(_spriteBatch);
 
                 // Middle

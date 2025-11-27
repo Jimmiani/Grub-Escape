@@ -34,6 +34,7 @@ namespace Grubby_Escape
         private List<Texture2D> _idleAnim;
         private List<Texture2D> _jumpAnim;
         private List<Texture2D> _alertAnim;
+        private List<Texture2D> _freedAnim;
         private List<Texture2D> _currentAnim;
         private List<Texture2D> _waveAnim;
 
@@ -46,7 +47,7 @@ namespace Grubby_Escape
         private float _idleTimer;
         private int _idleIndex;
 
-        public Grub(List<Texture2D> idleAnim, List<SoundEffect> idleEffect, List<SoundEffect> sadEffect, List<Texture2D> alertAnim, List<SoundEffect> alertEffect, List<Texture2D> jumpAnim, List<SoundEffect> jumpEffect)
+        public Grub(List<Texture2D> idleAnim, List<SoundEffect> idleEffect, List<SoundEffect> sadEffect, List<Texture2D> alertAnim, List<SoundEffect> alertEffect, List<Texture2D> jumpAnim, List<SoundEffect> jumpEffect, List<Texture2D> freedAnim)
         {
             _idleEffect = idleEffect;
             _alertEffect = alertEffect;
@@ -55,6 +56,7 @@ namespace Grubby_Escape
 
             _idleAnim = idleAnim;
             _alertAnim = alertAnim;
+            _freedAnim = freedAnim;
             _jumpAnim = jumpAnim;
 
             _generator = new Random();
@@ -136,6 +138,19 @@ namespace Grubby_Escape
                     }
                 }
             }
+            else if (grubState == GrubState.Freed)
+            {
+                _currentAnim = _freedAnim;
+                if (_animTimer >= 1.0 / 10.0)
+                {
+                    _currentFrame++;
+                    _animTimer = 0;
+                    if (_currentFrame >= _freedAnim.Count)
+                    {
+                        grubState = GrubState.Gone;
+                    }
+                }
+            }
 
             _grubRect.X = (int)_position.X;
             _grubRect.Y = (int)_position.Y;
@@ -185,7 +200,7 @@ namespace Grubby_Escape
         {
             if (grubState != GrubState.Gone)
             {
-                spriteBatch.Draw(_currentAnim[_currentFrame], _grubRect, Color.White);
+                spriteBatch.Draw(_currentAnim[_currentFrame], _grubRect, null, Color.White, 0, Vector2.Zero, SpriteEffects.FlipHorizontally, 0);
             }
 
         }
@@ -219,6 +234,14 @@ namespace Grubby_Escape
 
             _currentFrame = 0;
             grubState = GrubState.Jump;
+        }
+
+        public void Burrow()
+        {
+            _jumpEffect[_generator.Next(0, _jumpEffect.Count)].Play();
+
+            _currentFrame = 0;
+            grubState = GrubState.Freed;
         }
 
         public void Sad()
