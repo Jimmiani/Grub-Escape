@@ -138,7 +138,7 @@ namespace Grubby_Escape
                     point.Color,
                     0f,
                     Vector2.Zero,
-                    scale, // Scale factor to make the brush 5x5 pixels wide
+                    scale, // Scale factor
                     SpriteEffects.None,
                     0f
                 );

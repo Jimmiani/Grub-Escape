@@ -24,7 +24,8 @@ namespace Grubby_Escape
         TransitionOut,
         Math,
         TransitionIn,
-        Burrow
+        Burrow,
+        End
     }
 
     enum MathState
@@ -141,6 +142,7 @@ namespace Grubby_Escape
         List<SoundEffect> alertEffect;
         List<SoundEffect> jumpEffect;
         List<SoundEffect> idleEffect;
+        SoundEffect burrowEffect;
 
         bool isOnCart;
         bool isDragging;
@@ -182,7 +184,7 @@ namespace Grubby_Escape
 
             resolutionScaler = new ResolutionScaler(GraphicsDevice, 1920, 1080);
 
-            gameState = GameState.Math;
+            gameState = GameState.TransitionIn;
             mathState = MathState.TransitionIn;
             pinState = PinState.Waiting;
 
@@ -262,6 +264,7 @@ namespace Grubby_Escape
             introConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(550, 300, 290, 200)));
             introConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(840, 310, 246, 185)));
 
+            picRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(1570, 0, 350, 200)));
             picRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(550, 0, 800, 150)));
             picRepConcealers.Add(new Concealer(GraphicsDevice, new Rectangle(0, 250, 900, 700)));
             for (int i = 0; i < 4; i++)
@@ -331,7 +334,7 @@ namespace Grubby_Escape
 
             base.Initialize();
 
-            grubby = new Grub(grubIdle, idleEffect, sadEffect, grubAlert, alertEffect, grubJump, jumpEffect, grubFreed);
+            grubby = new Grub(grubIdle, idleEffect, sadEffect, grubAlert, alertEffect, grubJump, jumpEffect, grubFreed, burrowEffect);
             cart = new Cart(cartTexture, wheelTexture, new Vector2(300, -200), startSfx, movingSfx, stopSfx, landSfx, fallSfx);
             lumafly = new Lumafly(lumaflyTextures, new Vector2(2000, -50));
 
@@ -673,6 +676,7 @@ namespace Grubby_Escape
                 sadEffect.Add(Content.Load<SoundEffect>("Grubby Escape/Audio/Sound Effects/Grubs/Sad/grub_sad_" + i));
             for (int i = 1; i <= 4; i++)
                 idleEffect.Add(Content.Load<SoundEffect>("Grubby Escape/Audio/Sound Effects/Grubs/Sad Idle/Grub_sad_idle_0" + i));
+            burrowEffect = Content.Load<SoundEffect>("Grubby Escape/Audio/Sound Effects/Grubs/Burrow/grub_burrow");
 
             // Cart
 
@@ -1236,13 +1240,36 @@ namespace Grubby_Escape
                 if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
                 {
                     gameState = GameState.Burrow;
-
+                    transitionTimer = 0;
                     grubby.Burrow();
                 }
             }
             else if (gameState == GameState.Burrow)
             {
+                transitionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+                if (transitionTimer > 2)
+                {
+                    gameState = GameState.End;
+                    transitionTimer = 0;
+                }
+            }
+            else if (gameState == GameState.End)
+            {
+                transitionTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                transitionColor = Color.Black * (transitionTimer / 4);
+
+                if (mainMusic.Volume > 0)
+                {
+                    float newVolume = 0.7f - (transitionTimer / 4f);
+                    mainMusic.Volume = Math.Clamp(newVolume, 0f, 1f);
+                }
+                if (crystalAtmos.Volume > 0)
+                {
+                    float newVolume = 0.7f - (transitionTimer / 4f);
+                    crystalAtmos.Volume = Math.Clamp(newVolume, 0f, 1f);
+                }
             }
             base.Update(gameTime);
         }

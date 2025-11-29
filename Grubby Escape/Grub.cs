@@ -30,6 +30,7 @@ namespace Grubby_Escape
         private List<SoundEffect> _jumpEffect;
         private List<SoundEffect> _sadEffect;
         private List<SoundEffect> _idleEffect;
+        private SoundEffect _burrowEffect;
 
         private List<Texture2D> _idleAnim;
         private List<Texture2D> _jumpAnim;
@@ -47,12 +48,13 @@ namespace Grubby_Escape
         private float _idleTimer;
         private int _idleIndex;
 
-        public Grub(List<Texture2D> idleAnim, List<SoundEffect> idleEffect, List<SoundEffect> sadEffect, List<Texture2D> alertAnim, List<SoundEffect> alertEffect, List<Texture2D> jumpAnim, List<SoundEffect> jumpEffect, List<Texture2D> freedAnim)
+        public Grub(List<Texture2D> idleAnim, List<SoundEffect> idleEffect, List<SoundEffect> sadEffect, List<Texture2D> alertAnim, List<SoundEffect> alertEffect, List<Texture2D> jumpAnim, List<SoundEffect> jumpEffect, List<Texture2D> freedAnim, SoundEffect burrowEffect)
         {
             _idleEffect = idleEffect;
             _alertEffect = alertEffect;
             _jumpEffect = jumpEffect;
             _sadEffect = sadEffect;
+            _burrowEffect = burrowEffect;
 
             _idleAnim = idleAnim;
             _alertAnim = alertAnim;
@@ -145,6 +147,10 @@ namespace Grubby_Escape
                 {
                     _currentFrame++;
                     _animTimer = 0;
+                    if (_currentFrame == 15)
+                    {
+                        _burrowEffect.Play();
+                    }
                     if (_currentFrame >= _freedAnim.Count)
                     {
                         grubState = GrubState.Gone;
