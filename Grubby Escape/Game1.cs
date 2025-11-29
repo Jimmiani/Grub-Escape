@@ -179,12 +179,13 @@ namespace Grubby_Escape
             _graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             _graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
-            _graphics.IsFullScreen = true;
+            Window.IsBorderless = true;
+            _graphics.IsFullScreen = false;
             _graphics.ApplyChanges();
 
             resolutionScaler = new ResolutionScaler(GraphicsDevice, 1920, 1080);
 
-            gameState = GameState.TransitionIn;
+            gameState = GameState.Waiting;
             mathState = MathState.TransitionIn;
             pinState = PinState.Waiting;
 
